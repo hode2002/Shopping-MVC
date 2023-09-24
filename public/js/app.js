@@ -64,6 +64,29 @@ $(() => {
             }
 
         });
+
+        $('#edit-avatar-form').validate({
+            rules: {
+                email: { required: true, email: true },
+                phone: { minlength: 10, maxlength: 10 },
+            },
+            messages: {
+                email: {
+                    required: 'Bạn chưa email',
+                    email: 'Email không đúng định dạng'
+                },
+                phone: {
+                    minlength: 'Số điện thoại không hợp lệ',
+                    maxlength: 'Số điện thoại không hợp lệ',
+                },
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback my-1');
+                error.insertAfter(element);
+            }
+
+        });
         // End validate form
 
 
@@ -224,6 +247,28 @@ $(() => {
 
         startCountdown();
         // End countdown timer
+
+        // Preview avatar
+        const previewAvatar = (file, imgTag) => {
+            const allowSize = 1; //1MB
+
+            if (!file) {
+                return alert('Vui lòng chọn ảnh');
+            }
+            if (file.size / 1024 / 1024 > allowSize) {
+                return alert('Dụng lượng file tối đa 1 MB');
+            }
+            if (file.type !== "image/jpeg" && file.type !== "image/png") {
+                return alert('Định dạng:.JPEG, .PNG');
+            }
+            imgTag.attr('src', URL.createObjectURL(file));
+        }
+
+        $('#avatar-input').on('change', function (event) {
+            const imgTag = $('img#avatar-preview');
+            previewAvatar(this?.files[0], imgTag);
+        })
+        // Preview avatar
 
     });
 })
