@@ -180,8 +180,8 @@ $(() => {
                 {
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
                         infinite: true,
                         prevArrow: "",
                         nextArrow: ""
@@ -190,8 +190,8 @@ $(() => {
                 {
                     breakpoint: 600,
                     settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 4,
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
                         infinite: true,
                         prevArrow: "",
                         nextArrow: ""
@@ -200,8 +200,8 @@ $(() => {
                 {
                     breakpoint: 480,
                     settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 4,
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
                         infinite: true,
                         prevArrow: "",
                         nextArrow: ""
