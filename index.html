@@ -2,17 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="./public/imgs/favicon/apple-touch-icon.png">
-    <link rel="icon" type="img/png" sizes="32x32" href="./public/imgs/favicon/favicon-32x32.png">
-    <link rel="icon" type="imgs/png" sizes="16x16" href="./public/imgs/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./public/imgs/favicon/site.webmanifest">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./public/imgs/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="img/png" sizes="32x32" href="./public/imgs/favicon/favicon-32x32.png" />
+    <link rel="icon" type="imgs/png" sizes="16x16" href="./public/imgs/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./public/imgs/favicon/site.webmanifest" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+
+    <!-- Thư viện boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <!-- /Thư viện boxicons -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -33,7 +35,7 @@
         <!-- TOP HEADER -->
         <div class="py-3 d-none d-md-block" style="background-color: rgb(30, 31, 41);">
             <div class="container py-1">
-                <div class="d-flex justify-content-between flex-wrap">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <ul class="d-flex m-0" style="list-style-type: none;">
                         <li class="me-3 fw-semibold" style="font-size: 14px;">
                             <a href="#" class="text-decoration-none text-white">
@@ -58,13 +60,13 @@
                         </li>
                     </ul>
 
-                    <ul class="d-flex m-0" style="list-style-type: none;">
+                    <ul class="d-flex m-0 align-items-center" style="list-style-type: none;">
                         <li class="me-3 fw-semibold " style="font-size: 14px;">
                             <a href="#" class="text-decoration-none text-white">
                                 Trở thành Người bán
                             </a>
                         </li>
-                        <!-- <li class="ms-5 me-3 fw-semibold " style="font-size: 14px;">
+                        <li class="ms-5 me-3 fw-semibold " style="font-size: 14px;">
                             <a href="/pages/login/login.html" class="text-decoration-none text-white">
                                 Đăng nhập
                             </a>
@@ -73,7 +75,7 @@
                             <a href="/pages/register/register.html" class="text-decoration-none text-white">
                                 Đăng ký
                             </a>
-                        </li> -->
+                        </li>
                         <li class="ms-5 me-3 fw-semibold">
                             <a href="/pages/profile/profile.html"
                                 class="text-decoration-none text-white d-flex align-items-center gap-2">
@@ -326,7 +328,7 @@
     </header>
     <!-- /HEADER -->
 
-    <main style="background-color: #f5f5f5; min-height: 150vh;">
+    <main style="background-color: #f5f5f5; min-height: 150vh">
         <!-- SLIDE BAR -->
         <div style="background-color: #ffffff" class="pb-3 mb-3">
             <div class="container">
@@ -373,7 +375,6 @@
                                         class="d-block w-100 img-fuild" />
                                 </a>
                             </div>
-
                         </div>
                     </div>
                     <!-- /RIGHT -->
@@ -478,9 +479,7 @@
                             <img src="public/imgs/products/ThoitrangNu.png" alt="" style="object-fit: cover"
                                 width="100%" />
                         </div>
-                        <div class="text-center fw-semibold text-dark">
-                            Thời trang nữ
-                        </div>
+                        <div class="text-center fw-semibold text-dark">Thời trang nữ</div>
                     </a>
                 </div>
                 <div class="image-item py-3 col-sm-4 col-md-2">
@@ -500,87 +499,152 @@
             <div
                 class="d-flex justify-content-between fw-semibold fs-4 border-bottom p-2 text-start position-sticky start-0 end-0 top-0">
                 <div class="p-2 d-flex gap-3">
-                    <img src="./public/imgs/logos/flash_sale.png" alt="flash sale">
+                    <img src="./public/imgs/logos/flash_sale.png" alt="flash sale" />
                     <div class="countdown-timer">00:00:00</div>
                 </div>
-                <a href="#" class="text-decoration-none text-black fs-6">Xem tất cả ></a>
+                <a href="#" class="text-decoration-none text-black fs-6 align-self-center">Xem tất cả ></a>
             </div>
             <!-- PRODUCTs -->
             <div class="products_slide row p-4">
+                <div class="product d-flex justify-content-center col-md-2 py-2">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
+                            class="card-img-top p-2" alt="product" />
+                        <div class="card-body p-2">
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
+                            </h5>
+                        </div>
 
-                <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
-                        <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
-                            </h5>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /PRODUCTs -->
         </div>
@@ -591,84 +655,148 @@
             <div
                 class="d-flex justify-content-between fw-semibold fs-4 border-bottom p-2 text-start position-sticky start-0 end-0 top-0">
                 <div class="">TÌM KIẾM HÀNG ĐẦU</div>
-                <a href="#" class="text-decoration-none text-black fs-6">Xem tất cả ></a>
+                <a href="#" class="text-decoration-none text-black fs-6 align-self-center">Xem tất cả ></a>
             </div>
             <!-- PRODUCTs -->
             <div class="products_slide row p-4">
-
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-md-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
+                        <div class="logo-cart">
+                            <i class="bx bx-shopping-bag"></i>
+                            <div class="discount-card pe-1 ps-1">
+                                <span>10%</span>
+                                <span>Giảm</span>
+                            </div>
+                        </div>
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
+                        </div>
+                        <div class="star p-2 pt-0">
+                            <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                class="bx bxs-star"></i><i class="bx bx-star"></i>
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /PRODUCTs -->
         </div>
@@ -681,230 +809,265 @@
             </div>
             <!-- PRODUCTs -->
             <div class="row p-3">
-
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
-                    <div class="card" style="width: 11rem;">
+                    <div class="card" style="width: 11rem">
                         <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tn"
-                            class="card-img-top p-2" alt="product">
+                            class="card-img-top p-2" alt="product" />
                         <div class="card-body p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 11px;">
-                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết
-                                Nối Cảm Ứng Chính Hãng PKT
+                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                Động Kết Nối Cảm Ứng Chính Hãng PKT
                             </h5>
-                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36);">
+                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
                                 179.000đ
                             </p>
                             <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1"
-                                style="background-color: rgb(209, 0, 36); border: 1px solid rgb(209, 0, 36);">
+                                style="
+                        background-color: rgb(209, 0, 36);
+                        border: 1px solid rgb(209, 0, 36);
+                      ">
                                 <div class="btn text-white border-0">Thêm vào giỏ</div>
                             </div>
                         </div>
@@ -913,7 +1076,7 @@
 
                 <a href="#"
                     class="btn col-4 offset-4 btn-primary py-1 border-1 my-5 text-decoration-none text-black fs-6 border-0 text-white"
-                    style="background-color: rgb(30, 31, 41);">
+                    style="background-color: rgb(30, 31, 41)">
                     Xem thêm
                 </a>
             </div>
