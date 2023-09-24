@@ -10,7 +10,7 @@ $(() => {
         $('#signupForm').validate({
             rules: {
                 email: { required: true, email: true },
-                username: { required: true, minlength: 2 },
+                name: { required: true, minlength: 2 },
                 password: { required: true, minlength: 5 },
                 confirm_password: {
                     required: true,
@@ -20,12 +20,11 @@ $(() => {
             },
             messages: {
                 email: {
-                    required: 'Bạn chưa nhập mật khẩu email',
+                    required: 'Bạn chưa nhập email',
                     email: 'Email không đúng định dạng'
                 },
-                username: {
-                    required: 'Bạn chưa nhập vào tên đăng nhập',
-                    minlength: 'Tên dăng nhập phải có ít nhất 2 ký tự '
+                name: {
+                    required: 'Bạn chưa nhập vào họ tên',
                 },
                 password: {
                     required: 'Bạn chưa nhập mật khẩu',
@@ -34,15 +33,14 @@ $(() => {
                 confirm_password: {
                     required: 'Bạn chưa nhập mật khẩu',
                     minlength: 'Mật khẩu phải có ít nhất 5 ký tự ',
-                    equalTo: 'Mật khẩu không trùng với mật khẩu đã nhập '
+                    equalTo: 'Mật khẩu không trùng khớp'
                 },
             },
             errorElement: 'div',
             errorPlacement: function (error, element) {
                 error.addClass('invalid-feedback ms-3 my-1');
                 error.insertAfter(element);
-            }
-
+            },
         });
 
         $('#loginForm').validate({
@@ -61,7 +59,7 @@ $(() => {
             },
             errorElement: 'div',
             errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback ms-2 my-1');
+                error.addClass('invalid-feedback ms-3 my-1');
                 error.insertAfter(element);
             }
 
@@ -84,7 +82,7 @@ $(() => {
 
         $(".image-slider").slick({
             slidesToShow: 6,
-            slidesToScroll: 4,
+            slidesToScroll: 3,
             infinite: true,
             arrows: true,
             responsive: [
@@ -155,6 +153,38 @@ $(() => {
         $('.products_slide').slick({
             slidesToShow: 5,
             slidesToScroll: 3,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                        infinite: true,
+                        prevArrow: "",
+                        nextArrow: ""
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 4,
+                        infinite: true,
+                        prevArrow: "",
+                        nextArrow: ""
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 4,
+                        infinite: true,
+                        prevArrow: "",
+                        nextArrow: ""
+                    }
+                }
+            ],
             prevArrow:
                 "<button type='button' class='slick-prev slick-arrows pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
             nextArrow:
