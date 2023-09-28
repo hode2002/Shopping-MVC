@@ -18,15 +18,16 @@ input.input {
 
 @media only screen and (min-width: 770px) {
   .cart:hover .cart-list {
-    display  : block !important;
-    cursor   : pointer;
-    animation: bounce 0.3s;
+    display: block !important;
+    cursor: pointer;
+    transform-origin: 96% top;
+    animation: bounce 0.7s ease-in-out;
   }
 }
 
 @keyframes bounce {
   0% {
-    transform: scaleY(0.8);
+    transform: scale(0);
   }
 
   100% {
@@ -35,7 +36,7 @@ input.input {
 }
 
 .dropdown-menu.show {
-  inset           : 0px auto auto -100px !important;
+  inset: 0px auto auto -100px !important;
   background-color: rgb(21, 22, 29);
 }
 
@@ -44,18 +45,18 @@ input.input {
 }
 
 .cart-list .product:hover {
-  color           : rgb(209, 0, 36);
-  cursor          : pointer;
+  color: rgb(209, 0, 36);
+  cursor: pointer;
   background-color: #eee;
 }
 
 .cart-list .product:hover img {
   opacity: 0.9;
-  scale  : 1.03;
+  scale: 1.03;
 }
 
 header span.close-btn:hover {
-  color : rgb(209, 0, 36) !important;
+  color: rgb(209, 0, 36) !important;
   cursor: pointer;
 }
 
@@ -64,31 +65,31 @@ header span.close-btn:hover {
 }
 
 .cart-list:before {
-  content      : "";
-  position     : absolute;
-  top          : 0;
-  right        : 5%;
-  border-left  : 10px solid transparent;
-  border-right : 10px solid transparent;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 5%;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
   border-bottom: 10px solid #ffffff;
-  transform    : translateY(-100%);
+  transform: translateY(-100%);
 }
 
 .cart-list-product:first-child {
   position: relative;
-  z-index : 100;
+  z-index: 100;
 }
 
 .cart-list-product:first-child:before {
-  content      : "";
-  position     : absolute;
-  top          : 0;
-  right        : 5%;
-  border-left  : 10px solid transparent;
-  border-right : 10px solid transparent;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 5%;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
   border-bottom: 10px solid #b30000;
-  transform    : translateY(-100%);
-  transition   : border-color 0.2s linear;
+  transform: translateY(-100%);
+  transition: border-color 0.2s linear;
 }
 
 .cart-list-product:first-child:hover:before {
@@ -109,34 +110,34 @@ header span.close-btn:hover {
 }
 
 .slick-arrows {
-  position       : absolute;
-  top            : 50%;
-  transform      : translateY(-50%);
-  border         : none;
-  width          : 3%;
-  height         : 20%;
-  display        : flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  width: 3%;
+  height: 20%;
+  display: flex;
   justify-content: center;
-  align-items    : center;
-  font-size      : 20px;
-  line-height    : 1;
-  transition     : all 0.2s linear;
+  align-items: center;
+  font-size: 20px;
+  line-height: 1;
+  transition: all 0.2s linear;
 }
 
 .slick-arrows:hover {
   background-color: #d10024;
-  color           : white;
+  color: white;
 }
 
 .slick-prev {
-  left            : 0;
-  z-index         : 1;
+  left: 0;
+  z-index: 1;
   background-color: transparent;
 }
 
 .slick-next {
-  right           : 0;
-  z-index         : 1;
+  right: 0;
+  z-index: 1;
   background-color: transparent;
 }
 
@@ -155,11 +156,11 @@ header span.close-btn:hover {
 }
 
 .product:hover .card {
-  scale       : 1.08;
-  transition  : all 0.3s linear;
+  scale: 1.08;
+  transition: all 0.3s linear;
   border-color: rgb(209, 0, 36) !important;
-  z-index     : 1;
-  cursor      : pointer;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .product:hover .price {
@@ -182,13 +183,13 @@ header span.close-btn:hover {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow   : inset 0 0 5px grey;
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background   : rgb(209, 0, 36);
+  background: rgb(209, 0, 36);
   border-radius: 4px;
 }
 
@@ -199,7 +200,7 @@ header span.close-btn:hover {
 
 .product-card {
   max-width: 360px;
-  height   : 360px;
+  height: 360px;
 }
 
 .logo-cart {
@@ -208,45 +209,45 @@ header span.close-btn:hover {
 
 .logo-cart i {
   position: absolute;
-  left    : 0;
-  top     : 0;
+  left: 0;
+  top: 0;
 }
 
 .logo-cart .discount-card {
-  position        : absolute;
-  top             : 0;
-  right           : 0;
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: #d10024;
-  width           : 40px;
-  height          : 38px;
-  text-align      : center;
+  width: 40px;
+  height: 38px;
+  text-align: center;
 }
 
 .logo-cart .discount-card::after {
-  content     : "";
-  position    : absolute;
-  left        : 0;
-  bottom      : -5px;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
   border-width: 0 20px 5px;
   border-style: solid;
-  color       : #d10024;
+  color: #d10024;
   border-color: transparent currentColor transparent currentColor;
 }
 
 .logo-cart .discount-card span {
-  color      : white;
-  font-size  : 0.8rem;
+  color: white;
+  font-size: 0.8rem;
   line-height: 1.3rem;
 }
 
 .logo-cart .discount-card span:first-child {
-  font-size  : 0.8rem;
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
 .logo-cart .discount-card span:nth-child(2) {
-  position : relative;
-  top      : -10px;
+  position: relative;
+  top: -10px;
   font-size: 0.7rem;
 }
 
@@ -267,8 +268,8 @@ header span.close-btn:hover {
 }
 
 .logo-cart i {
-  font-size : 20px;
-  padding   : 5px;
+  font-size: 20px;
+  padding: 5px;
   transition: color 0.3s ease;
 }
 
@@ -278,5 +279,5 @@ header span.close-btn:hover {
 
 .card .star {
   margin: 0 -1px;
-  color : #333;
+  color: #333;
 }
