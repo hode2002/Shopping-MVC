@@ -1,0 +1,134 @@
+/* trang liên hệ */
+.main-contact {
+  font-family: Poppins, sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px;
+}
+.contact-form {
+  width: 80%;
+  background: #fff;
+  padding: 20px 60px 20px 20px;
+  box-shadow: 5px 10px rgba(0, 0, 0, 0.2);
+}
+.contact-left .details {
+  margin: 14px;
+  text-align: center;
+}
+.form-right {
+  margin-left: 16px;
+}
+.form-right .topic-form {
+  text-align: center;
+}
+.contact-left .details i {
+  font-size: 30px;
+  color: #d10024;
+  margin-bottom: 10px;
+}
+.contact-left .details .topic {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.contact-left {
+  position: relative;
+  margin-top: 15px;
+}
+.contact-left::before {
+  content: "";
+  position: absolute;
+  height: 70%;
+  width: 2px;
+  right: 10px;
+  background: #d10024;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.contact-left .details .text-one,
+.contact-left .details .text-two {
+  font-size: 14px;
+  color: #afafb6;
+}
+.topic-form {
+  font-size: 23px;
+  font-weight: 600;
+  color: #d10024;
+}
+.form-right input,
+.form-right textarea {
+  border: none;
+  background: #f0f1f8;
+  resize: none;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+#gui {
+  text-align: center;
+}
+#gui input {
+  background: #d10024;
+  padding: 10px 20px;
+}
+#gui input:hover {
+  background: #f0f1f8;
+  color: #d10024;
+}
+@media (max-width: 950px) {
+  .contact-left {
+    margin-right: 30px;
+  }
+  .contact-left::before {
+    right: -40px;
+  }
+}
+@media (max-width: 820px) {
+  #gui input {
+    margin-top: 12px;
+    margin-bottom: 5px;
+  }
+  .contact-left .details .text-one,
+  .contact-left .details .text-two {
+    font-size: 10px;
+  }
+  .contact-left .details .topic {
+    font-size: 14px;
+    text-wrap: wrap;
+  }
+  .contact-form {
+    width: 100%;
+    padding: 25px;
+  }
+  .contact-left::before {
+    display: none;
+  }
+  .contact-left {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+  }
+  .contact-form form {
+    margin-top: 15px;
+  }
+  .topic-form {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  .text-topic-form {
+    margin-bottom: 10px;
+  }
+  .contact-left .details {
+    width: 33%;
+  }
+  .contact-left {
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  .form-right {
+    width: 100%;
+    margin: 0 5px;
+  }
+}
