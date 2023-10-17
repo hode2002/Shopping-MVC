@@ -21,7 +21,7 @@ input.input {
     display: block !important;
     cursor: pointer;
     transform-origin: 96% top;
-    animation: bounce 0.7s ease-in-out;
+    animation: bounce 0.25s ease-in-out;
   }
 }
 
