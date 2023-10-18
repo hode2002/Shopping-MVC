@@ -346,11 +346,8 @@
             <div class="row h-100 py-5">
 
                 <div class="py-4 bg-white d-none d-md-block mb-4">
-                    <div class="d-flex align-items-center" style="padding: 0;">
-                        <div class="d-inline-block ps-1 pe-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
-                        </div>
-                        <div class="d-inline-block" style="width: calc(46.27949% + 60px);">Sản Phẩm</div>
+                    <div class="d-flex align-items-center fw-bold" style="padding: 0;">
+                        <div class="d-inline-block ms-3" style="width: calc(46.27949% + 60px);">Sản Phẩm</div>
                         <div class="d-inline-block tbl-price-width text-center">Đơn Giá</div>
                         <div class="d-inline-block tbl-quantity-width text-center">Số Lượng</div>
                         <div class="d-inline-block tbl-money-width text-center">Số Tiền</div>
@@ -502,12 +499,12 @@
 
                     <div class="d-flex flex-wrap justify-content-start mb-0 mb-md-3 mb-lg-0">
                         <div class="d-flex align-items-center me-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
+                            <input id="checkall" type="checkbox" style="width: 20px; height: 20px;">
                         </div>
-                        <a href="#" class="text-decoration-none ms-2 me-5 mb-0 d-none d-md-block"
+                        <label for="checkall" class="text-decoration-none ms-2 me-5 mb-0 d-none d-md-block"
                             style="color: rgb(209, 0, 36);">
                             Chọn tất cả
-                        </a>
+                        </label>
                         <a href="#" class="text-decoration-none mb-0 d-none d-md-block"
                             style="color: rgb(209, 0, 36);">Xóa</a>
                     </div>
@@ -516,10 +513,10 @@
                         <div class="d-flex align-items-center me-4">
                             <p class="mb-0 mx-2">Tổng <span class="d-none d-md-inline-block">thanh toán</span></p>
                             <p class="mb-0 d-none d-lg-inline-block">
-                                (<span>0</span> Sản phẩm):
+                                (<span class="quantity">0</span> Sản phẩm):
                             </p>
                             <p id="total" class="mb-0 ms-3 fs-3 fw-semibold" style="color: rgb(209, 0, 36);">
-                                179.000đ
+                                0đ
                             </p>
                         </div>
                         <button class="btn text-white" style="background-color: rgb(209, 0, 36); width: 200px;">
@@ -985,42 +982,80 @@
                 return number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
             }
 
-            const deleteProduct = () => {
+            const deleteItem = () => {
                 alert('xoá');
             };
 
             const priceChange = (element, increase = true) => {
 
                 let quantity = Number(element.find('.quantity').val());
-                const unitPrice = element.find('.unit-price').text();
+                const unitPrice = convertPriceToNumber(element.find('.unit-price').text());
 
                 if (increase) quantity++;
-                else quantity > 1 ? quantity-- : deleteProduct()
+                else quantity > 1 ? quantity-- : deleteItem()
 
-                const totalPrice = quantity * convertPriceToNumber(unitPrice)
+                const cartItemTotalPrice = quantity * unitPrice;
 
                 element.find('.quantity').attr('value', quantity);
-                element.find('.total-price').html(convertNumberToPrice(totalPrice))
+                element.find('.total-price').html(convertNumberToPrice(cartItemTotalPrice))
 
-                // if (element.find('input.select').is(':checked')) {
-                //     const totalPayment = convertPriceToNumber($('#cart-payment #total').text());
-                //     const totalPaymentPrice = increase ? convertNumberToPrice(totalPayment + totalPrice) : convertNumberToPrice(totalPayment - totalPrice);
-                //     $('#cart-payment #total').html(totalPaymentPrice);
-                // }
-
-                $('#cart-payment #total').html(totalPrice);
+                let paymentTotalPrice = 0;
+                $('.cart-item').each(function () {
+                    if ($(this).find('input.select').is(':checked')) {
+                        paymentTotalPrice += Number($(this).find('.quantity').val()) * convertPriceToNumber($(this).find('.unit-price').text());
+                    }
+                })
+                $('#cart-payment #total').html(convertNumberToPrice(paymentTotalPrice));
             }
 
             $('#cart .btn-increase').on('click', function () {
                 const element = $(this).closest('.cart-item');
-
                 priceChange(element);
-            })
+            });
 
             $('#cart .btn-decrease').on('click', function () {
                 const element = $(this).closest('.cart-item');
-
                 priceChange(element, false);
+            })
+
+            $('.cart-item').each(function () {
+                const inputCheckbox = $(this).find('input.select');
+                inputCheckbox.on('change', function () {
+                    const currTotalPaymentPrice = convertPriceToNumber($('#cart-payment #total').text());
+                    const unitPrice = convertPriceToNumber($(this).parents('.cart-item').find('.unit-price').text());
+                    const quantity = $(this).parents('.cart-item').find('.quantity').val();
+
+                    if ($(this).is(':checked')) {
+                        $('#cart-payment #total').html(convertNumberToPrice(currTotalPaymentPrice + unitPrice * quantity));
+                    } else {
+                        $('#checkall').prop('checked', false);
+                        $('#cart-payment #total').html(convertNumberToPrice(currTotalPaymentPrice - unitPrice * quantity));
+                    }
+                })
+            })
+
+            $('#checkall').on('change', function () {
+                if ($('#checkall').is(':checked')) {
+                    let paymentTotalPrice = 0;
+                    $('.cart-item.d-md-flex').each(function () {
+                        $(this).find('input.select').prop('checked', true);
+                        if ($(this).find('input.select').is(':checked')) {
+                            const quantity = Number($(this).find('.quantity').val());
+                            const unitPrice = convertPriceToNumber($(this).find('.unit-price').text());
+                            paymentTotalPrice += quantity * unitPrice;
+                        }
+                    })
+                    $('#cart-payment #total').html(convertNumberToPrice(paymentTotalPrice));
+                    return
+                }
+
+                if ($('#checkall').not(':checked')) {
+                    $('.cart-item.d-md-flex').each(function () {
+                        $(this).find('input.select').prop('checked', false);
+                    })
+                    $('#cart-payment #total').html(convertNumberToPrice(0));
+                    return
+                }
             })
         })
     </script>
