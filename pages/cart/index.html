@@ -332,7 +332,7 @@
     </header>
     <!-- /HEADER -->
 
-    <main style="background-color: #f5f5f5; min-height: 100vh; min-width: 100%;">
+    <main id="cart" style="background-color: #f5f5f5; min-height: 100vh; min-width: 100%;">
         <div class="bg-white py-4">
             <div class="container">
                 <p class="fs-2 m-0">
@@ -360,14 +360,14 @@
                 </div>
 
                 <div class="cart-list" style="padding: 0;">
+                    <!-- LAPTOP - PC - TABLET -->
+                    <div class="cart-item p-2 d-none d-md-flex align-items-center mt-3 bg-white shadow-sm">
 
-                    <div class="cart-item bg-white d-flex align-items-center mt-3">
-
-                        <div class="d-inline-block px-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
+                        <div class="px-3">
+                            <input class="select" type="checkbox" style="width: 20px; height: 20px;">
                         </div>
 
-                        <div class="d-inline-block tbl-product-width">
+                        <div class="tbl-product-width">
                             <div class="d-flex align-items-center">
                                 <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-opyk70ch7alv6c"
                                     alt="" style="width: 80px; height: 80px;">
@@ -378,32 +378,35 @@
                             </div>
                         </div>
 
-                        <div class="d-inline-block tbl-price-width text-center">
-                            <p class="m-0">179.000đ</p>
+                        <div class="tbl-price-width text-center d-none d-md-block">
+                            <p class="m-0 unit-price" style="color: rgb(209, 0, 36);">179.000đ</p>
                         </div>
 
-                        <div class="d-inline-block tbl-quantity-width text-center">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">-</button>
-                            <input type="text" value="1" class="text-center py-2" style="width: 50px; height: 32px;">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">+</button>
+                        <div
+                            class="tbl-quantity-width d-flex align-items-center justify-content-center mx-0 mx-md-2 mx-lg-0">
+                            <button class="btn-decrease btn btn-dark text-center p-0 rounded-0"
+                                style="width: 32px; height: 32px;">-</button>
+                            <input type="text" value="1" class="text-center py-2 quantity"
+                                style="width: 50px; height: 32px; outline: none;">
+                            <button class="btn-increase btn btn-dark text-center p-0 rounded-0"
+                                style="width: 32px; height: 32px;">+</button>
                         </div>
 
-                        <div class="d-inline-block tbl-money-width text-center">
-                            <p class="m-0">179.000đ</p>
+                        <div class="tbl-money-width text-center">
+                            <p class="m-0 fw-bold total-price" style="color: rgb(209, 0, 36);">179.000đ</p>
                         </div>
 
-                        <div class="d-inline-block text-center" style="width: 12.70417%;">
+                        <div class="text-center" style="width: 12.70417%;">
                             <a href="#" class="text-decoration-none text-center">Xóa</a>
                         </div>
                     </div>
+                    <div class="cart-item p-2 d-none d-md-flex align-items-center mt-3 bg-white shadow-sm">
 
-
-
-                    <div class="cart-item bg-white d-flex align-items-center mt-3">
-                        <div class="d-inline-block px-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
+                        <div class="px-3">
+                            <input class="select" type="checkbox" style="width: 20px; height: 20px;">
                         </div>
-                        <div class="d-inline-block tbl-product-width">
+
+                        <div class="tbl-product-width">
                             <div class="d-flex align-items-center">
                                 <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-opyk70ch7alv6c"
                                     alt="" style="width: 80px; height: 80px;">
@@ -413,143 +416,118 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="d-inline-block tbl-price-width text-center">
-                            <p class="m-0">179.000đ</p>
+
+                        <div class="tbl-price-width text-center d-none d-md-block">
+                            <p class="m-0 unit-price" style="color: rgb(209, 0, 36);">179.000đ</p>
                         </div>
-                        <div class="d-inline-block tbl-quantity-width text-center">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">-</button>
-                            <input type="text" value="1" class="text-center py-2" style="width: 50px; height: 32px;">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">+</button>
+
+                        <div
+                            class="tbl-quantity-width d-flex align-items-center justify-content-center mx-0 mx-md-2 mx-lg-0">
+                            <button class="btn-decrease btn btn-dark text-center p-0 rounded-0"
+                                style="width: 32px; height: 32px;">-</button>
+                            <input type="text" value="1" class="text-center py-2 quantity"
+                                style="width: 50px; height: 32px; outline: none;">
+                            <button class="btn-increase btn btn-dark text-center p-0 rounded-0"
+                                style="width: 32px; height: 32px;">+</button>
                         </div>
-                        <div class="d-inline-block tbl-money-width text-center">
-                            <p class="m-0">179.000đ</p>
+
+                        <div class="tbl-money-width text-center">
+                            <p class="m-0 fw-bold total-price" style="color: rgb(209, 0, 36);">179.000đ</p>
                         </div>
-                        <div class="d-inline-block text-center" style="width: 12.70417%;">
+
+                        <div class="text-center" style="width: 12.70417%;">
                             <a href="#" class="text-decoration-none text-center">Xóa</a>
                         </div>
-                        </d>
                     </div>
+                    <!-- LAPTOP - PC - TABLET -->
 
-                    <div class="cart-item bg-white d-flex align-items-center mt-3">
-                        <div class="d-inline-block px-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
+                    <!--MOBILE -->
+                    <div class="cart-item p-2 pb-4 d-md-none bg-white mt-3 shadow-sm">
+
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="p-2">
+                                    <input class="select" type="checkbox" style="width: 20px; height: 20px;">
+                                </div>
+                                <div class="text-center" style="width: 12.70417%;">
+                                    <a href="#" class="text-decoration-none text-center">Xóa</a>
+                                </div>
+                            </div>
+
+                            <div class="px-1">
+                                <div class="d-flex">
+                                    <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-opyk70ch7alv6c"
+                                        alt="" style="width: 120px; height: 120px;">
+                                    <p class="px-2 m-0">
+                                        Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
+                                        Động Kết Nối Cảm Ứng Chính Hãng PKT
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-inline-block tbl-product-width">
-                            <div class="d-flex align-items-center">
-                                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-opyk70ch7alv6c"
-                                    alt="" style="width: 80px; height: 80px;">
-                                <p class="text-truncate m-0">
-                                    Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
-                                    Động Kết Nối Cảm Ứng Chính Hãng PKT
+
+                        <div class="d-flex justify-content-around align-items-center">
+                            <div class="text-center d-flex align-items-center">
+                                <button class="btn-decrease btn btn-dark text-center p-0 rounded-0"
+                                    style="width: 32px; height: 32px;">-</button>
+                                <input type="text" value="1" class="quantity text-center py-2"
+                                    style="width: 50px; height: 32px;  outline: none;">
+                                <button class="btn-increase btn btn-dark text-center p-0 rounded-0"
+                                    style="width: 32px; height: 32px;">+</button>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="unit-price d-none">
+                                    179.000đ
+                                </p>
+                                <p class="total-price m-0 fs-4 fw-bold" style="color: rgb(209, 0, 36);">
+                                    179.000đ
                                 </p>
                             </div>
                         </div>
-                        <div class="d-inline-block tbl-price-width text-center">
-                            <p class="m-0">179.000đ</p>
-                        </div>
-                        <div class="d-inline-block tbl-quantity-width text-center">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">-</button>
-                            <input type="text" value="1" class="text-center py-2" style="width: 50px; height: 32px;">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">+</button>
-                        </div>
-                        <div class="d-inline-block tbl-money-width text-center">
-                            <p class="m-0">179.000đ</p>
-                        </div>
-                        <div class="d-inline-block text-center" style="width: 12.70417%;">
-                            <a href="#" class="text-decoration-none text-center">Xóa</a>
-                        </div>
-                        </d>
-                    </div>
 
-                    <div class="cart-item bg-white d-flex align-items-center mt-3">
-                        <div class="d-inline-block px-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
-                        </div>
-                        <div class="d-inline-block tbl-product-width">
-                            <div class="d-flex align-items-center">
-                                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-opyk70ch7alv6c"
-                                    alt="" style="width: 80px; height: 80px;">
-                                <p class="text-truncate m-0">
-                                    Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
-                                    Động Kết Nối Cảm Ứng Chính Hãng PKT
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-inline-block tbl-price-width text-center">
-                            <p class="m-0">179.000đ</p>
-                        </div>
-                        <div class="d-inline-block tbl-quantity-width text-center">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">-</button>
-                            <input type="text" value="1" class="text-center py-2" style="width: 50px; height: 32px;">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">+</button>
-                        </div>
-                        <div class="d-inline-block tbl-money-width text-center">
-                            <p class="m-0">179.000đ</p>
-                        </div>
-                        <div class="d-inline-block text-center" style="width: 12.70417%;">
-                            <a href="#" class="text-decoration-none text-center">Xóa</a>
-                        </div>
-                        </d>
                     </div>
-
-                    <div class="cart-item bg-white d-flex align-items-center mt-3">
-                        <div class="d-inline-block px-3">
-                            <input type="checkbox" style="width: 20px; height: 20px;">
-                        </div>
-                        <div class="d-inline-block tbl-product-width">
-                            <div class="d-flex align-items-center">
-                                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-opyk70ch7alv6c"
-                                    alt="" style="width: 80px; height: 80px;">
-                                <p class="text-truncate m-0">
-                                    Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự
-                                    Động Kết Nối Cảm Ứng Chính Hãng PKT
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-inline-block tbl-price-width text-center">
-                            <p class="m-0">179.000đ</p>
-                        </div>
-                        <div class="d-inline-block tbl-quantity-width text-center">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">-</button>
-                            <input type="text" value="1" class="text-center py-2" style="width: 50px; height: 32px;">
-                            <button class="btn btn-dark text-center p-0" style="width: 32px; height: 32px;">+</button>
-                        </div>
-                        <div class="d-inline-block tbl-money-width text-center">
-                            <p class="m-0">179.000đ</p>
-                        </div>
-                        <div class="d-inline-block text-center" style="width: 12.70417%;">
-                            <a href="#" class="text-decoration-none text-center">Xóa</a>
-                        </div>
-                        </d>
-                    </div>
+                    <!--MOBILE -->
 
                 </div>
 
             </div>
 
             <!-- THANH TOÁN -->
-            <div class="row my-4 bg-white p-3 fs-5 position-sticky bottom-0 z-2 shadow" style="height: 100px;">
-                <div class="d-flex justify-content-between align-items-center h-100">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-inline-block">
+            <div id="cart-payment"
+                class="row my-4 bg-white p-3 fs-5 position-sticky bottom-0 z-2 shadow align-items-center"
+                style="min-height: 100px;">
+                <div
+                    class="d-flex flex-row flex-md-column flex-lg-row justify-content-between align-items-center h-100">
+
+                    <div class="d-flex flex-wrap justify-content-start mb-0 mb-md-3 mb-lg-0">
+                        <div class="d-flex align-items-center me-3">
                             <input type="checkbox" style="width: 20px; height: 20px;">
                         </div>
-                        <a href="#" class="text-decoration-none ms-2 me-5 mb-0" style="color: rgb(209, 0, 36);">Chọn tất
-                            cả</a>
-                        <a href="#" class="text-decoration-none mb-0" style="color: rgb(209, 0, 36);">Xóa</a>
+                        <a href="#" class="text-decoration-none ms-2 me-5 mb-0 d-none d-md-block"
+                            style="color: rgb(209, 0, 36);">
+                            Chọn tất cả
+                        </a>
+                        <a href="#" class="text-decoration-none mb-0 d-none d-md-block"
+                            style="color: rgb(209, 0, 36);">Xóa</a>
                     </div>
 
                     <div class="d-flex">
                         <div class="d-flex align-items-center me-4">
-                            <p class="mb-0">Tổng thanh toán</p>
-                            <p class="mb-0">(<span>0</span> Sản phẩm):</p>
-                            <p class="mb-0 ms-3 fs-3 fw-semibold" style="color: rgb(209, 0, 36);">1.123.123đ</p>
+                            <p class="mb-0 mx-2">Tổng <span class="d-none d-md-inline-block">thanh toán</span></p>
+                            <p class="mb-0 d-none d-lg-inline-block">
+                                (<span>0</span> Sản phẩm):
+                            </p>
+                            <p id="total" class="mb-0 ms-3 fs-3 fw-semibold" style="color: rgb(209, 0, 36);">
+                                179.000đ
+                            </p>
                         </div>
-                        <div class="btn text-white" style="background-color: rgb(209, 0, 36); width: 200px;">MUA HÀNG
-                        </div>
+                        <button class="btn text-white" style="background-color: rgb(209, 0, 36); width: 200px;">
+                            MUA HÀNG
+                        </button>
                     </div>
-                </div>
 
+                </div>
             </div>
             <!-- THANH TOÁN -->
 
@@ -994,6 +972,58 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../../public/js/app.js"></script>
+    <script src="./cart.js"></script>
+
+    <script>
+        $(() => {
+            const convertPriceToNumber = (price) => {
+                const result = price.replace(/\D/g, '');
+                return Number(result);
+            }
+
+            const convertNumberToPrice = (number) => {
+                return number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+            }
+
+            const deleteProduct = () => {
+                alert('xoá');
+            };
+
+            const priceChange = (element, increase = true) => {
+
+                let quantity = Number(element.find('.quantity').val());
+                const unitPrice = element.find('.unit-price').text();
+
+                if (increase) quantity++;
+                else quantity > 1 ? quantity-- : deleteProduct()
+
+                const totalPrice = quantity * convertPriceToNumber(unitPrice)
+
+                element.find('.quantity').attr('value', quantity);
+                element.find('.total-price').html(convertNumberToPrice(totalPrice))
+
+                // if (element.find('input.select').is(':checked')) {
+                //     const totalPayment = convertPriceToNumber($('#cart-payment #total').text());
+                //     const totalPaymentPrice = increase ? convertNumberToPrice(totalPayment + totalPrice) : convertNumberToPrice(totalPayment - totalPrice);
+                //     $('#cart-payment #total').html(totalPaymentPrice);
+                // }
+
+                $('#cart-payment #total').html(totalPrice);
+            }
+
+            $('#cart .btn-increase').on('click', function () {
+                const element = $(this).closest('.cart-item');
+
+                priceChange(element);
+            })
+
+            $('#cart .btn-decrease').on('click', function () {
+                const element = $(this).closest('.cart-item');
+
+                priceChange(element, false);
+            })
+        })
+    </script>
 </body>
 
 </html>

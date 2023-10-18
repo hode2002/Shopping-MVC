@@ -64,7 +64,7 @@ header span.close-btn:hover {
   position: relative;
 }
 
-.cart-list:before {
+header .cart-list:before {
   content      : "";
   position     : absolute;
   top          : 0;
