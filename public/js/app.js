@@ -271,82 +271,117 @@ $(() => {
       previewAvatar(this?.files[0], imgTag);
     });
     // Preview avatar
-  });
-
-  // THÊM VÀO GIỎ HÀNG
-
-  // Initialize an empty cart array
-  var cart = [
-    {
-      id: "p-1",
-      name: "Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết Nối Cảm Ứng Chính Hãng PKT",
-      price: "179.000đ",
-      photo:
-        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tng",
-    },
-    {
-      id: "p-2",
-      name: "Cái số 2 Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết Nối Cảm Ứng Chính Hãng PKT",
-      price: "179.000đ",
-      photo:
-        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tng",
-    },
-  ];
-  let user_cart = [];
-
-  // Function to add an item to the cart
-  function addToCart(product, price) {
-    var item = {
-      product: product,
-      price: price,
-    };
-
-    cart.push(item);
-
-    // Update the cart display
-    updateCart();
-  }
-
-  // Function to update the cart display
-  function updateCart() {
-    var cartTable = $("#cart tbody");
-    cartTable.empty();
-
-    // Loop through the cart items and append them to the cart table
-    for (var i = 0; i < cart.length; i++) {
-      var item = cart[i];
-
-      var row = $("<tr></tr>");
-      row.append("<td>" + item.product + "</td>");
-      row.append("<td>" + item.price + "</td>");
-      row.append('<td><button class="remove">Remove</button></td>');
-
-      cartTable.append(row);
-    }
-  }
-
-  // Event handler for adding items to the cart
-  $(".add-to-cart").click(function () {
-    let id = $(this).closest(".product").attr("id");
-
-    // console.log(id);
-
-    // addToCart(product, price);
-    cart.forEach(function (item) {
-      if (item.id === id) {
-        user_cart.push(item);
-      }
+    // THÊM VÀO GIỎ HÀNG
+    let cart = new Array();
+    $("#quantity-in-cart").text($("#cart-show").children().length);
+    $(".add-cart-product").click(function (e) {
+      e.preventDefault();
+      let card = $(this).parent().parent();
+      let imgCard = card.find("img").attr("src");
+      let nameCard = card.children(".card-body").find("h5").text();
+      let priceCard = card.children(".card-body").find("p").text();
+      let quantityCard = 1;
+      let itemCard = new Array(imgCard, nameCard, priceCard, quantityCard);
+      cart.push(itemCard);
+      console.log(cart);
+      showCart();
+      let quantityCards = $("#cart-show").children().length;
+      $("#quantity-in-cart").text(quantityCards);
     });
-    // console.log(user_cart);
-    window.localStorage.setItem("user1", JSON.stringify(user_cart));
-  });
-
-  // Event handler for removing items from the cart
-  $(document).on("click", ".remove", function () {
-    var index = $(this).closest("tr").index();
-    cart.splice(index, 1);
-
-    // Update the cart display
-    updateCart();
+    let i = 0;
+    function showCart() {
+      let str = "";
+      for (i; i < cart.length; i++) {
+        str +=
+          "<div class='product card flex-row border-0'>" +
+          " <img src='" +
+          cart[i][0] +
+          "' class='w-25' alt='...' />" +
+          "<div class='card-body container'>  <div class='row'> <p class='card-text col-8 text-truncate'>" +
+          cart[i][1] +
+          "</p><div class='d-flex align-items-center gap-1'><p class='fs-5 fw-bold' style='color: rgb(209, 0, 36)'>" +
+          cart[i][2] +
+          "</p><p style='color: rgb(209, 0, 36)'>x 2</p> </div></div></div></div>";
+      }
+      // let show = $("#cart-show");
+      $(str).appendTo("#cart-show");
+      // $("#cart-show").append(html(str));
+    }
   });
 });
+
+// Initialize an empty cart array
+//   var cart = [
+//     {
+//       id: "p-1",
+//       name: "Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết Nối Cảm Ứng Chính Hãng PKT",
+//       price: "179.000đ",
+//       photo:
+//         "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tng",
+//     },
+//     {
+//       id: "p-2",
+//       name: "Cái số 2 Tai Nghe Bluetooth Pro 2 Không Dây Cao Cấp Định Vị Đổi Tên Tự Động Kết Nối Cảm Ứng Chính Hãng PKT",
+//       price: "179.000đ",
+//       photo:
+//         "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llysbdiyaktb13_tng",
+//     },
+//   ];
+//   let user_cart = [];
+
+//   // Function to add an item to the cart
+//   function addToCart(product, price) {
+//     var item = {
+//       product: product,
+//       price: price,
+//     };
+
+//     cart.push(item);
+
+//     // Update the cart display
+//     updateCart();
+//   }
+
+//   // Function to update the cart display
+//   function updateCart() {
+//     var cartTable = $("#cart tbody");
+//     cartTable.empty();
+
+//     // Loop through the cart items and append them to the cart table
+//     for (var i = 0; i < cart.length; i++) {
+//       var item = cart[i];
+
+//       var row = $("<tr></tr>");
+//       row.append("<td>" + item.product + "</td>");
+//       row.append("<td>" + item.price + "</td>");
+//       row.append('<td><button class="remove">Remove</button></td>');
+
+//       cartTable.append(row);
+//     }
+//   }
+
+//   // Event handler for adding items to the cart
+//   $(".add-to-cart").click(function () {
+//     let id = $(this).closest(".product").attr("id");
+
+//     // console.log(id);
+
+//     // addToCart(product, price);
+//     cart.forEach(function (item) {
+//       if (item.id === id) {
+//         user_cart.push(item);
+//       }
+//     });
+//     // console.log(user_cart);
+//     window.localStorage.setItem("user1", JSON.stringify(user_cart));
+//   });
+
+//   // Event handler for removing items from the cart
+//   $(document).on("click", ".remove", function () {
+//     var index = $(this).closest("tr").index();
+//     cart.splice(index, 1);
+
+//     // Update the cart display
+//     updateCart();
+//   });
+// });
