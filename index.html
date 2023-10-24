@@ -445,27 +445,18 @@
                   <!-- /Cart List -->
                 </a>
 
-                <div class="dropdown d-block d-md-none">
+                <div class="d-block d-md-none">
                   <button
-                    class="btn dropdown-toggle text-white fs-4"
+                    class="btn collapsed text-white fs-4"
                     type="button"
-                    data-bs-toggle="dropdown"
+                    data-bs-toggle="collapse"
+                    href="#dropdown-menu"
+                    role="button"
                     aria-expanded="false"
+                    aria-controls="dropdown-menu"
                   >
                     <i class="fa fa-bars"></i>
                   </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item text-white py-2" href="#"
-                        >Tài khoản</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item text-white py-2" href="#"
-                        >Đăng xuất</a
-                      >
-                    </li>
-                  </ul>
                 </div>
               </div>
               <!-- /Cart -->
@@ -477,6 +468,23 @@
       <!-- /MAIN HEADER -->
     </header>
     <!-- /HEADER -->
+    <ul
+      class="collapse multi-collapse d-md-none"
+      id="dropdown-menu"
+      style="
+        background-color: #15161d;
+        text-decoration: none;
+        list-style: none;
+        padding-left: 0px;
+      "
+    >
+      <li>
+        <a class="dropdown-item text-white py-2 ps-4" href="#">Tài khoản</a>
+      </li>
+      <li>
+        <a class="dropdown-item text-white py-2 ps-4" href="#">Đăng xuất</a>
+      </li>
+    </ul>
 
     <main style="background-color: #f5f5f5; min-height: 150vh">
       <!-- SLIDE BAR -->
