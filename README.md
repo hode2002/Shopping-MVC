@@ -1,4 +1,4 @@
-# Project học phần Công nghệ Web (CT275)
+# Project Niên Luận Cơ Sở (CT271)
 
 Học kỳ 1, Năm học 2023-2024
 
