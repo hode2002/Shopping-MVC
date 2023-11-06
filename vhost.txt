@@ -1,0 +1,10 @@
+<VirtualHost *:80>	
+    DocumentRoot "C:\Users\54dhv\Desktop\CT271-Project\public"
+    ServerName ct271-project.localhost
+    # Set access permission 
+    <Directory "C:\Users\54dhv\Desktop\CT271-Project\public"> 
+	Options Indexes FollowSymLinks Includes ExecCGI
+	AllowOverride All
+	Require all granted
+    </Directory>
+</VirtualHost>

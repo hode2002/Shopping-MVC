@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/imgs/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="img/png" sizes="32x32" href="/imgs/favicon/favicon-32x32.png" />
+  <link rel="icon" type="imgs/png" sizes="16x16" href="/imgs/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="/imgs/favicon/site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <title>Đổi mật khẩu</title>
+
+  <style>
+    button.btn.edit:hover {
+      background-color: rgb(30, 31, 41) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="position-sticky top-0 start-0 end-0 z-3"
+    style="border-bottom: 3px solid rgb(209, 0, 36); min-width: 400px">
+    <!-- TOP HEADER -->
+    <div class="py-3 d-none d-md-block" style="background-color: rgb(30, 31, 41)">
+      <div class="container py-1">
+        <div class="d-flex justify-content-between flex-wrap">
+          <ul class="d-flex m-0 align-items-center" style="list-style-type: none">
+            <li class="me-3 fw-semibold" style="font-size: 14px">
+              <a href="#" class="text-decoration-none text-white">
+                <i class="fa-solid fa-phone text-white bg-transparent" style="color: rgb(209, 0, 36) !important"></i>
+                +012-34-56-78
+              </a>
+            </li>
+            <li class="me-3 fw-semibold" style="font-size: 14px">
+              <a href="/contact" class="text-decoration-none text-white">
+                <i class="fa-solid fa-envelope text-white bg-transparent" style="color: rgb(209, 0, 36) !important"></i>
+                email@email.com
+              </a>
+            </li>
+            <li class="me-3 fw-semibold" style="font-size: 14px">
+              <a href="#" class="text-decoration-none text-white">
+                <i class="fa-solid fa-location-dot text-white bg-transparent"
+                  style="color: rgb(209, 0, 36) !important"></i>
+                30/4 ĐH Cần Thơ
+              </a>
+            </li>
+          </ul>
+
+          <ul class="d-flex m-0 align-items-center" style="list-style-type: none">
+            <li class="me-3 fw-semibold" style="font-size: 14px">
+              <a href="#" class="text-decoration-none text-white">
+                Trở thành Người bán
+              </a>
+            </li>
+
+            <li class="ms-5 me-3 fw-semibold">
+              <a href="/pages/account/profile.html"
+                class="text-decoration-none text-white d-flex align-items-center gap-2">
+                <img src="/imgs/logos/3772487.jpg" class="rounded-circle" alt=""
+                  style="width: 1.375rem; height: 1.375rem" />
+                <p class="m-0">HVD</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div class="py-3" style="background-color: rgb(21, 22, 29)">
+      <div class="container">
+        <div class="row">
+          <!-- LOGO -->
+          <div class="col-md-3 mb-3 m-md-0">
+            <div class="text-center">
+              <a href="/">
+                <img class="img-fluid w-75" src="/imgs/logos/shopping-online.png" alt="" />
+              </a>
+            </div>
+          </div>
+          <!-- /LOGO -->
+
+          <!-- SEARCH BAR -->
+          <div class="col-md-6">
+            <div class="h-100 w-100 d-flex flex-column justify-content-center position-relative">
+              <form id="search-form" class="d-flex w-100">
+                <input class="search input py-2 px-4 w-100 rounded-start-5 border-0" placeholder="Tìm kiếm" />
+                <div class="btn text-white fw-bold py-2 px-4 rounded-start-0 rounded-end-5 border-0"
+                  style="background-color: rgb(209, 0, 36)">
+                  Search
+                </div>
+              </form>
+
+              <!-- HISTORY -->
+              <div class="history position-absolute top-100 rounded-2 z-2" style="
+                    background-color: rgb(21, 22, 29);
+                    width: 85%;
+                    display: none;
+                  ">
+                <ul class="history-list p-0" style="list-style-type: none">
+                  <li class="d-flex align-items-center justify-content-around">
+                    <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white text-truncate"
+                      style="width: 90%">
+                      Bàn phím giả cơ
+                    </a>
+                    <span class="close-btn text-white p-1">
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
+                  </li>
+                  <li class="d-flex justify-content-around">
+                    <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
+                      Đồng hồ
+                    </a>
+                    <span class="close-btn text-white p-1">
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
+                  </li>
+                  <li class="d-flex justify-content-around">
+                    <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
+                      iphone 15 promax 512gb
+                    </a>
+                    <span class="close-btn text-white p-1">
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
+                  </li>
+                  <li class="d-flex justify-content-around">
+                    <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
+                      laptop
+                    </a>
+                    <span class="close-btn text-white p-1">
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
+                  </li>
+                  <li class="d-flex justify-content-around">
+                    <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
+                      Giày thể thao nam
+                    </a>
+                    <span class="close-btn text-white p-1">
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <!-- /HISTORY -->
+            </div>
+          </div>
+          <!-- /SEARCH BAR -->
+
+          <!-- ACCOUNT -->
+          <div class="col-md-3 mt-4 mt-md-0">
+            <!-- Cart -->
+            <div class="cart h-100 d-flex justify-content-around align-items-center">
+              <a href="/cart" class="text-white position-relative" style="color: white !important;">
+                <i class="fa fa-shopping-cart text-center fs-2"></i>
+                <span class="position-absolute rounded-circle text-center" style="
+                      width: 25px;
+                      height: 25px;
+                      top: -10px;
+                      right: -10px;
+                      background-color: rgb(209, 0, 36);
+                    ">
+                  3
+                </span>
+
+                <!-- Cart List -->
+                <div class="cart-list d-none position-absolute bg-white border rounded-3" style="
+                      inset: 50px auto auto -450px;
+                      width: 500px;
+                      z-index: 100;
+                    ">
+                  <div class="overflow-x-hidden overflow-y-scroll rounded" style="max-height: 50vh">
+                    <div class="product card flex-row border-0">
+                      <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
+                      <div class="card-body container">
+                        <div class="row">
+                          <p class="card-text col-8 text-truncate">
+                            Bàn phím giả cơ gaming kèm chuột có dây chế độ led
+                            7 màu tiện lợi dành cho máy tính,game thủ,văn
+                            phòng.
+                          </p>
+                          <div class="d-flex align-items-center gap-1">
+                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                              ₫125.000
+                            </p>
+                            <p style="color: rgb(209, 0, 36)">x 2</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="product card flex-row border-0">
+                      <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
+                      <div class="card-body container">
+                        <div class="row">
+                          <p class="card-text col-8 text-truncate">
+                            Bàn phím giả cơ gaming kèm chuột có dây chế độ led
+                            7 màu tiện lợi dành cho máy tính,game thủ,văn
+                            phòng.
+                          </p>
+                          <div class="d-flex align-items-center gap-1">
+                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                              ₫125.000
+                            </p>
+                            <p style="color: rgb(209, 0, 36)">x 2</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="product card flex-row border-0">
+                      <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
+                      <div class="card-body container">
+                        <div class="row">
+                          <p class="card-text col-8 text-truncate">
+                            Bàn phím giả cơ gaming kèm chuột có dây chế độ led
+                            7 màu tiện lợi dành cho máy tính,game thủ,văn
+                            phòng.
+                          </p>
+                          <div class="d-flex align-items-center gap-1">
+                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                              ₫125.000
+                            </p>
+                            <p style="color: rgb(209, 0, 36)">x 2</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="product card flex-row border-0">
+                      <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
+                      <div class="card-body container">
+                        <div class="row">
+                          <p class="card-text col-8 text-truncate">
+                            Bàn phím giả cơ gaming kèm chuột có dây chế độ led
+                            7 màu tiện lợi dành cho máy tính,game thủ,văn
+                            phòng.
+                          </p>
+                          <div class="d-flex align-items-center gap-1">
+                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                              ₫125.000
+                            </p>
+                            <p style="color: rgb(209, 0, 36)">x 2</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="product card flex-row border-0">
+                      <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
+                      <div class="card-body container">
+                        <div class="row">
+                          <p class="card-text col-8 text-truncate">
+                            Bàn phím giả cơ gaming kèm chuột có dây chế độ led
+                            7 màu tiện lợi dành cho máy tính,game thủ,văn
+                            phòng.
+                          </p>
+                          <div class="d-flex align-items-center gap-1">
+                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                              ₫125.000
+                            </p>
+                            <p style="color: rgb(209, 0, 36)">x 2</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-4 pb-3 text-end">
+                    <button class="btn text-white py-2 px-3 me-3" style="background-color: rgb(209, 0, 36)">
+                      Xem giỏ hàng
+                    </button>
+                  </div>
+                </div>
+                <!-- /Cart List -->
+            </div>
+
+            <div class="dropdown d-block d-md-none">
+              <button class="btn dropdown-toggle text-white fs-4" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa fa-bars"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item text-white py-2" href="#">Tài khoản</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-white py-2" href="#">Đăng xuất</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /Cart -->
+        </div>
+        <!-- /ACCOUNT -->
+      </div>
+    </div>
+    </div>
+    <!-- /MAIN HEADER -->
+  </header>
+  <!-- /HEADER -->
+
+  <main style="background-color: #f5f5f5">
+    <div class="container">
+      <div class="row h-100 py-5">
+        <div class="col-3 p-3 d-none d-md-block">
+          <div class="py-3 d-flex align-items-center gap-3">
+            <img src="/imgs/logos/3772487.jpg" alt="avatar" class="rounded-circle" style="width: 50px; height: 50px" />
+            <p class="m-0 fw-bold">HVD</p>
+          </div>
+
+          <div class="mt-4">
+            <div class="d-flex gap-2 align-items-center mb-2">
+              <img src="https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4"
+                style="width: 1.5rem; height: 1.5rem" />
+              <a href="#" class="text-decoration-none text-black fs-5 m-0">Tài khoản của tôi</a>
+            </div>
+            <ul style="list-style-type: none">
+              <li class="mb-2 fs-5">
+                <a href="/profile" class="text-decoration-none text-black opacity-75">Hồ sơ</a>
+              </li>
+              <li class="mb-2 fs-5">
+                <a href="#" class="text-decoration-none text-black">Đổi mật khẩu</a>
+              </li>
+              <li class="mb-2 fs-5">
+                <a href="/address" class="text-decoration-none text-black opacity-75">Địa chỉ</a>
+              </li>
+            </ul>
+
+            <div class="fs-5 d-flex align-items-center gap-2">
+              <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078"
+                style="width: 1.5rem; height: 1.5rem" />
+              <a href="#" class="text-decoration-none text-black fs-5 m-0">Đơn mua</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-8 p-4 bg-white h-100 rounded-3">
+          <div class="border-bottom pb-3">
+            <p class="m-0 fs-3">Hồ Sơ Của Tôi</p>
+            <p class="m-0 fs-5">
+              Quản lý thông tin hồ sơ để bảo mật tài khoản
+            </p>
+          </div>
+          <div class="row pt-5 flex-column-reverse flex-md-row">
+            <!-- EDIT PROFILE -->
+            <div class="col-12 col-md-12 px-5 border-md-end">
+              <form id="edit-avatar-form" action="" class="mt-5">
+                <div class="mb-5">
+                  <label for="password" class="form-label w-100 fw-semibold">Mật khẩu mới</label>
+                  <input type="password" name="password" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
+                </div>
+                <div class="mb-5">
+                  <label for="password" class="form-label w-100 fw-semibold">Nhập lại mật khẩu mới</label>
+                  <input type="password" name="new-password"
+                    class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
+                </div>
+
+                <div class="col text-center">
+                  <button type="submit" class="btn edit btn-outline-dark btn-lg mt-4 w-100 bg-white">
+                    Lưu
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- /EDIT PROFILE -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="border-top: 3px solid rgb(209, 0, 36); min-width: 400px">
+    <!-- top footer -->
+    <div style="background-color: rgb(21, 22, 29)">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-xs-6 text-center text-md-start">
+            <h3 class="mt-5 mb-3 my-md-4 fs-4 text-white">Về Chúng Tôi</h3>
+
+            <ul style="padding: 0; list-style-type: none">
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Giới Thiệu Về Shop</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Tuyển Dụng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Điều Khoản</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Chính Sách Bảo Mật</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Chính Hãng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Kênh Người Bán</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Flash Sales</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Liên Hệ Với Truyền Thông</a>
+              </li>
+            </ul>
+            <ul style="padding: 0; list-style-type: none">
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fa-solid fa-location-dot text-white bg-transparent"
+                    style="color: rgb(209, 0, 36) !important"></i>
+                  30/4 ĐH Cần Thơ</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fa-solid fa-phone text-white bg-transparent" style="color: rgb(209, 0, 36) !important"></i>
+                  +012-34-56-78
+                </a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fa-solid fa-envelope text-white bg-transparent"
+                    style="color: rgb(209, 0, 36) !important"></i>
+                  email@email.com
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-3 col-xs-6 text-center text-md-start">
+            <h3 class="mt-5 mb-3 my-md-4 fs-4 text-white">CSKH</h3>
+
+            <ul class="" style="padding: 0; list-style-type: none">
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Trung Tâm Trợ Giúp</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Hướng Dẫn Mua Hàng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Hướng Dẫn Bán Hàng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Thanh Toán</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Vận Chuyển</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Trả Hàng & Hoàn Tiền</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Chăm Sóc Khách Hàng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Chính Sách Bảo Hành</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-3 col-xs-6 text-center text-md-start">
+            <h3 class="mt-5 mb-3 my-md-4 fs-4 text-white">THANH TOÁN</h3>
+
+            <ul class="d-flex justify-content-center justify-content-md-start flex-wrap gap-3"
+              style="padding: 0; list-style-type: none">
+              <li class="py-2">
+                <a href="#" class="fs-1 text-white text-decoration-none"><i class="fa-brands fa-cc-visa"></i></a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="fs-1 text-white text-decoration-none"><i class="fa-brands fa-cc-amazon-pay"></i></a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="fs-1 text-white text-decoration-none"><i class="fa-brands fa-cc-paypal"></i></a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="fs-1 text-white text-decoration-none"><i class="fa-brands fa-cc-mastercard"></i></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-3 col-xs-6 text-center text-md-start">
+            <h3 class="mt-5 mb-3 my-md-4 fs-4 text-white">Các Dịch Vụ</h3>
+
+            <ul class="" style="padding: 0; list-style-type: none">
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Tài khoản của tôi</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Giỏ Hàng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Theo Dõi Đơn Hàng</a>
+              </li>
+              <li class="py-2">
+                <a href="#" class="text-white text-decoration-none">Trợ giúp</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /top footer -->
+
+    <!-- bottom footer -->
+    <div style="background-color: rgb(30, 31, 41)">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center text-white py-4">
+            <span class="copyright">
+              &copy; 2023 - Bản quyền thuộc về Công ty TTHH
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /bottom footer -->
+  </footer>
+  <!-- /FOOTER -->
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>
