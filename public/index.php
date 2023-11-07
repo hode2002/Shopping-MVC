@@ -41,4 +41,16 @@ $router->get('/contact', function () {
     require_once VIEWS_DIR . '/contact/index.html';
 });
 
+$router->get('/product/detail', function () {
+    require_once VIEWS_DIR . '/product/detail/index.html';
+});
+
+$router->get('/product', function () {
+    require_once VIEWS_DIR . '/product/index.html';
+});
+
+$router->get('/payment', function () {
+    require_once VIEWS_DIR . '/payment/index.html';
+});
+
 $router->run();
