@@ -1,0 +1,113 @@
+CREATE TABLE roles (
+    code VARCHAR(255) PRIMARY KEY ,
+    name VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE contacts (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255),
+    name VARCHAR(255),
+    phone VARCHAR(10),
+    content TEXT,
+    status TINYINT(1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255),
+    password VARCHAR(255),
+    name VARCHAR(255),
+    address VARCHAR(255),
+    phone VARCHAR(10),
+    gender tinyint(1),
+    dob VARCHAR(255),
+    role_code VARCHAR(255) DEFAULT 'R1',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE categories (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    slug VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE products (
+    id VARCHAR(255) PRIMARY KEY,
+    cate_id INTEGER REFERENCES categories(id),
+    name VARCHAR(255),
+    thumbnail VARCHAR(255),
+    price FLOAT,
+    sale FLOAT DEFAULT '0',
+    description TEXT,
+    slug VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE product_images (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    product_id INTEGER REFERENCES products(id),
+    image_url VARCHAR(255)
+);
+
+CREATE TABLE comments (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_id INTEGER REFERENCES users(id),
+    product_id INTEGER REFERENCES products(id),
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE history_search (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_id INTEGER REFERENCES users(id),
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE history_buy (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_id INTEGER REFERENCES users(id),
+    product_id INTEGER REFERENCES products(id),
+    price FLOAT,
+    quantity INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_id INTEGER REFERENCES users(id),
+    total FLOAT,
+    status TINYINT(1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_detail (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    order_id INTEGER REFERENCES orders(id),
+    product_id INTEGER REFERENCES products(id),
+    quantity INTEGER,
+    total FLOAT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE delivery (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    charge_amount FLOAT,
+    status TINYINT(1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

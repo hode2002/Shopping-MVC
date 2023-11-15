@@ -9,48 +9,30 @@ require_once SRC_DIR . '/bootstrap.php';
 
 $router = new \Bramus\Router\Router();
 
+require_once SRC_DIR . '/routes/auth.php';
+require_once SRC_DIR . '/routes/cart.php';
+require_once SRC_DIR . '/routes/admin.php';
+require_once SRC_DIR . '/routes/profile.php';
+require_once SRC_DIR . '/routes/product.php';
+require_once SRC_DIR . '/routes/checkout.php';
+require_once SRC_DIR . '/routes/contact.php';
+
 $router->get('/', function () {
-    require_once VIEWS_DIR . '/home/index.html';
-});
+    $title = 'Trang chủ';
 
-$router->get('/login', function () {
-    require_once VIEWS_DIR . '/login/index.html';
-});
+    $UserModel = new \App\Models\UserModel();
+    $CategoryModel = new \App\Models\CategoryModel();
+    $ProductModel = new \App\Models\ProductModel();
 
-$router->get('/register', function () {
-    require_once VIEWS_DIR . '/register/index.html';
-});
+    if (isset($_SESSION['email'])) {
+        $user = $UserModel->getByEmail(email: $_SESSION['email']);
+    }
+    $categories = $CategoryModel->getAll();
+    $products = $ProductModel->getAll();
+    $recommends = $ProductModel->getRandom();
+    $proSales = $ProductModel->getProSales();
 
-$router->get('/profile', function () {
-    require_once VIEWS_DIR . '/account/profile/index.html';
-});
-
-$router->get('/password', function () {
-    require_once VIEWS_DIR . '/account/password/index.html';
-});
-
-$router->get('/address', function () {
-    require_once VIEWS_DIR . '/account/address/index.html';
-});
-
-$router->get('/cart', function () {
-    require_once VIEWS_DIR . '/cart/index.html';
-});
-
-$router->get('/contact', function () {
-    require_once VIEWS_DIR . '/contact/index.html';
-});
-
-$router->get('/product/detail', function () {
-    require_once VIEWS_DIR . '/product/detail/index.html';
-});
-
-$router->get('/product', function () {
-    require_once VIEWS_DIR . '/product/index.html';
-});
-
-$router->get('/payment', function () {
-    require_once VIEWS_DIR . '/payment/index.html';
+    require_once VIEWS_DIR . '/home/index.php';
 });
 
 $router->run();

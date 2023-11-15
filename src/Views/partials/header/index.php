@@ -22,7 +22,31 @@
 
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
-    <title>Shopping Online</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript" src="/js/app.js"></script>
+
+    <style>
+        .dropdown-menu {
+            z-index: 100;
+        }
+
+        .dropdown-item {
+            color: white !important;
+        }
+
+        .dropdown-item:hover {
+            color: rgb(209, 0, 36) !important;
+        }
+    </style>
+    <title><?= $title ?? 'Shopping Online' ?></title>
 </head>
 
 <body>
@@ -32,6 +56,7 @@
         <div class="py-3 d-none d-md-block" style="background-color: rgb(30, 31, 41)">
             <div class="container py-1">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <!-- LEFT -->
                     <ul class="d-flex m-0" style="list-style-type: none">
                         <li class="me-3 fw-semibold" style="font-size: 14px">
                             <a href="#" class="text-decoration-none text-white">
@@ -52,30 +77,57 @@
                             </a>
                         </li>
                     </ul>
+                    <!-- /LEFT -->
 
+                    <!-- RIGHT -->
                     <ul class="d-flex m-0 align-items-center" style="list-style-type: none">
-                        <li class="me-3 fw-semibold" style="font-size: 14px">
-                            <a href="#" class="text-decoration-none text-white">
-                                Trở thành Người bán
-                            </a>
-                        </li>
-                        <li class="ms-5 me-3 fw-semibold" style="font-size: 14px">
-                            <a href="/pages/login/login.html" class="text-decoration-none text-white">
-                                Đăng nhập
-                            </a>
-                        </li>
-                        <li class="ms-5 me-3 fw-semibold" style="font-size: 14px">
-                            <a href="/pages/register/register.html" class="text-decoration-none text-white">
-                                Đăng ký
-                            </a>
-                        </li>
-                        <li class="ms-5 me-3 fw-semibold">
-                            <a href="/pages/account/profile.html" class="text-decoration-none text-white d-flex align-items-center gap-2">
-                                <img src="/imgs/logos/3772487.jpg" class="rounded-circle" alt="" style="width: 1.375rem; height: 1.375rem" />
-                                <p class="m-0">HVD</p>
-                            </a>
-                        </li>
+                        <?php
+                        if (empty($_SESSION['email'])) {
+                            echo '<li class="ms-5 me-3 fw-semibold" style="font-size: 14px">
+                                   <a href="/login" class="text-decoration-none text-white">
+                                       Đăng nhập
+                                   </a>
+                               </li>
+                               <li class="ms-5 me-3 fw-semibold" style="font-size: 14px">
+                                   <a href="/register" class="text-decoration-none text-white">
+                                       Đăng ký
+                                   </a>
+                               </li>';
+                        } else {
+                        ?>
+                            <li class="me-3 fw-semibold" style="font-size: 14px">
+                                <a href="#" class="text-decoration-none text-white">
+                                    Trở thành người bán
+                                </a>
+                            </li>
+                            <li id="dropdown" class="dropdown">
+                                <button class="btn dropdown-toggle d-flex align-items-center" type="button" style="box-shadow: none;" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a href="/profile" class="preview-img text-decoration-none text-white d-flex align-items-center gap-2">
+                                        <img src="<?= $user['avatar'] ?>" class="rounded-circle" alt="" style="width: 1.375rem; height: 1.375rem" />
+                                        <p class="m-0 fw-bold text-capitalize"><?= htmlspecialchars(explode('@', $_SESSION['email'])[0]) ?></p>
+                                    </a>
+                                </button>
+                                <ul id="dropdown-menu" class="dropdown-menu text-white">
+                                    <li><a class="dropdown-item" href="/profile">Tài khoản</a></li>
+                                    <li><a class="dropdown-item" href="/purchase">Đơn mua</a></li>
+                                    <?= (isset($_SESSION['role']) && ((int) $_SESSION['role'] === 'R3'))
+                                        ? '<li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>'
+                                        : '';
+                                    ?>
+                                    <form id="logout_form" action="/logout" method="post" class="d-flex flex-column">
+                                        <button class="dropdown-item" type="submit">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            Đăng Xuất
+                                        </button>
+                                    </form>
+                                </ul>
+                            </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
+                    <!-- /RIGHT -->
+
                 </div>
             </div>
         </div>
@@ -292,10 +344,13 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item text-white py-2" href="#">Tài khoản</a>
+                                        <a class="dropdown-item text-white py-2" href="/profile">Tài khoản</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white py-2" href="#">Đăng xuất</a>
+                                        <a class="dropdown-item text-white py-2" href="/purchase">Đơn mua</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-white py-2" href="/logout">Đăng xuất</a>
                                     </li>
                                 </ul>
                             </div>
