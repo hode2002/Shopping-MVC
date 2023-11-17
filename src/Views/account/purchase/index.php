@@ -4,10 +4,6 @@
         height: 10px !important;
     }
 
-    .btn:hover {
-        background-color: #17252a !important;
-    }
-
     .btn-status:hover {
         cursor: pointer;
     }
@@ -164,8 +160,8 @@
                                         </p>
                                     </div>
                                     <p class="mt-2">
-                                        <span class="text-decoration-line-through text-black-50 me-2"> ${convertNumberToPrice(item.price)}</span>
-                                        <span class="text-danger fw-bold sale">${convertNumberToPrice(Number(item.price) - Number(item.price) * (Number(item.sale) / 100))}</span>
+                                        <span class="text-decoration-line-through text-black-50 me-2"> ${convertNumberToPrice(item.origin_price)}</span>
+                                        <span class="text-danger fw-bold sale">${convertNumberToPrice(item.price)}</span>
                                     </p>
                                 </div>
                                 <div class="text-start">

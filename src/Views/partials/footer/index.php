@@ -187,11 +187,13 @@
                                     <p class="card-text col-8 text-truncate">
                                        ${item.name}
                                     </p>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                                    <div class="d-flex gap-1 flex-column">
+                                        <p class="mb-0 fw-bold text-dark opacity-75 text-decoration-line-through" style="color: rgb(209, 0, 36)">
                                             ${convertNumberToPrice(item.price)}
                                         </p>
-                                        <p style="color: rgb(209, 0, 36)">x<span class="quantity ms-1 fw-bold">${item.quantity}</span></p>
+                                        <p class="mb-0 fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                                            ${convertNumberToPrice(item.price - item.price * item.sale / 100)} x<span class="quantity ms-1 fw-bold">${item.quantity}</span>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -264,11 +266,13 @@
                                         <p class="card-text col-8 text-truncate">
                                         ${product.find('.name').text()}
                                         </p>
-                                        <div class="d-flex align-items-center gap-1">
-                                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                ${product.find('.price').text()}
+                                        <div class="d-flex gap-1 flex-column">
+                                            <p class="mb-0 fw-bold text-dark opacity-75 text-decoration-line-through" style="color: rgb(209, 0, 36)">
+                                                ${product.find('.origin-price').text()}
                                             </p>
-                                            <p style="color: rgb(209, 0, 36)">x<span class="quantity ms-1 fw-bold">1</span></p>
+                                            <p class="mb-0 fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                                                 ${product.find('.price').text()} x<span class="quantity ms-1 fw-bold">1</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

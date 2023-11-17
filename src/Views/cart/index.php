@@ -75,7 +75,9 @@
                         </div>
 
                         <div class="tbl-price-width text-center">
-                            <p class="m-0 unit-price" style="color: rgb(209, 0, 36);"><?= htmlspecialchars(format_money($item['price'])) ?></p>
+                            <p class="m-0 unit-price" style="color: rgb(209, 0, 36);">
+                                <?= htmlspecialchars(format_money((int)$item['price'] - (int)$item['price'] * (int)$item['sale'] / 100)) ?>
+                            </p>
                         </div>
 
                         <div class="d-flex justify-content-center tbl-quantity-width">
@@ -95,7 +97,7 @@
                         </div>
 
                         <div class="tbl-price-width text-center">
-                            <p class="m-0 fw-bold total-price" style="color: rgb(209, 0, 36);"><?= htmlspecialchars(format_money((int)$item['price'] * (int)$item['quantity'])) ?></p>
+                            <p class="m-0 fw-bold total-price" style="color: rgb(209, 0, 36);"><?= htmlspecialchars(format_money(((int)$item['price'] - (int)$item['price'] * (int)$item['sale'] / 100) * (int)$item['quantity'])) ?></p>
                         </div>
 
                         <div class="text-center" style="width: 12.70417%;">
@@ -435,27 +437,27 @@
                             res = JSON.parse(res);
 
                             Swal.fire({
-                                title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
-                                text: res["message"],
-                                icon: `${res["error"] ? 'error' : 'success'}`,
-                                confirmButtonText: 'Ok',
-                                customClass: {
-                                    confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
-                                },
-                            }).then(function() {
-                                $('header .cart-list .product.card').each(function() {
-                                    const itemId = $(this)[0].dataset.product_id;
-                                    if (itemId === productId) {
-                                        $(this).remove();
-                                    }
+                                    title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+                                    text: res["message"],
+                                    icon: `${res["error"] ? 'error' : 'success'}`,
+                                    confirmButtonText: 'Ok',
+                                    customClass: {
+                                        confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+                                    },
                                 })
+                                .then(function() {
+                                    $('header .cart-list .product.card').each(function() {
+                                        const itemId = $(this)[0].dataset.product_id;
+                                        if (itemId === productId) {
+                                            $(this).remove();
+                                            if (!$('header .cart-list .product.card').length) {
+                                                window.location.reload();
+                                            }
+                                        }
+                                    })
 
-                                if (!$('header .cart-list .product.card').length) {
-                                    window.location.reload();
-                                }
-
-                                product.remove();
-                            })
+                                    product.remove();
+                                })
                         },
                         error: function(error) {
                             console.log(error);

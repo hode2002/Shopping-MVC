@@ -107,8 +107,11 @@
               <h5 class="name card-title text-truncate" style="font-size: 11px">
                 <?= htmlspecialchars($product['name']) ?>
               </h5>
-              <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
+              <p class="origin-price card-text text-start m-0 text-dark opacity-75 text-decoration-line-through">
                 <?= format_money(htmlspecialchars($product['price'])) ?>
+              </p>
+              <p class="price card-text text-start m-0 fw-bold" style="color: rgb(209, 0, 36)">
+                <?= format_money(htmlspecialchars((int)$product['price'] - (int)$product['price'] * (int)$product['sale'] / 100)) ?>
               </p>
             </div>
             <div class="star p-2 pt-0">
@@ -152,8 +155,11 @@
               <h5 class="name card-title text-truncate z-n1" style="font-size: 11px">
                 <?= htmlspecialchars($product['name']) ?>
               </h5>
-              <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
+              <p class="origin-price card-text text-start m-0 text-dark opacity-75 text-decoration-line-through">
                 <?= format_money(htmlspecialchars($product['price'])) ?>
+              </p>
+              <p class="price card-text text-start m-0 fw-bold" style="color: rgb(209, 0, 36)">
+                <?= format_money(htmlspecialchars((int)$product['price'] - (int)$product['price'] * (int)$product['sale'] / 100)) ?>
               </p>
             </div>
             <div class="star p-2 pt-0">
@@ -188,8 +194,11 @@
               <h5 class="name card-title text-truncate" style="font-size: 11px">
                 <?= htmlspecialchars($product['name']) ?>
               </h5>
-              <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
+              <p class="origin-price card-text text-start m-0 text-dark opacity-75 text-center text-decoration-line-through">
                 <?= format_money(htmlspecialchars($product['price'])) ?>
+              </p>
+              <p class="price card-text text-start m-0 text-center fw-bold" style="color: rgb(209, 0, 36)">
+                <?= format_money(htmlspecialchars((int)$product['price'] - (int)$product['price'] * (int)$product['sale'] / 100)) ?>
               </p>
               <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1 add-cart-product" style="
                     background-color: rgb(209, 0, 36);

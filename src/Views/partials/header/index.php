@@ -65,7 +65,7 @@
                     data.forEach((item) => {
                         html += `
                             <li class="d-flex search-item align-items-center justify-content-around" data-id="${item.id}">
-                                <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white text-truncate" style="width: 90%">
+                                <a href="/search?keyword=${item.content}" class="py-1 ps-2 d-block text-decoration-none text-white text-truncate" style="width: 90%">
                                     ${item.content}
                                 </a>
                                 <span class="close-btn delete-btn text-white p-1">

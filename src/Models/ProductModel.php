@@ -144,12 +144,14 @@ class ProductModel
         return $stmt->rowCount() >= 0;
     }
 
-    public function getBookByCategory($sach)
+    public function getProductByKeyWord($keyword)
     {
         include SRC_DIR . '/config.php';
-        $sql = "select * from sach where the_loai like ? or ten_sach like ? or tac_gia like ?";
+        $sql = "SELECT p.*, c.name cate_name 
+                from products p JOIN categories c ON p.cate_id = c.id
+                WHERE c.name LIKE ? OR p.name LIKE ? OR p.description LIKE ?";
         $ketqua = $conn->prepare($sql);
-        $ketqua->execute(['%' . $sach . '%', '%' . $sach . '%', '%' . $sach . '%']);
+        $ketqua->execute(['%' . $keyword . '%', '%' . $keyword . '%', '%' . $keyword . '%']);
         $ketqua = $ketqua->fetchAll(PDO::FETCH_ASSOC);
 
         return $ketqua;
