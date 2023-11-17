@@ -17,6 +17,7 @@ require_once SRC_DIR . '/routes/product.php';
 require_once SRC_DIR . '/routes/checkout.php';
 require_once SRC_DIR . '/routes/contact.php';
 require_once SRC_DIR . '/routes/delivery.php';
+require_once SRC_DIR . '/routes/historySearch.php';
 
 $router->get('/', function () {
     $title = 'Trang chủ';

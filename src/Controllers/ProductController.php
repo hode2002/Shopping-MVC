@@ -7,7 +7,7 @@ class ProductController
     public function index()
     {
         $ProductModel = new \App\Models\ProductModel();
-        require_once VIEWS_DIR . '/product/index.html';
+        require_once VIEWS_DIR . '/product/search/index.php';
     }
 
     public function getDetail($id)

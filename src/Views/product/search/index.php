@@ -1,6 +1,6 @@
 <?php include_once VIEWS_DIR . "/partials/header/index.php" ?>
 
-<main style="background-color: #f5f5f5" class="p-2 rounded">
+<main style="background-color: #f5f5f5" class="p-5 rounded">
     <div class="container rounded">
         <div style="background-color: #ffffff">
             <div class="row fw-semibold fs-4 border-bottom p-2 text-center m-0" style="width: 100%">
@@ -68,11 +68,11 @@
                     Xem nhiều
                 </a>
             </div>
+
             <div class="row p-3">
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -103,7 +103,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -133,7 +132,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -163,7 +161,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -193,7 +190,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -223,7 +219,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -253,7 +248,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -284,7 +278,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -314,7 +307,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -344,7 +336,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -374,7 +365,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>
@@ -404,7 +394,6 @@
                 <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
                     <div class="card" style="width: 11rem">
                         <div class="logo-cart">
-                            <i class="bx bx-shopping-bag add-to-cart" id="cart-item-1"></i>
                             <div class="discount-card pe-1 ps-1">
                                 <span>10%</span>
                                 <span>Giảm</span>

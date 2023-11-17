@@ -12,9 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Thư viện boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <!-- /Thư viện boxicons -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -55,6 +53,56 @@
             color: rgb(209, 0, 36) !important;
         }
     </style>
+
+    <script>
+        $(() => {
+            $.ajax({
+                url: '/history-search',
+                type: 'GET',
+                success: function(res) {
+                    data = JSON.parse(res);
+                    let html = '';
+                    data.forEach((item) => {
+                        html += `
+                            <li class="d-flex search-item align-items-center justify-content-around" data-id="${item.id}">
+                                <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white text-truncate" style="width: 90%">
+                                    ${item.content}
+                                </a>
+                                <span class="close-btn delete-btn text-white p-1">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
+                            </li>
+                        `;
+                    })
+
+                    $('header .history-list').html(html);
+                },
+            })
+
+            $('header .btn-search').on('click', function() {
+                const keyword = $('header .keyword').val();
+
+                $.ajax({
+                    url: '/history-search',
+                    type: 'POST',
+                    data: {
+                        content: keyword,
+                    }
+                })
+
+                window.location.href = `/search?keyword=${keyword}`;
+            })
+
+            $(document).on('click', '.delete-btn', function() {
+                const id = $(this).closest('.search-item')[0].dataset.id;
+                $.ajax({
+                    url: '/history-search/delete/' + id,
+                    type: 'POST',
+                })
+                $(this).closest('.search-item').remove();
+            })
+        })
+    </script>
 
     <title><?= $title ?? 'Shopping Online' ?></title>
 </head>
@@ -160,12 +208,12 @@
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="h-100 w-100 d-flex flex-column justify-content-center position-relative">
-                            <form id="search-form" class="d-flex w-100">
-                                <input class="search input py-2 px-4 w-100 rounded-start-5 border-0" placeholder="Tìm kiếm" />
-                                <div class="btn text-white fw-bold py-2 px-4 rounded-start-0 rounded-end-5 border-0" style="background-color: rgb(209, 0, 36)">
+                            <div id="search-form" class="d-flex w-100">
+                                <input autocomplete="off" class="search input py-2 px-4 w-100 rounded-start-5 border-0 keyword" name="keyword" placeholder="Tìm kiếm" />
+                                <div class="btn btn-search text-white fw-bold py-2 px-4 rounded-start-0 rounded-end-5 border-0" style="background-color: rgb(209, 0, 36)">
                                     Search
                                 </div>
-                            </form>
+                            </div>
 
                             <!-- HISTORY -->
                             <div class="history position-absolute top-100 rounded-2 z-2" style="
@@ -174,7 +222,7 @@
                     display: none;
                   ">
                                 <ul class="history-list p-0" style="list-style-type: none">
-                                    <li class="d-flex align-items-center justify-content-around">
+                                    <!-- <li class="d-flex align-items-center justify-content-around">
                                         <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white text-truncate" style="width: 90%">
                                             Bàn phím giả cơ
                                         </a>
@@ -213,7 +261,7 @@
                                         <span class="close-btn text-white p-1">
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <!-- /HISTORY -->
