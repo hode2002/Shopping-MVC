@@ -135,33 +135,25 @@ class ProfileController
         try {
             require_once SRC_DIR . '/config.php';
             $UserModel = new \App\Models\UserModel();
-
-            if (!isset($_POST['id']) || empty($_POST['district'])) {
-                JsonResponse(error: 1, message: "Có lỗi xảy ra, vui lòng thử lại sau");
+            if (!isset($_SESSION['email'])) {
+                JsonResponse(error: 1, message: "Đăng nhập để tiếp tục");
             }
-            $id = htmlspecialchars($_POST['id']);
-            var_dump($_POST);
-            if (!isset($_POST['city']) || empty($_POST['city'])) {
-                JsonResponse(error: 1, message: "Vui lòng chọn tỉnh thành");
-            }
-            $city = htmlspecialchars($_POST['city']);
+            $email = $_SESSION['email'];
 
-            if (!isset($_POST['district']) || empty($_POST['district'])) {
-                JsonResponse(error: 1, message: "Vui lòng chọn quận huyện");
-            }
-            $district = htmlspecialchars($_POST['district']);
+            $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
 
-            if (!isset($_POST['ward']) || empty($_POST['ward'])) {
-                JsonResponse(error: 1, message: "Vui lòng chọn phường xã");
+            if (!isset($_POST['address'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập địa chỉ");
             }
-            $ward = htmlspecialchars($_POST['ward']);
+            $address = htmlspecialchars($_POST['address']);
 
-            $isSuccess = $UserModel->updateAddress($id, $city, $district, $ward);
+            $isSuccess = $UserModel->updateAddress($userId, $address);
             if (empty($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra, vui lòng thử lại sau");
             }
 
-            JsonResponse(error: 0, message: "Đổi mật khẩu thành công");
+            JsonResponse(error: 0, message: "Cập nhật địa chỉ thành công");
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

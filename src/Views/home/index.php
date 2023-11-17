@@ -14,7 +14,7 @@
   </li>
 </ul>
 
-<main id="home" style="background-color: #f5f5f5; min-height: 150vh">
+<main id="home" style="background-color: #f5f5f5; min-height: 100vh">
   <!-- SLIDE BAR -->
   <div style="background-color: #ffffff" class="pb-3 mb-3">
     <div class="container">
@@ -22,10 +22,10 @@
         <!-- LEFT -->
         <div class="col-sm-12 col-md-8 p-1">
           <div class="banner carousel container text-center p-0 h-100">
-            <div class="carousel-inner h-100">
-              <img alt="First slide" src="https://cf.shopee.vn/file/vn-50009109-84b6dbb942b411b06e260b2534a52ab1_xxhdpi" class="d-block img-fuild" />
-              <img alt="Second slide" src="https://cf.shopee.vn/file/vn-50009109-eefba2922ef040c46d036932a0dd2e46_xxhdpi" class="d-block img-fuild" />
-              <img alt="Third slide" src="https://cf.shopee.vn/file/vn-50009109-ec79ec7ff8c16835be817c9231303e2e_xxhdpi" class="d-block img-fuild" />
+            <div class="carousel-inner h-100 d-flex overflow-hidden">
+              <img alt="First slide" src="https://cf.shopee.vn/file/vn-50009109-84b6dbb942b411b06e260b2534a52ab1_xxhdpi" class="d-block img-fluid" />
+              <img alt="Second slide" src="https://cf.shopee.vn/file/vn-50009109-eefba2922ef040c46d036932a0dd2e46_xxhdpi" class="d-block img-fluid" />
+              <img alt="Third slide" src="https://cf.shopee.vn/file/vn-50009109-ec79ec7ff8c16835be817c9231303e2e_xxhdpi" class="d-block img-fluid" />
             </div>
           </div>
         </div>
@@ -34,21 +34,21 @@
         <!-- RIGHT -->
         <div class="img-bar col-md-4 d-flex align-items-center d-none d-md-block">
           <div class="row h-100 p-1">
-            <div class="banner-right-top">
+            <div class="d-flex overflow-hidden banner-right-top">
               <a href="#" class="col-6 d-block">
-                <img src="https://cf.shopee.vn/file/vn-50009109-4988b1d7e837aa158abecceab54ad7aa_xhdpi" class="d-block w-100 img-fuild" />
+                <img src="https://cf.shopee.vn/file/vn-50009109-4988b1d7e837aa158abecceab54ad7aa_xhdpi" class="d-block img-fluid" />
               </a>
               <a href="#" class="col-6 d-block">
-                <img src="https://cf.shopee.vn/file/vn-50009109-ac73ded4ff2a273dee3d344b2fc326d4_xhdpi" class="d-block w-100 img-fuild" />
+                <img src="https://cf.shopee.vn/file/vn-50009109-ac73ded4ff2a273dee3d344b2fc326d4_xhdpi" class="d-block img-fluid" />
               </a>
             </div>
 
-            <div class="banner-right-bottom align-self-end">
+            <div class="d-flex overflow-hidden banner-right-bottom align-self-end">
               <a href="#" class="col-6 d-block">
-                <img src="https://cf.shopee.vn/file/vn-50009109-33c16a4397dd8fb1f63f4a75f793a8d7_xhdpi" class="d-block w-100 img-fuild" />
+                <img src="https://cf.shopee.vn/file/vn-50009109-33c16a4397dd8fb1f63f4a75f793a8d7_xhdpi" class="d-block img-fluid" />
               </a>
               <a href="#" class="col-6 d-block">
-                <img src="https://cf.shopee.vn/file/vn-50009109-0a3205a391f00a39dc4537d8c943329a_xhdpi" class="d-block w-100 img-fuild" />
+                <img src="https://cf.shopee.vn/file/vn-50009109-0a3205a391f00a39dc4537d8c943329a_xhdpi" class="d-block img-fluid" />
               </a>
             </div>
           </div>
@@ -64,7 +64,7 @@
     <div class="row fw-semibold fs-2 border-bottom p-2">
       <div>DANH MỤC</div>
     </div>
-    <div class="image-slider">
+    <div class="image-slider d-flex overflow-hidden">
       <?php foreach ($categories as $cate) : ?>
         <div class="image-item py-3 col-sm-4 col-md-2">
           <a href="/danh-muc/<?= htmlspecialchars($cate['slug']) ?>" class="text-decoration-none">
@@ -94,10 +94,9 @@
     <!-- PRODUCTs -->
     <div class="products_slide row p-4">
       <?php foreach ($proSales as $product) : ?>
-        <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="text-decoration-none text-dark product d-flex justify-content-center col-md-2 py-2" id="p-n">
+        <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="mb-5 text-decoration-none text-dark product d-flex justify-content-center col-md-2 py-2" data-product_id="<?= htmlspecialchars($product['id']) ?>">
           <div class="card" style="width: 11rem">
             <div class="logo-cart">
-              <i class="bx bx-shopping-bag add-to-cart"> </i>
               <div class="discount-card pe-1 ps-1">
                 <span><?= htmlspecialchars($product['sale']) ?> %</span>
                 <span>Giảm</span>
@@ -105,12 +104,21 @@
             </div>
             <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="card-img-top p-2" alt="product" />
             <div class="card-body p-2">
-              <h5 class="card-title text-truncate" style="font-size: 11px">
+              <h5 class="name card-title text-truncate" style="font-size: 11px">
                 <?= htmlspecialchars($product['name']) ?>
               </h5>
+              <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
+                <?= format_money(htmlspecialchars($product['price'])) ?>
+              </p>
             </div>
             <div class="star p-2 pt-0">
               <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bx-star"></i>
+            </div>
+            <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1 add-cart-product" style="
+                    background-color: rgb(209, 0, 36);
+                    border: 1px solid rgb(209, 0, 36);
+                  ">
+              <div class="add-to-cart btn text-white border-0">Thêm vào giỏ</div>
             </div>
           </div>
         </a>
@@ -129,12 +137,11 @@
         ></a>
     </div>
     <!-- PRODUCTs -->
-    <div class="products_slide row p-4">
+    <div class="products_slide row p-4" style="min-height: 350px;">
       <?php foreach ($products as $product) : ?>
-        <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="text-decoration-none text-dark product d-flex justify-content-center col-md-2 py-2">
+        <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="mb-5 text-decoration-none text-dark product d-flex justify-content-center col-md-2 py-2" data-product_id="<?= htmlspecialchars($product['id']) ?>">
           <div class="card" style="width: 11rem">
             <div class="logo-cart">
-              <i class="bx bx-shopping-bag add-to-cart"> </i>
               <div class="discount-card pe-1 ps-1">
                 <span><?= htmlspecialchars($product['sale']) ?> %</span>
                 <span>Giảm</span>
@@ -142,12 +149,21 @@
             </div>
             <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="card-img-top p-2" alt="product" />
             <div class="card-body p-2">
-              <h5 class="card-title text-truncate" style="font-size: 11px">
+              <h5 class="name card-title text-truncate z-n1" style="font-size: 11px">
                 <?= htmlspecialchars($product['name']) ?>
               </h5>
+              <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
+                <?= format_money(htmlspecialchars($product['price'])) ?>
+              </p>
             </div>
             <div class="star p-2 pt-0">
               <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bx-star"></i>
+            </div>
+            <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1 add-cart-product" style="
+                    background-color: rgb(209, 0, 36);
+                    border: 1px solid rgb(209, 0, 36);
+                  ">
+              <div class="add-to-cart btn text-white border-0">Thêm vào giỏ</div>
             </div>
           </div>
         </a>
@@ -165,11 +181,11 @@
     <!-- PRODUCTs -->
     <div class="row p-3">
       <?php foreach ($recommends as $product) : ?>
-        <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="text-decoration-none text-dark product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
+        <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="text-decoration-none text-dark product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2" data-product_id="<?= htmlspecialchars($product['id']) ?>">
           <div class="card" style="width: 11rem">
             <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="card-img-top p-2" alt="product" />
             <div class="card-body p-2">
-              <h5 class="card-title text-truncate" style="font-size: 11px">
+              <h5 class="name card-title text-truncate" style="font-size: 11px">
                 <?= htmlspecialchars($product['name']) ?>
               </h5>
               <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
@@ -179,7 +195,7 @@
                     background-color: rgb(209, 0, 36);
                     border: 1px solid rgb(209, 0, 36);
                   ">
-                <div class="btn text-white border-0">Thêm vào giỏ</div>
+                <div class="add-to-cart btn text-white border-0">Thêm vào giỏ</div>
               </div>
             </div>
           </div>

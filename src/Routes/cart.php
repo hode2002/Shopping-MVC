@@ -6,6 +6,6 @@ $router->post('/cart', 'App\Controllers\CartController@postCreate');
 
 $router->post('/cart/list', 'App\Controllers\CartController@getList');
 
-$router->post('/cart/update/(\d+)', 'App\Controllers\CartController@postUpdate');
+$router->post('/cart/update/(.*)', 'App\Controllers\CartController@postUpdate');
 
-$router->post('/cart/delete/(\d+)', 'App\Controllers\CartController@postDelete');
+$router->post('/cart/delete/(.*)', 'App\Controllers\CartController@postDelete');

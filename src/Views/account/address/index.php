@@ -49,8 +49,13 @@
         <div class="row pt-5 flex-column-reverse flex-md-row">
           <!-- EDIT ADDRESS -->
           <div class="col px-5 border-md-end">
-            <form id="user_edit_address_form" action="/profile/address" method="post">
-              <label for="address" class="form-label w-100 fw-semibold mb-5">Địa chỉ</label>
+            <div class="mb-5">
+              <label for="address" class="form-label w-100 fw-semibold">
+                Địa chỉ
+              </label>
+              <input type="text" autocomplete="off" name="address" value="<?= htmlspecialchars($user['address']) ?>" id="address" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
+            </div>
+            <!-- <label for="address" class="form-label w-100 fw-semibold mb-5">Địa chỉ</label>
               <div class="mb-5 row">
                 <select class="col-1 form-select form-select-sm mb-3 form-control shadow-sm border-0 fw-lighter fs-7 p-3" id="city">
                   <option value="" selected>Chọn tỉnh thành</option>
@@ -63,13 +68,12 @@
                 <select class=" col-1 form-select form-select-sm form-control shadow-sm border-0 fw-lighter fs-7 p-3" id="ward">
                   <option value="" selected>Chọn phường xã</option>
                 </select>
-              </div>
-              <div class=" col text-center">
-                <button type="button" id="btn_edit_address" class="btn btn-outline-dark btn-lg mt-4 w-100 bg-white">
-                  Lưu
-                </button>
-              </div>
-            </form>
+              </div> -->
+            <div class=" col text-center">
+              <button type="button" id="btn_edit_address" class="btn btn-outline-dark btn-lg mt-4 w-100 bg-white">
+                Lưu
+              </button>
+            </div>
           </div>
           <!-- /EDIT ADDRESS -->
         </div>
@@ -78,7 +82,7 @@
   </div>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
   $(() => {
     const cities = $('#city')[0];
@@ -125,7 +129,7 @@
 
     $('#btn_edit_address').on('click', function(e) {
       axios({
-          url: "/account/address",
+          url: "/profile/address",
           method: "POST",
           data: {
             'city': $('#city').val(),
@@ -149,6 +153,36 @@
         });
     })
 
+  })
+</script> -->
+
+<script>
+  $(() => {
+    $('#btn_edit_address').on('click', function() {
+      $.ajax({
+        url: '/profile/address',
+        type: 'POST',
+        data: {
+          address: $('#address').val()
+        },
+        success: function(res) {
+          res = JSON.parse(res);
+
+          Swal.fire({
+            title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+            text: res["message"],
+            icon: `${res["error"] ? 'error' : 'success'}`,
+            confirmButtonText: 'Ok',
+            customClass: {
+              confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+            },
+          })
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      })
+    })
   })
 </script>
 

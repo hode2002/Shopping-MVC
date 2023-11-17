@@ -50,13 +50,11 @@ class UserModel
         return $stmt->rowCount() === 1;
     }
 
-    public function updateAddress($id, $city, $district, $ward)
+    public function updateAddress($id, $address)
     {
         include SRC_DIR . '/config.php';
         $sql = "UPDATE users SET address = ? WHERE id = ?";
-        $address = $city . ',' . $district . ',' . $ward;
         $stmt = $conn->prepare($sql);
-        $password = md5($password);
         $stmt->execute([$address, $id]);
         return $stmt->rowCount() === 1;
     }

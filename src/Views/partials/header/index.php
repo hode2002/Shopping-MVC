@@ -45,7 +45,17 @@
         .dropdown-item:hover {
             color: rgb(209, 0, 36) !important;
         }
+
+        .cart .cart-list .product:hover {
+            color: rgb(209, 0, 36) !important;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        header a:hover {
+            color: rgb(209, 0, 36) !important;
+        }
     </style>
+
     <title><?= $title ?? 'Shopping Online' ?></title>
 </head>
 
@@ -215,128 +225,30 @@
                     <div class="col-md-3 mt-4 mt-md-0">
                         <!-- Cart -->
                         <div class="cart h-100 d-flex justify-content-around align-items-center">
-                            <a href="/cart" class="text-white position-relative" style="color: white !important;">
-                                <i class="fa fa-shopping-cart text-center fs-2"></i>
-                                <span class="position-absolute rounded-circle text-center" style="
-                      width: 25px;
-                      height: 25px;
-                      top: -10px;
-                      right: -10px;
-                      background-color: rgb(209, 0, 36);
-                    ">
-                                    3
+                            <div class="text-white position-relative">
+                                <a href="/cart"><i class="fa fa-shopping-cart text-center fs-2" style="color: white !important;"></i></a>
+                                <span class="cart-quantity position-absolute rounded-circle text-center" style="
+                                                                                                width: 25px;
+                                                                                                height: 25px;
+                                                                                                top: -10px;
+                                                                                                right: -10px;
+                                                                                                background-color: rgb(209, 0, 36);
+                                                                                                ">
+                                    0
                                 </span>
 
                                 <!-- Cart List -->
                                 <div class="cart-list d-none position-absolute bg-white border rounded-3" style="
-                      inset: 50px auto auto -450px;
-                      width: 500px;
-                      z-index: 100;
-                    ">
-                                    <div class="overflow-x-hidden overflow-y-scroll rounded" style="max-height: 50vh">
-                                        <div class="product card flex-row border-0">
-                                            <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
-                                            <div class="card-body container">
-                                                <div class="row">
-                                                    <p class="card-text col-8 text-truncate">
-                                                        Bàn phím giả cơ gaming kèm chuột có dây chế độ led
-                                                        7 màu tiện lợi dành cho máy tính,game thủ,văn
-                                                        phòng.
-                                                    </p>
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                            ₫125.000
-                                                        </p>
-                                                        <p style="color: rgb(209, 0, 36)">x 2</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product card flex-row border-0">
-                                            <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
-                                            <div class="card-body container">
-                                                <div class="row">
-                                                    <p class="card-text col-8 text-truncate">
-                                                        Bàn phím giả cơ gaming kèm chuột có dây chế độ led
-                                                        7 màu tiện lợi dành cho máy tính,game thủ,văn
-                                                        phòng.
-                                                    </p>
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                            ₫125.000
-                                                        </p>
-                                                        <p style="color: rgb(209, 0, 36)">x 2</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product card flex-row border-0">
-                                            <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
-                                            <div class="card-body container">
-                                                <div class="row">
-                                                    <p class="card-text col-8 text-truncate">
-                                                        Bàn phím giả cơ gaming kèm chuột có dây chế độ led
-                                                        7 màu tiện lợi dành cho máy tính,game thủ,văn
-                                                        phòng.
-                                                    </p>
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                            ₫125.000
-                                                        </p>
-                                                        <p style="color: rgb(209, 0, 36)">x 2</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product card flex-row border-0">
-                                            <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
-                                            <div class="card-body container">
-                                                <div class="row">
-                                                    <p class="card-text col-8 text-truncate">
-                                                        Bàn phím giả cơ gaming kèm chuột có dây chế độ led
-                                                        7 màu tiện lợi dành cho máy tính,game thủ,văn
-                                                        phòng.
-                                                    </p>
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                            ₫125.000
-                                                        </p>
-                                                        <p style="color: rgb(209, 0, 36)">x 2</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product card flex-row border-0">
-                                            <img src="/imgs/products/96a5c0f3ecefb25751ed5d7668cedee8_tn.jpg" class="w-25" alt="..." />
-                                            <div class="card-body container">
-                                                <div class="row">
-                                                    <p class="card-text col-8 text-truncate">
-                                                        Bàn phím giả cơ gaming kèm chuột có dây chế độ led
-                                                        7 màu tiện lợi dành cho máy tính,game thủ,văn
-                                                        phòng.
-                                                    </p>
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                            ₫125.000
-                                                        </p>
-                                                        <p style="color: rgb(209, 0, 36)">x 2</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pt-4 pb-3 text-end">
-                                        <button class="btn text-white py-2 px-3 me-3" style="background-color: rgb(209, 0, 36)">
-                                            Xem giỏ hàng
-                                        </button>
+                                                                                                                inset: 50px auto auto -450px;
+                                                                                                                width: 500px;
+                                                                                                                z-index: 100;
+                                                                                                                ">
+                                    <div style="height: 300px;" class="empty-cart d-flex justify-content-center align-items-center">
+                                        <img src="/imgs/cart/empty-cart.png" class="w-25" alt="">
                                     </div>
                                 </div>
                                 <!-- /Cart List -->
-                            </a>
+                            </div>
 
                             <div class="dropdown d-block d-md-none">
                                 <button class="btn dropdown-toggle text-white fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">

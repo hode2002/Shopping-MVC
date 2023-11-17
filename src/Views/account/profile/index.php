@@ -29,7 +29,7 @@
                 khẩu</a>
             </li>
             <li class="mb-2 fs-5">
-              <a href="/account/address" class="text-decoration-none text-black opacity-75">Địa chỉ</a>
+              <a href="/profile/address" class="text-decoration-none text-black opacity-75">Địa chỉ</a>
             </li>
           </ul>
 
@@ -60,14 +60,14 @@
                 <label for="name" class="form-label w-100 fw-semibold">
                   Tên
                 </label>
-                <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" id="name" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
+                <input type="text" autocomplete="off" name="name" value="<?= htmlspecialchars($user['name']) ?>" id="name" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
               </div>
 
               <div class="mb-5">
                 <label for="phone" class="form-label w-100 fw-semibold">
                   Số điện thoại
                 </label>
-                <input type="text" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" id="phone" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
+                <input type="text" autocomplete="off" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" id="phone" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
               </div>
 
               <div class="mb-5">
@@ -88,7 +88,7 @@
                 <label for="dob" class="form-label w-100 fw-semibold">
                   Ngày sinh
                 </label>
-                <input type="text" value="<?= htmlspecialchars($user['dob']) ?>" name="dob" id="dob" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
+                <input type="text" autocomplete="off" value="<?= htmlspecialchars($user['dob']) ?>" name="dob" id="dob" class="form-control shadow-sm border-0 fw-lighter fs-7 p-3" />
               </div>
 
               <input type="hidden" name="user_id" value="<?= $user['id'] ?>">

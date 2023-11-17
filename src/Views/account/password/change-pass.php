@@ -28,7 +28,7 @@
               <a href="#" class="text-decoration-none text-black">Đổi mật khẩu</a>
             </li>
             <li class="mb-2 fs-5">
-              <a href="/account/address" class="text-decoration-none text-black opacity-75">Địa chỉ</a>
+              <a href="/profile/address" class="text-decoration-none text-black opacity-75">Địa chỉ</a>
             </li>
           </ul>
 
@@ -100,7 +100,7 @@
             },
           }).then(function() {
             if (!res['error']) {
-              window.location.href = '/account/profile'
+              window.location.href = '/profile'
             }
           })
         },

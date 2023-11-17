@@ -471,4 +471,4 @@
 
 <script src="https://mdbootstrap.com/api/snippets/static/download/MDB5-Free_6.4.2/js/mdb.min.js"></script>
 
-<?php include_once VIEWS_DIR . "/partials/header/index.php" ?>
+<?php include_once VIEWS_DIR . "/partials/footer/index.php" ?>

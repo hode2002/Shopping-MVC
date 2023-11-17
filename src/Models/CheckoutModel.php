@@ -6,29 +6,24 @@ use PDO;
 
 class CheckoutModel
 {
-    public function createOrder()
+    public function createOrder($userId, $name, $address, $phone, $note, $checkout_products, $delivery)
     {
         include SRC_DIR . '/config.php';
-        $UserModel = new \App\Models\UserModel();
         $CartModel = new \App\Models\CartModel();
 
-        $user = $UserModel->getByEmail($_SESSION['email']);
-        $userId = $user['id'];
-
-        $sql = "INSERT INTO don_hang(id_kh, dia_chi) VALUES (?, ?)";
+        $sql = "INSERT INTO orders(user_id, name, phone, address, note, delivery_id, delivery_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$userId, $user['dia_chi']]);
+        $stmt->execute([$userId, $name, $phone, $address, $note, $delivery['id'], $delivery['estimateDate']]);
 
         $orderId = (int) $conn->lastInsertId();
         if ($stmt->rowCount() === 1) {
-            $cartList = $CartModel->getList($userId);
 
-            foreach ($cartList as $cartItem) {
-                $bookId = $cartItem['id_sach'];
+            foreach ($checkout_products as $product) {
+                $productId = $product['id'];
 
-                $result = $this->createOrderDetail($orderId, $bookId, quantity: $cartItem['so_luong'], price: $cartItem['gia_sale']);
+                $result = $this->createOrderDetail($orderId, $productId, $product['quantity'], $product['price']);
                 if (!empty($result)) {
-                    $CartModel->delete($userId, $bookId);
+                    $CartModel->delete($userId, $productId);
                 }
             }
 
@@ -40,28 +35,33 @@ class CheckoutModel
         return false;
     }
 
-    private function createOrderDetail($orderId, $bookId, $quantity, $price)
+    private function createOrderDetail($orderId, $productId, $quantity, $price)
     {
         include SRC_DIR . '/config.php';
-        $sql = "INSERT INTO chi_tiet_don_hang(id_don_hang, id_sach, so_luong, gia) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO order_detail (order_id, product_id, quantity, price, total) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$orderId, $bookId, $quantity, $price]);
+        $stmt->execute([$orderId, $productId, $quantity, $price, (int)$quantity * (int)$price]);
         return $stmt->rowCount() === 1;
     }
 
     private function updateTotalPrice($orderId)
     {
         include SRC_DIR . '/config.php';
-        $sql = "UPDATE don_hang 
-        SET tong_tien = (
-            SELECT sum(gia * so_luong)
-            FROM chi_tiet_don_hang
-            GROUP BY id_don_hang
-            HAVING id_don_hang = ?
-        ) 
-        WHERE id = ?";
+        $sql = "UPDATE orders
+                SET total = (
+                    SELECT SUM(d.total)
+                    FROM order_detail d
+                    WHERE d.order_id = ?
+                    GROUP BY d.order_id
+                ) + (
+                    SELECT charge_amount
+                    FROM delivery
+                    WHERE id = (SELECT delivery_id FROM orders WHERE id = ?)
+                )
+                WHERE id = ?";
+
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$orderId, $orderId]);
+        $stmt->execute([$orderId, $orderId, $orderId]);
         return $stmt->rowCount() === 1;
     }
 

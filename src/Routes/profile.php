@@ -8,8 +8,8 @@ $router->post('/profile/avatar', 'App\Controllers\ProfileController@postUpdateAv
 $router->get('/account/password', 'App\Controllers\ProfileController@getChangePassword');
 $router->post('/account/password', 'App\Controllers\ProfileController@postChangePassword');
 
-$router->get('/account/address', 'App\Controllers\ProfileController@getAddress');
-$router->post('/account/address', 'App\Controllers\ProfileController@postAddress');
+$router->get('/profile/address', 'App\Controllers\ProfileController@getAddress');
+$router->post('/profile/address', 'App\Controllers\ProfileController@postAddress');
 
 $router->get('/purchase', 'App\Controllers\ProfileController@getPurchase');
 $router->post('/purchase', 'App\Controllers\ProfileController@postPurchase');

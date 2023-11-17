@@ -143,6 +143,171 @@
 </footer>
 <!-- /FOOTER -->
 
+<script type="text/javascript">
+    $().ready(() => {
+        const convertPriceToNumber = (price) => {
+            const result = price.replace(/\D/g, '');
+            return Number(result);
+        }
+
+        const convertNumberToPrice = (number) => {
+            return Number(number).toLocaleString('vi', {
+                style: 'currency',
+                currency: 'VND'
+            });
+        }
+
+        fetch('/cart/list', {
+                method: 'POST',
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.length === 0) {
+                    const el = `<div style="height: 300px;" class="empty-cart d-flex justify-content-center align-items-center">
+                                    <img src="/imgs/cart/empty-cart.png" class="w-25" alt="">
+                                </div>`;
+                    $('header .cart .cart-list').html(el);
+                    return;
+                }
+
+                $('header .cart-quantity').html(data.length);
+
+                $('header .cart .cart-list').html(
+                    `<div class="contain overflow-x-hidden overflow-y-scroll rounded" style="max-height: 50vh"></div>`
+                );
+
+                let html = '';
+
+                data.forEach(item => {
+                    html += `
+                        <a href="/product/${item.product_id}" class="product card flex-row border-0 p-3 text-decoration-none text-dark" data-product_id="${item.product_id}">
+                            <img src="${item.thumbnail}" class="img-fluid" style=" height: 100px; width: 100px;" alt="..." />
+                            <div class="card-body container">
+                                <div class="row">
+                                    <p class="card-text col-8 text-truncate">
+                                       ${item.name}
+                                    </p>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                                            ${convertNumberToPrice(item.price)}
+                                        </p>
+                                        <p style="color: rgb(209, 0, 36)">x<span class="quantity ms-1 fw-bold">${item.quantity}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>                       
+                     `;
+                })
+
+                $('header .cart .cart-list div').html(html);
+                $('header .cart .cart-list').append(`
+                        <div class="pt-4 pb-3 text-end">
+                            <a href="/cart" class="text-decoration-none btn text-white py-2 px-3 me-3" style="color: #fff !important; background-color: rgb(209, 0, 36)">
+                                Xem giỏ hàng
+                            </a>
+                        </div>
+                `);
+
+
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+
+        $('.add-to-cart').each(function() {
+            $(this).on('click', function() {
+                const product = $(this).closest('.product');
+                const productId = product[0].dataset.product_id;
+
+                const formData = new FormData();
+
+                formData.append('productId', productId);
+                formData.append('quantity', 1);
+
+                fetch('/cart', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(res => {
+                        if ($('header .empty-cart').length) {
+                            $('header .empty-cart').remove();
+
+                            $('header .cart .cart-list').html(
+                                `<div class="contain overflow-x-hidden overflow-y-scroll rounded" style="max-height: 50vh"></div>`
+                            );
+
+                            $('header .cart .cart-list').append(`
+                                    <div class="pt-4 pb-3 text-end">
+                                        <a href="/cart" class="text-decoration-none btn text-white py-2 px-3 me-3" style="color: #fff !important; background-color: rgb(209, 0, 36)">
+                                            Xem giỏ hàng
+                                        </a>
+                                    </div>
+                            `);
+                        }
+
+                        let isExist = false;
+                        $('header .cart-list .product.card').each(function() {
+                            const itemId = $(this).prop('href').split('/')[4];
+
+                            if (itemId === productId) {
+                                $(this).find('.quantity').html(Number($(this).find('.quantity').text()) + 1);
+                                isExist = true;
+                            }
+                        })
+
+                        const cartItem = `
+                            <a href="/product/${productId}" class="product card flex-row border-0 p-3 text-decoration-none text-dark" data-product_id="${product.product_id}">
+                                <img src="${product.find('img').prop('src')}" class="img-fluid" style=" height: 100px; width: 100px;" alt="..." />
+                                <div class="card-body container">
+                                    <div class="row">
+                                        <p class="card-text col-8 text-truncate">
+                                        ${product.find('.name').text()}
+                                        </p>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <p class="fs-5 fw-bold" style="color: rgb(209, 0, 36)">
+                                                ${product.find('.price').text()}
+                                            </p>
+                                            <p style="color: rgb(209, 0, 36)">x<span class="quantity ms-1 fw-bold">1</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>                       
+                        `;
+
+                        if (!isExist) {
+                            $('header .cart-list .contain').append(cartItem)
+                        }
+
+                        $('header .cart-quantity').html($('header .cart-list .product.card').length);
+
+                        if ($(this).find('.no-alert').length) {
+                            window.location.href = '/checkout';
+                            return;
+                        }
+
+                        Swal.fire({
+                            title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+                            text: res["message"],
+                            icon: `${res["error"] ? 'error' : 'success'}`,
+                            confirmButtonText: 'Ok',
+                            customClass: {
+                                confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+                            },
+                        }).then(() => {
+                            if (res['error'] === 2) {
+                                window.location.href = '/login';
+                            }
+                        })
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+            })
+        })
+    })
+</script>
+
 </body>
 
 </html>

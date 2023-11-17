@@ -4,9 +4,9 @@ body {
   font-family: Poppins, sans-serif;
 }
 
-a:hover {
+/* a:hover {
   color: rgb(209, 0, 36) !important;
-}
+} */
 
 .history li:hover {
   background-color: rgb(30, 31, 41);
@@ -44,7 +44,7 @@ input.input {
   background: #000 !important;
 }
 
-.cart-list .product:hover {
+/* .cart-list .product:hover {
   color           : rgb(209, 0, 36);
   cursor          : pointer;
   background-color: #eee;
@@ -53,7 +53,7 @@ input.input {
 .cart-list .product:hover img {
   opacity: 0.9;
   scale  : 1.03;
-}
+} */
 
 header span.close-btn:hover {
   color : rgb(209, 0, 36) !important;
@@ -259,9 +259,9 @@ header .cart-list:before {
   box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 }
 
-.product :hover {
+/* .product :hover {
   border: none;
-}
+} */
 
 .card {
   border: none;

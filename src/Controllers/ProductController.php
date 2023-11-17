@@ -14,8 +14,17 @@ class ProductController
     {
         try {
             $ProductModel = new \App\Models\ProductModel();
+            $UserModel = new \App\Models\UserModel();
+
+            if (isset($_SESSION['email'])) {
+                $user = $UserModel->getByEmail($_SESSION['email']);
+            }
 
             $product = $ProductModel->getById($id);
+            if (empty($product)) {
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            }
 
             $cateId = $product['cate_id'];
             $recommend = $ProductModel->getByCateId($cateId);

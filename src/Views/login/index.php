@@ -32,7 +32,7 @@
                 <label for="password" class="form-label ms-4 w-100 fw-semibold">
                   Mật khẩu:
                 </label>
-                <input value="7qpekhk5" type="password" name="password" placeholder="Nhập vào mật khẩu" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" />
+                <input value="11111" type="password" name="password" placeholder="Nhập vào mật khẩu" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" />
               </div>
 
               <div class="text-end fw-bold">

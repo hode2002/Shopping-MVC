@@ -6,7 +6,13 @@ class ContactController
 {
     public function index()
     {
+        $UserModel = new \App\Models\UserModel();
         $title = 'Liên hệ';
+
+        if (isset($_SESSION['email'])) {
+            $user = $UserModel->getByEmail($_SESSION['email']);
+        }
+
         require_once VIEWS_DIR . '/contact/index.php';
     }
 

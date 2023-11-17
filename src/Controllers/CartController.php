@@ -9,6 +9,7 @@ class CartController
         try {
             $UserModel = new \App\Models\UserModel();
             $CartModel = new \App\Models\CartModel();
+            $title = 'Giỏ Hàng';
 
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
@@ -18,7 +19,6 @@ class CartController
             $user = $UserModel->getByEmail($email);
             $userId = $user['id'];
 
-            $title = 'Giỏ Hàng';
             $cartList = $CartModel->getList($userId);
             if (empty($cartList)) {
                 require_once VIEWS_DIR . '/cart/empty.php';
@@ -66,25 +66,30 @@ class CartController
             }
             $email = $_SESSION['email'];
 
-            if (!isset($_POST['bookId'])) {
+            if (!isset($_POST['productId'])) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
             }
-            $bookId = htmlspecialchars($_POST['bookId']);
+            $productId = htmlspecialchars($_POST['productId']);
+
+            if (!isset($_POST['quantity'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
+            }
+            $quantity = htmlspecialchars($_POST['quantity']);
 
             $user = $UserModel->getByEmail($email);
             $userId = $user['id'];
 
-            $isExist = $CartModel->find($userId, $bookId);
+            $isExist = $CartModel->find($userId, $productId);
             if (!empty($isExist)) {
-                $quantity = (int)$isExist['so_luong'] + 1;
-                $isUpdated = $CartModel->update($userId, $bookId, $quantity);
+                $quantity = (int)$isExist['quantity'] + (int)$quantity;
+                $isUpdated = $CartModel->update($userId, $productId, $quantity);
                 if (empty($isUpdated)) {
                     JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
                 }
 
                 JsonResponse(error: 0, message: "Cập nhật số lượng thành công thành công");
             }
-            $isSuccess = $CartModel->create($userId, $bookId);
+            $isSuccess = $CartModel->create($userId, $productId);
             if (empty($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
             }

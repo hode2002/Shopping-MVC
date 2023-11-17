@@ -10,14 +10,15 @@ class CheckoutController
             if (!isAuthentication()) {
                 redirect('/login');
             }
+            $title = 'Thanh Toán';
 
             $UserModel = new \App\Models\UserModel();
-            $CartModel = new \App\Models\CartModel();
+            $DeliveryModel = new \App\Models\DeliveryModel();
 
             $user = $UserModel->getByEmail($_SESSION['email']);
-            $cartList = $CartModel->getList($user['id']);
 
-            $title = 'Thanh Toán';
+            $delivery = $DeliveryModel->getAll();
+
             require_once VIEWS_DIR . '/checkout/index.php';
         } catch (\PDOException $e) {
             echo $e->getMessage();
@@ -28,21 +29,25 @@ class CheckoutController
     {
         try {
             $UserModel = new \App\Models\UserModel();
-            $CartModel =  new \App\Models\CartModel();
             $CheckoutModel = new \App\Models\CheckoutModel();
 
             $user = $UserModel->getByEmail($_SESSION['email']);
             $userId = $user['id'];
 
-            $cartList = $CartModel->getList($userId);
-            if (empty($cartList)) {
-                JsonResponse(error: 1, message: "Giỏ hàng trống");
+            if (!isset($_POST['checkout_products'])) {
+                JsonResponse(error: 1, message: "Chưa chọn sản phẩm");
             }
+            $checkout_products = json_decode($_POST['checkout_products'], true);
 
             if (!isset($_POST['userInfo'])) {
                 JsonResponse(error: 1, message: "Vui lòng nhập thông tin khách hàng");
             }
             $userCheckoutInfo = json_decode($_POST['userInfo'], true);
+
+            if (!isset($_POST['delivery'])) {
+                JsonResponse(error: 1, message: "Chưa chọn đơn vị vận chuyển");
+            }
+            $delivery = json_decode($_POST['delivery'], true);
 
             if (!isset($userCheckoutInfo['name'])) {
                 JsonResponse(error: 1, message: "Vui lòng nhập họ tên");
@@ -59,9 +64,9 @@ class CheckoutController
             }
             $phone = htmlspecialchars($userCheckoutInfo['phone']);
 
-            $UserModel->updateProfile($userId, $name, $phone, $address);
+            $note = htmlspecialchars($userCheckoutInfo['note']) ?? "";
 
-            $isSuccess = $CheckoutModel->createOrder();
+            $isSuccess = $CheckoutModel->createOrder($userId, $name, $address, $phone, $note, $checkout_products, $delivery);
 
             if (empty($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
