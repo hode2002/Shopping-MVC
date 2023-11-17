@@ -25,7 +25,7 @@
               <a href="/profile" class="text-decoration-none text-black opacity-75">Hồ sơ</a>
             </li>
             <li class="mb-2 fs-5">
-              <a href="#" class="text-decoration-none text-black">Đổi mật khẩu</a>
+              <a href="#" class="text-decoration-none" style="color:rgb(209, 0, 36) !important;">Đổi mật khẩu</a>
             </li>
             <li class="mb-2 fs-5">
               <a href="/profile/address" class="text-decoration-none text-black opacity-75">Địa chỉ</a>
@@ -34,7 +34,7 @@
 
           <div class="fs-5 d-flex align-items-center gap-2">
             <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078" style="width: 1.5rem; height: 1.5rem" />
-            <a href="#" class="text-decoration-none text-black fs-5 m-0">Đơn mua</a>
+            <a href="/purchase" class="text-decoration-none text-black fs-5 m-0">Đơn mua</a>
           </div>
         </div>
       </div>

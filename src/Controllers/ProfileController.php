@@ -169,7 +169,7 @@ class ProfileController
             $user = $UserModel->getByEmail($_SESSION['email']);
 
             $title = 'Đơn mua';
-            require_once VIEWS_DIR . '/user/purchase/index.php';
+            require_once VIEWS_DIR . '/account/purchase/index.php';
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

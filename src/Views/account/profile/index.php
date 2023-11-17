@@ -22,7 +22,7 @@
           </div>
           <ul style="list-style-type: none">
             <li class="mb-2 fs-5">
-              <a href="#" class="text-decoration-none text-black">Hồ sơ</a>
+              <a href="#" class="text-decoration-none" style="color:rgb(209, 0, 36) !important;">Hồ sơ</a>
             </li>
             <li class="mb-2 fs-5">
               <a href="/account/password" class="text-decoration-none text-black opacity-75">Đổi mật
@@ -35,7 +35,7 @@
 
           <div class="fs-5 d-flex align-items-center gap-2">
             <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078" style="width: 1.5rem; height: 1.5rem" />
-            <a href="#" class="text-decoration-none text-black fs-5 m-0">Đơn mua</a>
+            <a href="/purchase" class="text-decoration-none text-black fs-5 m-0">Đơn mua</a>
           </div>
         </div>
       </div>

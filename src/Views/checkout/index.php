@@ -199,7 +199,7 @@
                     }).then(function() {
                         if (!res['error']) {
                             window.localStorage.removeItem('checkout_products');
-                            window.location.href = '/cart';
+                            window.location.href = '/purchase';
                         }
                     })
                 })

@@ -69,7 +69,7 @@ class CheckoutModel
     {
         include SRC_DIR . '/config.php';
 
-        $sql = "SELECT id, trang_thai, tong_tien FROM don_hang WHERE id_kh = ? ORDER BY id DESC";
+        $sql = "SELECT id, status, total FROM orders WHERE user_id = ? ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$userId]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -81,11 +81,11 @@ class CheckoutModel
         $data = [];
 
         foreach ($results as $item) {
-            $sql = "SELECT s.anh_bia, s.ten_sach, s.gia_goc, ctdh.gia, ctdh.so_luong
-                    FROM don_hang dh JOIN chi_tiet_don_hang ctdh
-                    ON dh.id = ctdh.id_don_hang
-                    JOIN sach s ON s.id = ctdh.id_sach
-                    WHERE dh.id = ?";
+            $sql = "SELECT p.id, p.thumbnail, p.name, p.sale, o_detail.price, o_detail.quantity
+                    FROM orders o JOIN order_detail o_detail
+                    ON o.id = o_detail.order_id
+                    JOIN products p ON p.id = o_detail.product_id
+                    WHERE o.id = ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->execute([$item['id']]);
@@ -93,9 +93,9 @@ class CheckoutModel
 
             $arrTmp = [
                 'id' => $item['id'],
-                'status' => $item['trang_thai'],
-                'total' => $item['tong_tien'],
-                'books' => $result
+                'status' => $item['status'],
+                'total' => $item['total'],
+                'products' => $result
             ];
 
             array_push($data, $arrTmp);
@@ -108,7 +108,7 @@ class CheckoutModel
     {
         include SRC_DIR . '/config.php';
 
-        $sql = "SELECT id, trang_thai, tong_tien FROM don_hang WHERE id_kh = ? AND trang_thai = ? ORDER BY id DESC";
+        $sql = "SELECT id, status, total FROM orders WHERE user_id = ? AND status = ? ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$userId, $status]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -120,11 +120,11 @@ class CheckoutModel
         $data = [];
 
         foreach ($results as $item) {
-            $sql = "SELECT s.anh_bia, s.ten_sach, s.gia_goc, ctdh.gia, ctdh.so_luong
-                    FROM don_hang dh JOIN chi_tiet_don_hang ctdh
-                    ON dh.id = ctdh.id_don_hang
-                    JOIN sach s ON s.id = ctdh.id_sach
-                    WHERE dh.id = ?";
+            $sql = "SELECT p.id, p.thumbnail, p.name, p.sale, o_detail.price, o_detail.quantity
+                    FROM orders o JOIN order_detail o_detail
+                    ON o.id = o_detail.order_id
+                    JOIN products p ON p.id = o_detail.product_id
+                    WHERE o.id = ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->execute([$item['id']]);
@@ -132,9 +132,9 @@ class CheckoutModel
 
             $arrTmp = [
                 'id' => $item['id'],
-                'status' => $item['trang_thai'],
-                'total' => $item['tong_tien'],
-                'books' => $result
+                'status' => $item['status'],
+                'total' => $item['total'],
+                'products' => $result
             ];
 
             array_push($data, $arrTmp);
@@ -146,7 +146,9 @@ class CheckoutModel
     public function getOrdersInfo()
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT dh.*, kh.ho_ten, kh.so_dien_thoai FROM don_hang dh JOIN khach_hang kh ON dh.id_kh = kh.id";
+        $sql = "SELECT o.*, u.name, u.phone 
+                FROM orders o 
+                JOIN users u ON o.user_id = u.id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -158,11 +160,11 @@ class CheckoutModel
     {
         include SRC_DIR . '/config.php';
 
-        $sql = "SELECT s.anh_bia, s.ten_sach, s.gia_goc, ctdh.id_sach, ctdh.gia, ctdh.so_luong, dh.trang_thai, dh.tong_tien
-                FROM don_hang dh JOIN chi_tiet_don_hang ctdh
-                ON dh.id = ctdh.id_don_hang
-                JOIN sach s ON s.id = ctdh.id_sach
-                WHERE dh.id = ?";
+        $sql = "SELECT p.thumbnail, p.name, p.sale, o_detail.product_id, o_detail.price, o_detail.quantity, o.status, o.total
+                FROM orders o JOIN order_detail o_detail
+                ON o.id = o_detail.order_id
+                JOIN products p ON p.id = o_detail.product_id
+                WHERE o.id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$orderId]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -173,7 +175,7 @@ class CheckoutModel
     public function getById($id)
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT * FROM don_hang WHERE id = ?";
+        $sql = "SELECT * FROM orders WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -184,7 +186,7 @@ class CheckoutModel
     public function updateStatus($id, $status)
     {
         include SRC_DIR . '/config.php';
-        $sql = "UPDATE don_hang SET trang_thai = ? WHERE id = ?";
+        $sql = "UPDATE orders SET status = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$status, $id]);
 
@@ -196,9 +198,9 @@ class CheckoutModel
         include SRC_DIR . '/config.php';
 
         foreach ($orders as $order) {
-            $sql = "INSERT INTO gio_hang (id_sach, id_kh, so_luong) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO carts (product_id, user_id, quantity) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$order['id_sach'], $userId, $order['so_luong']]);
+            $stmt->execute([$order['product_id'], $userId, $order['quantity']]);
 
             if ($stmt->rowCount() !== 1) {
                 return false;
