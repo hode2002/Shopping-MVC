@@ -140,6 +140,7 @@
         </div>
     </div>
     <!-- /bottom footer -->
+
 </footer>
 <!-- /FOOTER -->
 

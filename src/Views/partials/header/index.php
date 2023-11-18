@@ -13,11 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -101,6 +100,30 @@
                 })
                 $(this).closest('.search-item').remove();
             })
+
+            $('.open-shop').on('click', function() {
+                $.ajax({
+                    url: '/shop',
+                    type: 'POST',
+                    success: function(res) {
+                        res = JSON.parse(res);
+
+                        Swal.fire({
+                            title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+                            text: res["message"],
+                            icon: `${res["error"] ? 'error' : 'success'}`,
+                            confirmButtonText: 'Ok',
+                            customClass: {
+                                confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+                            },
+                        }).then(() => {
+                            if (!res['error']) {
+                                window.location.href = '/shop';
+                            }
+                        })
+                    },
+                })
+            })
         })
     </script>
 
@@ -153,11 +176,22 @@
                                </li>';
                         } else {
                         ?>
-                            <li class="me-3 fw-semibold" style="font-size: 14px">
-                                <a href="#" class="text-decoration-none text-white">
-                                    Trở thành người bán
-                                </a>
-                            </li>
+                            <?php
+                            if ($_SESSION['role'] === "R1") {
+                                echo '<li class="me-3 fw-semibold" style="font-size: 14px">
+                                        <a href="#" class="open-shop text-decoration-none text-white">
+                                            Trở thành người bán
+                                        </a>
+                                    </li>';
+                            } else {
+                                echo '<li class="me-3 fw-semibold" style="font-size: 14px">
+                                        <a href="/shop" class="text-decoration-none text-white">
+                                           Quản lí cửa hàng
+                                        </a>
+                                    </li>';
+                            }
+
+                            ?>
                             <li id="dropdown" class="dropdown">
                                 <button class="btn dropdown-toggle d-flex align-items-center" type="button" style="box-shadow: none;" data-bs-toggle="dropdown" aria-expanded="false">
                                     <a href="/profile" class="preview-img text-decoration-none text-white d-flex align-items-center gap-2">
@@ -210,7 +244,7 @@
                         <div class="h-100 w-100 d-flex flex-column justify-content-center position-relative">
                             <div id="search-form" class="d-flex w-100">
                                 <input autocomplete="off" class="search input py-2 px-4 w-100 rounded-start-5 border-0 keyword" name="keyword" placeholder="Tìm kiếm" />
-                                <div class="btn btn-search text-white fw-bold py-2 px-4 rounded-start-0 rounded-end-5 border-0" style="background-color: rgb(209, 0, 36)">
+                                <div class="btn btn-search text-white fw-bold py-2 px-4 rounded-start-0 rounded-end-5 border-0 d-flex align-items-center" style="background-color: rgb(209, 0, 36)">
                                     Search
                                 </div>
                             </div>
@@ -221,48 +255,7 @@
                     width: 85%;
                     display: none;
                   ">
-                                <ul class="history-list p-0" style="list-style-type: none">
-                                    <!-- <li class="d-flex align-items-center justify-content-around">
-                                        <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white text-truncate" style="width: 90%">
-                                            Bàn phím giả cơ
-                                        </a>
-                                        <span class="close-btn text-white p-1">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </li>
-                                    <li class="d-flex justify-content-around">
-                                        <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
-                                            Đồng hồ
-                                        </a>
-                                        <span class="close-btn text-white p-1">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </li>
-                                    <li class="d-flex justify-content-around">
-                                        <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
-                                            iphone 15 promax 512gb
-                                        </a>
-                                        <span class="close-btn text-white p-1">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </li>
-                                    <li class="d-flex justify-content-around">
-                                        <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
-                                            laptop
-                                        </a>
-                                        <span class="close-btn text-white p-1">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </li>
-                                    <li class="d-flex justify-content-around">
-                                        <a href="#" class="py-1 ps-2 d-block text-decoration-none text-white" style="width: 90%">
-                                            Giày thể thao nam
-                                        </a>
-                                        <span class="close-btn text-white p-1">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </li> -->
-                                </ul>
+                                <ul class="history-list p-0" style="list-style-type: none"></ul>
                             </div>
                             <!-- /HISTORY -->
                         </div>

@@ -59,6 +59,15 @@ class UserModel
         return $stmt->rowCount() === 1;
     }
 
+    public function updateRole($userId, $roleCode)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "UPDATE users SET role_code = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$roleCode, $userId]);
+        return $stmt->rowCount() === 1;
+    }
+
     public function updateAvatar($id, $avatar)
     {
         include SRC_DIR . '/config.php';

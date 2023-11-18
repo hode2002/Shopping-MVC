@@ -84,37 +84,36 @@ class ProductModel
         return $ketqua;
     }
 
-    public function create($book)
+    public function create($shopId, $product)
     {
         include SRC_DIR . '/config.php';
-        $sql = "INSERT INTO sach(ten_sach, gia_goc, gia_sale, anh_bia, tac_gia, mo_ta) VALUES(?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO products (id, shop_id, name, price, sale, thumbnail, cate_id, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$book['name'], $book['price'], $book['sale'], BASE_URL . '/uploads/' . $book['img'], $book['author'], $book['description']]);
+        $stmt->execute([$product['id'], $shopId, $product['name'], $product['price'], $product['sale'], BASE_URL . '/uploads/' . $product['img'], $product['category'], $product['description']]);
 
-        $id = (int) $conn->lastInsertId();
-        if ($stmt->rowCount() === 1 && !empty($book['imgs'])) {
-            foreach ($book['imgs'] as $img) {
-                $sql = "INSERT INTO hinh_anh_sach(id_sach, hinh_anh) VALUES(?, ?)";
+        if ($stmt->rowCount() === 1 && !empty($product['imgs'])) {
+            foreach ($product['imgs'] as $img) {
+                $sql = "INSERT INTO product_images (product_id, image_url) VALUES(?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$id, BASE_URL . '/uploads/' . $img]);
+                $stmt->execute([$product['id'], BASE_URL . '/uploads/' . $img]);
             }
             return true;
         }
         return false;
     }
 
-    public function update($book)
+    public function update($product)
     {
         include SRC_DIR . '/config.php';
         $sql = "UPDATE sach SET ten_sach=?, gia_goc=?, gia_sale=?, anh_bia=?, tac_gia=?, mo_ta=? WHERE id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$book['name'], $book['price'], $book['sale'], BASE_URL . '/uploads/' . $book['img'], $book['author'], $book['description'], $book['book_id']]);
+        $stmt->execute([$product['name'], $product['price'], $product['sale'], BASE_URL . '/uploads/' . $product['img'], $product['author'], $product['description'], $product['book_id']]);
 
-        if ($stmt->rowCount() === 1 && !empty($book['imgs'])) {
-            foreach ($book['imgs'] as $img) {
+        if ($stmt->rowCount() === 1 && !empty($product['imgs'])) {
+            foreach ($product['imgs'] as $img) {
                 $sql = "INSERT INTO hinh_anh_sach(id_sach, hinh_anh) VALUES(?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$book['book_id'], BASE_URL . '/uploads/' . $img]);
+                $stmt->execute([$product['book_id'], BASE_URL . '/uploads/' . $img]);
             }
             return true;
         }

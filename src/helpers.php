@@ -17,7 +17,12 @@ function JsonResponse($error, $message)
 
 function isAdmin()
 {
-    return isset($_SESSION['email']) && (int)$_SESSION['is_admin'] === 1;
+    return isset($_SESSION['email']) && $_SESSION['role'] === 'R3';
+}
+
+function isShop()
+{
+    return isset($_SESSION['email']) && $_SESSION['role'] === 'R2';
 }
 
 function isAuthentication()

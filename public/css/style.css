@@ -4,10 +4,6 @@ body {
   font-family: Poppins, sans-serif;
 }
 
-/* a:hover {
-  color: rgb(209, 0, 36) !important;
-} */
-
 .history li:hover {
   background-color: rgb(30, 31, 41);
 }
@@ -40,9 +36,9 @@ input.input {
   background-color: rgb(21, 22, 29);
 }
 
-.dropdown-item:hover {
+/* .dropdown-item:hover {
   background: #000 !important;
-}
+} */
 
 /* .cart-list .product:hover {
   color           : rgb(209, 0, 36);

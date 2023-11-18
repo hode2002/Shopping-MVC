@@ -12,6 +12,7 @@ $router = new \Bramus\Router\Router();
 require_once SRC_DIR . '/routes/auth.php';
 require_once SRC_DIR . '/routes/cart.php';
 require_once SRC_DIR . '/routes/admin.php';
+require_once SRC_DIR . '/routes/shop.php';
 require_once SRC_DIR . '/routes/profile.php';
 require_once SRC_DIR . '/routes/product.php';
 require_once SRC_DIR . '/routes/checkout.php';
