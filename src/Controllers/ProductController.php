@@ -17,10 +17,12 @@ class ProductController
 
         $keyword = htmlspecialchars($_GET['keyword']);
         $products = $ProductModel->getProductByKeyWord($keyword);
-        if (!empty($products)) {
-            $title = $products[0]['name'];
+        if (empty($products)) {
+            require_once VIEWS_DIR . '/product/search/empty.php';
+            exit;
         }
 
+        $title = $products[0]['name'];
         require_once VIEWS_DIR . '/product/search/index.php';
     }
 
