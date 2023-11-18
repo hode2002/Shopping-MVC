@@ -13,18 +13,18 @@
                             <div>
                                 <p>Thông tin đơn hàng</p>
                             </div>
-                            <form method="post" action="/checkout">
+                            <form id="checkout_form" method="post" action="/checkout">
                                 <div class="mb-3">
                                     <input type="email" style="box-shadow: none;" value="<?= htmlspecialchars($user['email']) ?>" disabled autocomplete="off" class="form-control" id="email" placeholder="Email" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" style="box-shadow: none;" value="<?= htmlspecialchars($user['name']) ?>" autocomplete="off" class="form-control" id="name" placeholder="Họ tên" />
+                                    <input type="text" name="name" style="box-shadow: none;" value="<?= htmlspecialchars($user['name']) ?>" autocomplete="off" class="form-control" id="name" placeholder="Họ tên" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="tel" style="box-shadow: none;" value="<?= htmlspecialchars($user['phone']) ?>" autocomplete="off" class="form-control" id="phone" placeholder="Số điện thoại" />
+                                    <input type="tel" name="phone" style="box-shadow: none;" value="<?= htmlspecialchars($user['phone']) ?>" autocomplete="off" class="form-control" id="phone" placeholder="Số điện thoại" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" style="box-shadow: none;" value="<?= htmlspecialchars($user['address']) ?>" autocomplete="off" class="form-control" id="address" placeholder="Tỉnh thành" />
+                                    <input type="text" name="address" style="box-shadow: none;" value="<?= htmlspecialchars($user['address']) ?>" autocomplete="off" class="form-control" id="address" placeholder="Tỉnh thành" />
                                 </div>
                                 <div class="mb-3">
                                     <textarea style="box-shadow: none;" class="form-control" id="note" rows="3" placeholder="Ghi chú"></textarea>
@@ -70,7 +70,7 @@
                     <div id="show-order" class="mx-4"></div>
                     <div class="mx-4 button text-center d-flex justify-content-between align-items-center" id="gui">
                         <a href="/cart" class="text-decoration-none">Quay về giỏ hàng</a>
-                        <input id="checkout" class="btn text-white" type="button" style="background-color: rgb(209, 0, 36);" value="Thanh toán" />
+                        <input form="checkout_form" id="checkout" class="btn text-white" type="submit" style="background-color: rgb(209, 0, 36);" value="Thanh toán" />
                     </div>
                 </div>
             </div>
@@ -79,6 +79,57 @@
 </main>
 
 <script>
+    $.validator.setDefaults({
+        submitHandler: function() {
+            const formData = new FormData();
+
+            const userInfo = {
+                "email": $('#email').val(),
+                "name": $('#name').val(),
+                "address": $('#address').val(),
+                "phone": $('#phone').val(),
+                "note": $('#note').val(),
+            };
+
+            const checkout_products = JSON.parse(window.localStorage.getItem('checkout_products'));
+
+            formData.append('checkout_products', JSON.stringify(checkout_products.map((item) => ({
+                id: item.id,
+                quantity: item.quantity,
+                price: item.price,
+            }))));
+
+            formData.append("userInfo", JSON.stringify(userInfo));
+
+            formData.append("delivery", JSON.stringify({
+                id: $('input[name="delivery"]:checked').val(),
+                estimateDate: $('.estimate-date').text(),
+            }));
+
+            fetch('/checkout', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(res => {
+                    Swal.fire({
+                        title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+                        text: res["message"],
+                        icon: `${res["error"] ? 'error' : 'success'}`,
+                        confirmButtonText: 'Ok',
+                        customClass: {
+                            confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+                        },
+                    }).then(function() {
+                        if (!res['error']) {
+                            window.localStorage.removeItem('checkout_products');
+                            window.location.href = '/purchase';
+                        }
+                    })
+                })
+        }
+    })
+
     $(() => {
         if (!window.localStorage.getItem('delivery')) {
             fetch('/delivery', {
@@ -155,54 +206,42 @@
             })
         })
 
-        $('#checkout').on('click', function() {
-            const formData = new FormData();
-
-            const userInfo = {
-                "email": $('#email').val(),
-                "name": $('#name').val(),
-                "address": $('#address').val(),
-                "phone": $('#phone').val(),
-                "note": $('#note').val(),
-            };
-
-            const checkout_products = JSON.parse(window.localStorage.getItem('checkout_products'));
-
-
-            formData.append('checkout_products', JSON.stringify(checkout_products.map((item) => ({
-                id: item.id,
-                quantity: item.quantity,
-                price: item.price,
-            }))));
-
-            formData.append("userInfo", JSON.stringify(userInfo));
-
-            formData.append("delivery", JSON.stringify({
-                id: $('input[name="delivery"]:checked').val(),
-                estimateDate: $('.estimate-date').text(),
-            }));
-
-            fetch('/checkout', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(res => {
-                    Swal.fire({
-                        title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
-                        text: res["message"],
-                        icon: `${res["error"] ? 'error' : 'success'}`,
-                        confirmButtonText: 'Ok',
-                        customClass: {
-                            confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
-                        },
-                    }).then(function() {
-                        if (!res['error']) {
-                            window.localStorage.removeItem('checkout_products');
-                            window.location.href = '/purchase';
-                        }
-                    })
-                })
+        $('#checkout_form').validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                phone: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                address: {
+                    required: true,
+                },
+            },
+            messages: {
+                name: 'Nhập họ tên',
+                phone: {
+                    required: 'Nhập số điện thoại',
+                    minlength: 'Số điện thoại phải có 10 số',
+                    maxlength: 'Số điện thoại tối đa 10 số',
+                },
+                address: {
+                    required: 'Nhập địa chỉ',
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: (error, element) => {
+                error.addClass('invalid-feedback');
+                error.insertAfter(element);
+            },
+            highlight: (element, errorClass, validClass) => {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+            },
+            unhighlight: (element, errorClass, validClass) => {
+                $(element).addClass('is-valid').removeClass('is-invalid');
+            },
         })
 
     })
