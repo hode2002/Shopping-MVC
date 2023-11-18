@@ -9,7 +9,7 @@ class ProductModel
     public function getAll()
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT * FROM products LIMIT 12";
+        $sql = "SELECT * FROM products WHERE status = 1 LIMIT 12";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,7 +20,7 @@ class ProductModel
     public function getRandom()
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT * FROM products ORDER BY RAND() LIMIT 12";
+        $sql = "SELECT * FROM products WHERE status = 1 ORDER BY RAND() LIMIT 12";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,7 +31,7 @@ class ProductModel
     public function getProSales()
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT * FROM products WHERE sale <> 0 ORDER BY sale DESC LIMIT 12";
+        $sql = "SELECT * FROM products WHERE status = 1 AND sale <> 0 ORDER BY sale DESC LIMIT 12";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,7 +43,7 @@ class ProductModel
     {
         include SRC_DIR . '/config.php';
 
-        $sql = "SELECT p.*, c.name AS cate_name, c.slug AS cate_slug FROM products p JOIN categories c ON p.cate_id = c.id WHERE p.id=?";
+        $sql = "SELECT p.*, c.name AS cate_name, c.slug AS cate_slug FROM products p JOIN categories c ON p.cate_id = c.id WHERE p.id=? AND status = 1";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -65,23 +65,12 @@ class ProductModel
     public function getByCateId($cateId)
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT * FROM products WHERE cate_id = ? LIMIT 12";
+        $sql = "SELECT * FROM products WHERE status = 1 AND cate_id = ? LIMIT 12";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$cateId]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $results;
-    }
-
-    public function getAllByAuthor($tac_gia)
-    {
-        include SRC_DIR . '/config.php';
-        $sql = "select * from sach where tac_gia=?";
-        $ketqua = $conn->prepare($sql);
-        $ketqua->execute([$tac_gia]);
-        $ketqua = $ketqua->fetchAll(PDO::FETCH_ASSOC);
-
-        return $ketqua;
     }
 
     public function create($shopId, $product)
