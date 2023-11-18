@@ -160,7 +160,7 @@ class CheckoutModel
     {
         include SRC_DIR . '/config.php';
 
-        $sql = "SELECT p.thumbnail, p.name, p.price origin_price p.sale, o_detail.product_id, o_detail.price, o_detail.quantity, o.status, o.total
+        $sql = "SELECT p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.product_id, o_detail.price, o_detail.quantity, o.status, o.total
                 FROM orders o JOIN order_detail o_detail
                 ON o.id = o_detail.order_id
                 JOIN products p ON p.id = o_detail.product_id
