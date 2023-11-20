@@ -35,7 +35,7 @@
                 </thead>
                 <tbody id="t_body">
                   <?php foreach ($products as $product) : ?>
-                    <tr>
+                    <tr class="product" data-product_id="<?= htmlspecialchars($product['id']) ?>">
                       <td>
                         <span><?= htmlspecialchars($product['id']) ?></span>
                       </td>
@@ -57,9 +57,9 @@
                         <a href="/shop/products/edit/<?= htmlspecialchars($product['id']) ?>">
                           <i class="fa-solid fa-pen-to-square" style="font-size: 24px"></i>
                         </a>&nbsp;
-                        <a href="#">
-                          <i class=" fa fa-trash font-weight-bold" style="font-size: 24px"></i>
-                        </a>
+                        <p class="mb-0 delete-btn">
+                          <i class=" fa fa-trash font-weight-bold" style="font-size: 24px; cursor: pointer;"></i>
+                        </p>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -74,5 +74,59 @@
 <?php endif; ?>
 
 <div class="clearfix"></div>
+
+<script>
+  const postAjax = (url, data) => {
+    $.ajax({
+      url,
+      type: 'POST',
+      data: data ? data : '',
+      success: function(res) {
+        res = JSON.parse(res);
+
+        Swal.fire({
+          title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+          text: res["message"],
+          icon: `${res["error"] ? 'error' : 'success'}`,
+          confirmButtonText: 'Ok',
+          customClass: {
+            confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+          },
+        }).then(() => {
+          if (!res["error"]) {
+            window.location.reload();
+          }
+        })
+
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    })
+  }
+  $('.delete-btn').on('click', function() {
+    Swal.fire({
+      title: 'Xác nhận xóa?',
+      text: "Bạn chắc chắn muốn xóa sản phẩm này?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: 'Hủy'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const productId = $(this).closest('.product')[0].dataset.product_id;
+        const data = {
+          id: productId
+        }
+
+        postAjax('/shop/product/delete/', data);
+
+        $(this).closest('.product').remove();
+      }
+    })
+  })
+</script>
 
 <?php include_once VIEWS_DIR . "/shop/partials/footer/index.php" ?>

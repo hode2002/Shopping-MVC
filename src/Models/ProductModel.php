@@ -146,12 +146,12 @@ class ProductModel
         return false;
     }
 
-    public function delete($id)
+    public function delete($id, $shopId)
     {
         include SRC_DIR . '/config.php';
-        $sql = "DELETE FROM products WHERE id=?";
+        $sql = "DELETE FROM products WHERE id=? AND shop_id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt->execute([$id, $shopId]);
 
         if ($stmt->rowCount() !== 1) {
             return false;

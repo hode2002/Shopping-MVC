@@ -313,6 +313,58 @@ class ShopController
         }
     }
 
+    public function postDeleteProduct()
+    {
+        try {
+            if (!(isAdmin() || isShop())) {
+                $title = 'Lỗi';
+                JsonResponse(error: 3, message: "Bạn không có quyền thực hiện chức năng này!");
+            };
+            require_once SRC_DIR . '/config.php';
+            $ProductModel = new \App\Models\ProductModel();
+            $UserModel = new \App\Models\UserModel();
+            $ShopModel = new \App\Models\ShopModel();
+
+            $email = $_SESSION['email'];
+            $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
+
+            $shop = $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            if (!isset($_POST['id'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra, Vui lòng thử lại sau");
+            }
+            $id = htmlspecialchars($_POST['id']);
+
+            $product = $ProductModel->getByIdAndShopId($id, $shopId);
+            if (empty($product)) {
+                JsonResponse(error: 1, message: "Sản phẩm không tồn tại hoặc đã bị xóa");
+            }
+
+            foreach ($product['imgs'] as $item) {
+                $fileName = extractFileNameFromUrl($item['image_url']);
+                remove_img_file($fileName);
+            }
+
+            $isSuccess = $ProductModel->delete($id, $shopId);
+
+            $fileName = extractFileNameFromUrl($product['thumbnail']);
+            if ($isSuccess && empty($fileName)) {
+                JsonResponse(error: 1, message: "Xóa sản phẩm thành công");
+            }
+            remove_img_file($fileName);
+
+            if (!$isSuccess) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau.");
+            }
+
+            JsonResponse(error: 0, message: "Xóa sản phẩm thành công");
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function getOrders()
     {
         try {
