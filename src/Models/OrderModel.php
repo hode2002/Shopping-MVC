@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 
-class CheckoutModel
+class OrderModel
 {
     public function createOrder($userId, $name, $address, $phone, $note, $checkout_products, $delivery)
     {

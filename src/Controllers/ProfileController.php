@@ -182,7 +182,7 @@ class ProfileController
                 JsonResponse(error: 1, message: "Vui lòng đăng nhập để tiếp tục");
             }
 
-            $CheckoutModel = new \App\Models\CheckoutModel();
+            $OrderModel = new \App\Models\OrderModel();
             $UserModel = new \App\Models\UserModel();
 
             $user = $UserModel->getByEmail($_SESSION["email"]);
@@ -194,12 +194,12 @@ class ProfileController
 
             $status = htmlspecialchars($_POST['status']);
             if ((int)$status === 3) {
-                $orders = $CheckoutModel->getAllOrder($userId);
+                $orders = $OrderModel->getAllOrder($userId);
                 echo json_encode($orders);
                 exit;
             }
 
-            $orders = $CheckoutModel->getOrderByStatus($userId, $status);
+            $orders = $OrderModel->getOrderByStatus($userId, $status);
             echo json_encode($orders);
         } catch (\PDOException $e) {
             echo $e->getMessage();

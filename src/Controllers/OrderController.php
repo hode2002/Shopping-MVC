@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class CheckoutController
+class OrderController
 {
     public function index()
     {
@@ -29,7 +29,7 @@ class CheckoutController
     {
         try {
             $UserModel = new \App\Models\UserModel();
-            $CheckoutModel = new \App\Models\CheckoutModel();
+            $OrderModel = new \App\Models\OrderModel();
 
             $user = $UserModel->getByEmail($_SESSION['email']);
             $userId = $user['id'];
@@ -66,7 +66,7 @@ class CheckoutController
 
             $note = htmlspecialchars($userCheckoutInfo['note']) ?? "";
 
-            $isSuccess = $CheckoutModel->createOrder($userId, $name, $address, $phone, $note, $checkout_products, $delivery);
+            $isSuccess = $OrderModel->createOrder($userId, $name, $address, $phone, $note, $checkout_products, $delivery);
 
             if (empty($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
@@ -92,14 +92,14 @@ class CheckoutController
                 JsonResponse(error: 1, message: "Không thể thực hiện");
             }
 
-            $CheckoutModel = new \App\Models\CheckoutModel();
+            $OrderModel = new \App\Models\OrderModel();
 
-            $order = $CheckoutModel->getById($id);
+            $order = $OrderModel->getById($id);
             if (empty($order)) {
                 JsonResponse(error: 1, message: "Đơn hàng không tồn tại, Vui lòng kiểm tra lại");
             }
 
-            $isSuccess = $CheckoutModel->updateStatus($id, $status);
+            $isSuccess = $OrderModel->updateStatus($id, $status);
 
             if (!$isSuccess) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau.");
@@ -119,7 +119,7 @@ class CheckoutController
             }
             $email = htmlspecialchars($_SESSION["email"]);
 
-            $CheckoutModel = new \App\Models\CheckoutModel();
+            $OrderModel = new \App\Models\OrderModel();
             $UserModel = new \App\Models\UserModel();
 
             $user = $UserModel->getByEmail($email);
@@ -129,12 +129,12 @@ class CheckoutController
             }
             $id = htmlspecialchars($_POST['id']);
 
-            $orders = $CheckoutModel->getOrderDetail($id);
+            $orders = $OrderModel->getOrderDetail($id);
             if (empty($orders)) {
                 JsonResponse(error: 1, message: "Đơn hàng không tồn tại, Vui lòng kiểm tra lại");
             }
 
-            $isSuccess = $CheckoutModel->insertToCart($user['id'], $orders);
+            $isSuccess = $OrderModel->insertToCart($user['id'], $orders);
 
             if (!$isSuccess) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau.");
