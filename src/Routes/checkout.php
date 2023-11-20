@@ -1,9 +1,9 @@
 <?php
 
-$router->get('/checkout', 'App\Controllers\CheckoutController@index');
+$router->get('/checkout', 'App\Controllers\OrderController@index');
 
-$router->post('/checkout', 'App\Controllers\CheckoutController@create');
+$router->post('/checkout', 'App\Controllers\OrderController@create');
 
-$router->post('/checkout/cancel', 'App\Controllers\CheckoutController@postOrderCancel');
+$router->post('/checkout/cancel', 'App\Controllers\OrderController@postOrderCancel');
 
-$router->post('/checkout/buy_again', 'App\Controllers\CheckoutController@postOrderBuyAgain');
+$router->post('/checkout/buy_again', 'App\Controllers\OrderController@postOrderBuyAgain');
