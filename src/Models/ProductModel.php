@@ -88,7 +88,7 @@ class ProductModel
     {
         include SRC_DIR . '/config.php';
 
-        $sql = "SELECT p.*, c.name AS cate_name, c.slug AS cate_slug 
+        $sql = "SELECT p.*
                 FROM products p 
                 JOIN categories c ON p.cate_id = c.id 
                 WHERE p.id=? AND p.shop_id=?";
@@ -100,7 +100,7 @@ class ProductModel
             return false;
         }
 
-        $sql = "SELECT * FROM product_images WHERE product_id=?";
+        $sql = "SELECT image_url FROM product_images WHERE product_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         $imgs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -128,18 +128,18 @@ class ProductModel
         return false;
     }
 
-    public function update($product)
+    public function update($product, $shopId)
     {
         include SRC_DIR . '/config.php';
-        $sql = "UPDATE sach SET ten_sach=?, gia_goc=?, gia_sale=?, anh_bia=?, tac_gia=?, mo_ta=? WHERE id=?";
+        $sql = "UPDATE products SET name=?, price=?, sale=?, thumbnail=?, cate_id=?, description=? WHERE id=? AND shop_id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$product['name'], $product['price'], $product['sale'], BASE_URL . '/uploads/' . $product['img'], $product['author'], $product['description'], $product['book_id']]);
+        $stmt->execute([$product['name'], $product['price'], $product['sale'], BASE_URL . '/uploads/' . $product['thumbnail'], $product['category'], $product['description'], $product['id'], $shopId]);
 
         if ($stmt->rowCount() === 1 && !empty($product['imgs'])) {
             foreach ($product['imgs'] as $img) {
-                $sql = "INSERT INTO hinh_anh_sach(id_sach, hinh_anh) VALUES(?, ?)";
+                $sql = "INSERT INTO product_images(product_id, images_url) VALUES(?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$product['book_id'], BASE_URL . '/uploads/' . $img]);
+                $stmt->execute([$product['id'], BASE_URL . '/uploads/' . $img]);
             }
             return true;
         }
@@ -149,7 +149,7 @@ class ProductModel
     public function delete($id)
     {
         include SRC_DIR . '/config.php';
-        $sql = "DELETE FROM sach WHERE id=?";
+        $sql = "DELETE FROM products WHERE id=?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
 
@@ -157,13 +157,13 @@ class ProductModel
             return false;
         }
 
-        return $this->deleteBookImgs($id);
+        return $this->deleteImgs($id);
     }
 
-    public function deleteBookImgs($id)
+    public function deleteImgs($id)
     {
         include SRC_DIR . '/config.php';
-        $sql = "DELETE FROM hinh_anh_sach WHERE id_sach = ?";
+        $sql = "DELETE FROM product_images WHERE product_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->rowCount() >= 0;

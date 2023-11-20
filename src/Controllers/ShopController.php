@@ -204,6 +204,7 @@ class ShopController
             require_once SRC_DIR . '/config.php';
             $UserModel = new \App\Models\UserModel();
             $ProductModel = new \App\Models\ProductModel();
+            $ShopModel = new \App\Models\ShopModel();
 
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
@@ -224,7 +225,89 @@ class ShopController
 
             $product = $ProductModel->getByIdAndShopId($id, $shopId);
 
-            require_once VIEWS_DIR . '/shop/order/index.php';
+            require_once VIEWS_DIR . '/shop/product/edit/index.php';
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function postEditProduct()
+    {
+        try {
+            if (!(isAdmin() || isShop())) {
+                $title = 'Lỗi';
+                JsonResponse(error: 3, message: "Bạn không có quyền thực hiện chức năng này!");
+            };
+
+            require_once SRC_DIR . '/config.php';
+            $ProductModel = new \App\Models\ProductModel();
+            $UserModel = new \App\Models\UserModel();
+            $ShopModel = new \App\Models\ShopModel();
+
+            $email = $_SESSION['email'];
+            $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
+
+            $shop = $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            if (!isset($_POST['product'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập thông tin sản phẩm");
+            }
+            $product = json_decode($_POST['product'], true);
+
+            if (!isset($product['id'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập mã sản phẩm");
+            }
+
+            if (!isset($product['name'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập tên sản phẩm");
+            }
+
+            if (!isset($product['price'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập giá bán");
+            }
+
+            if (!isset($product['sale'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập sale");
+            }
+
+            if (!isset($product['category'])) {
+                JsonResponse(error: 1, message: "Vui lòng chọn danh mục sản phẩm");
+            }
+
+            if (!isset($product['description'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập mô tả sản phẩm");
+            }
+
+            $oldProduct = $ProductModel->getByIdAndShopId($product['id'], $shopId);
+
+            $img = handle_img_upload('img');
+            if (empty($img)) {
+                $fileName = extractFileNameFromUrl($oldProduct['thumbnail']);
+                $product['thumbnail'] = $fileName;
+            } else {
+                $product['thumbnail'] = $img;
+                $fileName = extractFileNameFromUrl($oldProduct['thumbnail']);
+                remove_img_file($fileName);
+            }
+
+            $imgs = handle_img_upload('imgs', isMultiple: true);
+            if (!empty($imgs)) {
+                foreach ($oldProduct['imgs'] as $item) {
+                    $fileName = extractFileNameFromUrl($item['image_url']);
+                    remove_img_file($fileName);
+                }
+                $ProductModel->deleteImgs($product['id']);
+                $product['imgs'] = $imgs;
+            }
+
+            $isSuccess = $ProductModel->update($product, $shopId);
+            if (!isset($isSuccess)) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+
+            JsonResponse(error: 0, message: "Cập nhật thành công");
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

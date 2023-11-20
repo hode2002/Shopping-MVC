@@ -21,7 +21,7 @@
             Sửa sản phẩm
           </div>
           <div class="card-body card-block">
-            <form id="add_product_form" action="shop/products" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form id="edit_product_form" action="shop/products" method="post" enctype="multipart/form-data" class="form-horizontal">
               <div class="row form-group">
                 <div class="col col-md-3 align-self-center align-self-center">
                   <label for="id" class="form-control-label">Mã sản phẩm</label>
@@ -47,18 +47,18 @@
                 <div class="col-12 col-md-9">
                   <select class="form-select form-control" id="category" name="category">
                     <option value="" selected>Chọn danh mục</option>
-                    <option value="1">Xe máy</option>
-                    <option value="2">Ba lô</option>
-                    <option value="3">Thể thao</option>
-                    <option value="4">Điện thoại</option>
-                    <option value="5">Đồng hồ</option>
-                    <option value="6">Giày dép</option>
-                    <option value="7">Dụng cụ nhà</option>
-                    <option value="8">Laptop</option>
-                    <option value="9">Phụ kiện</option>
-                    <option value="10">Sách</option>
-                    <option value="11">Thời trang nam</option>
-                    <option value="12">Thời trang nữ</option>
+                    <option <?= $product['cate_id'] == 1 ? 'selected' : '' ?> value="1">Xe máy</option>
+                    <option <?= $product['cate_id'] == 2 ? 'selected' : '' ?> value="2">Ba lô</option>
+                    <option <?= $product['cate_id'] == 3 ? 'selected' : '' ?> value="3">Thể thao</option>
+                    <option <?= $product['cate_id'] == 4 ? 'selected' : '' ?> value="4">Điện thoại</option>
+                    <option <?= $product['cate_id'] == 5 ? 'selected' : '' ?> value="5">Đồng hồ</option>
+                    <option <?= $product['cate_id'] == 6 ? 'selected' : '' ?> value="6">Giày dép</option>
+                    <option <?= $product['cate_id'] == 7 ? 'selected' : '' ?> value="7">Dụng cụ nhà</option>
+                    <option <?= $product['cate_id'] == 8 ? 'selected' : '' ?> value="8">Laptop</option>
+                    <option <?= $product['cate_id'] == 9 ? 'selected' : '' ?> value="9">Phụ kiện</option>
+                    <option <?= $product['cate_id'] == 10 ? 'selected' : '' ?> value="10">Sách</option>
+                    <option <?= $product['cate_id'] == 11 ? 'selected' : '' ?> value="11">Thời trang nam</option>
+                    <option <?= $product['cate_id'] == 12 ? 'selected' : '' ?> value="12">Thời trang nữ</option>
                   </select>
                 </div>
               </div>
@@ -68,7 +68,7 @@
                   <label for="price" class="form-control-label"> Giá </label>
                 </div>
                 <div class="col-12 col-md-9">
-                  <input value="<?= htmlspecialchars(format_money($product['price'])) ?>" type="text" autocomplete="off" id="price" name="price" placeholder="Giá" class="form-control" />
+                  <input value="<?= htmlspecialchars($product['price']) ?>" type="text" autocomplete="off" id="price" name="price" placeholder="Giá" class="form-control" />
                 </div>
               </div>
 
@@ -77,7 +77,7 @@
                   <label for="sale" class="form-control-label"> Sale </label>
                 </div>
                 <div class="col-12 col-md-9">
-                  <input type="text" autocomplete="off" id="sale" name="sale" value="<?= htmlspecialchars($product['id']) ?>" placeholder="%" class="form-control" />
+                  <input type="text" autocomplete="off" id="sale" name="sale" value="<?= htmlspecialchars($product['sale']) ?>" placeholder="%" class="form-control" />
                 </div>
               </div>
 
@@ -89,7 +89,7 @@
                 <div class="col-12 col-md-9">
                   <input hidden type="file" class="form-control-file form-control img" id="thumbnail" name="img" accept="image/*">
                   <label for="thumbnail" class="btn text-dark" style="background-color: #f0f3f5;">Chọn</label>
-                  <div class="preview-img mt-3 d-none col-12 col-md-9 px-0">
+                  <div class="preview-img mt-3 col-12 col-md-9 px-0">
                     <img src="<?= htmlspecialchars($product['thumbnail']) ?>" alt="" style="width: 150px;">
                   </div>
                 </div>
@@ -103,10 +103,10 @@
                 <div class="col-12 col-md-9">
                   <input hidden type="file" multiple class="form-control-file form-control imgs" id="imgs" name="imgs[]" accept="image/*">
                   <label for="imgs" class="btn text-dark" style="background-color: #f0f3f5;">Chọn</label>
-                  <div class="preview-imgs mt-3 d-none col-12 col-md-9 px-0">
+                  <div class="preview-imgs mt-3 col-12 col-md-9 px-0">
                     <img src="" alt="" style="width: 150px;">
                     <?php foreach ($product['imgs'] as $img) : ?>
-                      <img src="<?= htmlspecialchars($img['hinh_anh']) ?>" alt="" style="width: 150px;">
+                      <img src="<?= htmlspecialchars($img['image_url']) ?>" alt="" style="width: 150px;">
                     <?php endforeach ?>
                   </div>
                 </div>
@@ -230,7 +230,7 @@
       };
       formData.append("product", JSON.stringify(product));
 
-      fetch('/shop/products', {
+      fetch('/shop/product/edit', {
           method: 'POST',
           body: formData,
         })
@@ -261,7 +261,7 @@
   })
 
   $(() => {
-    $('#add_product_form').validate({
+    $('#edit_product_form').validate({
       rules: {
         id: {
           required: true,
@@ -279,9 +279,6 @@
         sale: {
           required: true,
           number: true
-        },
-        img: {
-          required: true,
         },
         description: {
           required: true,
@@ -322,8 +319,8 @@
       },
     })
 
-    previewImg($('#add_product_form input.img'), $('.preview-img'));
-    previewImg($('#add_product_form input.imgs'), $('.preview-imgs'));
+    previewImg($('#edit_product_form input.img'), $('.preview-img'));
+    previewImg($('#edit_product_form input.imgs'), $('.preview-imgs'));
   })
 </script>
 
