@@ -1,31 +1,5 @@
 <?php include_once VIEWS_DIR . "/shop/partials/header/index.php" ?>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  if (isset($_POST["add_sp"]) && $_POST["add_sp"]) {
-    $ten = $_POST["ten"];
-    $gia = $_POST["gia"];
-    $hinhanh = $_POST["hinh_anh"];
-    $slt = $_POST["so_luong_ton"];
-
-    $sql = "CALL createProduct('$ten', '$gia', 'goat', '$slt', '$hinhanh')";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-?>
-    <script>
-      Swal.fire({
-        icon: "success",
-        title: "Thêm Sản Phẩm",
-        text: "Thành công!",
-      }).then(function() {
-        window.location.href = 'index.php?page=products&act=list'
-      });;
-    </script>
-<?php
-  }
-}
-?>
-
 <style>
   label {
     margin-bottom: 0 !important;
