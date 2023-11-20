@@ -73,6 +73,17 @@ class ProductModel
         return $results;
     }
 
+    public function getAllByShopId($shopId)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT * FROM products WHERE shop_id = ? LIMIT 12";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$shopId]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
     public function create($shopId, $product)
     {
         include SRC_DIR . '/config.php';

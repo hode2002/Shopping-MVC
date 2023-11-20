@@ -68,19 +68,27 @@ class ShopController
         try {
             require_once SRC_DIR . '/config.php';
             $UserModel = new \App\Models\UserModel();
+            $ShopModel = new \App\Models\ShopModel();
+            $ProductModel = new \App\Models\ProductModel();
 
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
             }
             $email = htmlspecialchars($_SESSION["email"]);
 
-            $user = $UserModel->getByEmail($email);
-
             if (!(isAdmin() || isShop())) {
                 $title = 'Lỗi';
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
+
+            $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
+
+            $shop = $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            $products = $ProductModel->getAllByShopId($shopId);
 
             require_once VIEWS_DIR . '/shop/product/index.php';
         } catch (\PDOException $e) {
@@ -99,13 +107,13 @@ class ShopController
             }
             $email = htmlspecialchars($_SESSION["email"]);
 
-            $user = $UserModel->getByEmail($email);
-
             if (!(isAdmin() || isShop())) {
                 $title = 'Lỗi';
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
+
+            $user = $UserModel->getByEmail($email);
 
             require_once VIEWS_DIR . '/shop/product/add/index.php';
         } catch (\PDOException $e) {

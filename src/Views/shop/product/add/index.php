@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="col-12 col-md-9">
                   <input hidden type="file" class="form-control-file form-control img" id="thumbnail" name="img" accept="image/*">
-                  <label for="thumbnail" class="btn text-white" style="background-color:  rgb(209, 0, 36);">Chọn</label>
+                  <label for="thumbnail" class="btn text-dark" style="background-color: #f0f3f5;">Chọn</label>
                   <div class="preview-img mt-3 d-none col-12 col-md-9 px-0">
                     <img src="" alt="" style="width: 150px;">
                   </div>
@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="col-12 col-md-9">
                   <input hidden type="file" multiple class="form-control-file form-control imgs" id="imgs" name="imgs[]" accept="image/*">
-                  <label for="imgs" class="btn text-white" style="background-color:  rgb(209, 0, 36);">Chọn</label>
+                  <label for="imgs" class="btn text-dark" style="background-color: #f0f3f5;">Chọn</label>
                   <div class="preview-imgs mt-3 d-none col-12 col-md-9 px-0">
                     <img src="" alt="" style="width: 150px;">
                   </div>
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               </div>
 
               <div class="mt-5 d-flex justify-content-center">
-                <input type="submit" id="add_sp" name="add_sp" value="Thêm sản phẩm" class="form-control text-white btn" style="max-width: 150px; cursor: pointer; background-color: rgb(209, 0, 36);" />
+                <input type="submit" id="add_sp" name="add_sp" value="Thêm sản phẩm" class="form-control text-dark btn" style="max-width: 150px; cursor: pointer; background-color: #f0f3f5;" />
               </div>
             </form>
 

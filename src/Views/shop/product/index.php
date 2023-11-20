@@ -1,5 +1,7 @@
 <?php include_once VIEWS_DIR . "/shop/partials/header/index.php" ?>
 
+<?php var_dump($products) ?>
+
 <div class="content" style="min-height: 100vh;">
   <div class="animated fadeIn">
     <div class="row">
