@@ -150,7 +150,7 @@ class ShopController
                 JsonResponse(error: 1, message: "Vui lòng nhập mã sản phẩm");
             }
 
-            $isExist = $ProductModel->getById($product['id']);
+            $isExist = $ProductModel->getByIdAndShopId($product['id'], $shopId);
             if (!empty($isExist)) {
                 JsonResponse(error: 1, message: "Sản phẩm đã tồn tại");
             }
@@ -193,6 +193,38 @@ class ShopController
             }
 
             JsonResponse(error: 0, message: "Thêm thành công");
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getEditProduct($id)
+    {
+        try {
+            require_once SRC_DIR . '/config.php';
+            $UserModel = new \App\Models\UserModel();
+            $ProductModel = new \App\Models\ProductModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
+
+            $shop = $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            if (!(isAdmin() || isShop())) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            $product = $ProductModel->getByIdAndShopId($id, $shopId);
+
+            require_once VIEWS_DIR . '/shop/order/index.php';
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

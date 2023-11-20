@@ -84,6 +84,32 @@ class ProductModel
         return $results;
     }
 
+    public function getByIdAndShopId($id, $shopId)
+    {
+        include SRC_DIR . '/config.php';
+
+        $sql = "SELECT p.*, c.name AS cate_name, c.slug AS cate_slug 
+                FROM products p 
+                JOIN categories c ON p.cate_id = c.id 
+                WHERE p.id=? AND p.shop_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id, $shopId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($result)) {
+            return false;
+        }
+
+        $sql = "SELECT * FROM product_images WHERE product_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id]);
+        $imgs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result['imgs'] = $imgs;
+
+        return $result;
+    }
+
     public function create($shopId, $product)
     {
         include SRC_DIR . '/config.php';
