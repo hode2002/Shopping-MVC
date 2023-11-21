@@ -388,6 +388,40 @@ class ShopController
         try {
             require_once SRC_DIR . '/config.php';
             $UserModel = new \App\Models\UserModel();
+            $ShopModel = new \App\Models\ShopModel();
+            $OrderModel = new \App\Models\OrderModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
+
+            if (!(isAdmin() || isShop())) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            $shop =  $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            $orders = $OrderModel->getByShopId($shopId);
+
+            require_once VIEWS_DIR . '/shop/order/index.php';
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getOrderDetail($id)
+    {
+        try {
+            require_once SRC_DIR . '/config.php';
+            $UserModel = new \App\Models\UserModel();
+            $OrderModel = new \App\Models\OrderModel();
 
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
@@ -402,7 +436,50 @@ class ShopController
                 exit;
             };
 
-            require_once VIEWS_DIR . '/shop/order/index.php';
+            $orders = $OrderModel->getOrderDetail($id);
+
+            require_once VIEWS_DIR . '/shop/order/detail/index.php';
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function postUpdateOrderStatus()
+    {
+        try {
+            require_once SRC_DIR . '/config.php';
+            $UserModel = new \App\Models\UserModel();
+            $OrderModel = new \App\Models\OrderModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
+            if (!(isAdmin() || isShop())) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            if (!isset($_POST['id'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra, Vui lòng thử lại sau");
+            }
+            $id = htmlspecialchars($_POST['id']);
+
+            if (!isset($_POST['status'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra, Vui lòng thử lại sau");
+            }
+            $status = htmlspecialchars($_POST['status']);
+
+            $isSuccess = $OrderModel->updateStatus($id, $status);
+            if (empty($isSuccess)) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra, Vui lòng thử lại sau");
+            }
+
+            JsonResponse(error: 0, message: "Cập nhật thành công");
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

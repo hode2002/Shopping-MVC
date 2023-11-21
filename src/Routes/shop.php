@@ -10,6 +10,7 @@ $router->post('/shop/product/edit', 'App\Controllers\ShopController@postEditProd
 $router->post('/shop/product/delete', 'App\Controllers\ShopController@postDeleteProduct');
 
 $router->get('/shop/orders', 'App\Controllers\ShopController@getOrders');
-$router->get('/shop/orders/(\d+)', 'App\Controllers\ShopController@getOrders');
+$router->get('/shop/orders/(\d+)', 'App\Controllers\ShopController@getOrderDetail');
+$router->post('/shop/orders/edit', 'App\Controllers\ShopController@postUpdateOrderStatus');
 
 $router->get('/shop/transports', 'App\Controllers\ShopController@getTransports');

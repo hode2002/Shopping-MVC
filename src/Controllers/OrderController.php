@@ -94,7 +94,7 @@ class OrderController
 
             $OrderModel = new \App\Models\OrderModel();
 
-            $order = $OrderModel->getById($id);
+            $order = $OrderModel->getOrderDetail($id);
             if (empty($order)) {
                 JsonResponse(error: 1, message: "Đơn hàng không tồn tại, Vui lòng kiểm tra lại");
             }
