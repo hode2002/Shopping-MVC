@@ -154,7 +154,7 @@
                                         <td><span><?= htmlspecialchars($order['ORDER_STATUS'] == 0 ? 'Chờ xác nhận' : ($order['ORDER_STATUS'] == 1 ? 'Đang giao' : ($order['ORDER_STATUS'] == 2 ? 'Hủy' : 'Đã nhận hàng'))) ?></span></td>
                                         <td><span><?= htmlspecialchars(format_money($order['TOTAL_PRICE'])) ?></span></td>
                                         <td>
-                                            <a href="#">
+                                            <a target="_blank" href="/shop/orders/<?= htmlspecialchars($order['ORDER_ID']) ?>">
                                                 <i class="fa-regular fa-eye font-weight-bold" style="font-size: 24px"></i>
                                             </a>
                                         </td>
