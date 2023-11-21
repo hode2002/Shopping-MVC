@@ -42,7 +42,7 @@ class ShopController
             $shopUsers = $UserModel->getAllByShopId($shopId);
             $userCount = count($shopUsers);
 
-            $orders = $OrderModel->getByShopId($shopId);
+            $orders = $OrderModel->getByShopIdAndStatus($shopId, status: 0);
 
             require_once VIEWS_DIR . '/shop/index.php';
         } catch (\PDOException $e) {

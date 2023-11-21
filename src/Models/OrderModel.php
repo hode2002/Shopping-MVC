@@ -81,10 +81,11 @@ class OrderModel
         $data = [];
 
         foreach ($results as $item) {
-            $sql = "SELECT p.id, p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.price, o_detail.quantity
+            $sql = "SELECT p.id, p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.price, o_detail.quantity, s.name shop_name
                     FROM orders o JOIN order_detail o_detail
                     ON o.id = o_detail.order_id
                     JOIN products p ON p.id = o_detail.product_id
+                    JOIN shops s ON s.id = p.shop_id
                     WHERE o.id = ?";
 
             $stmt = $conn->prepare($sql);
@@ -120,10 +121,12 @@ class OrderModel
         $data = [];
 
         foreach ($results as $item) {
-            $sql = "SELECT p.id, p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.price, o_detail.quantity
-                    FROM orders o JOIN order_detail o_detail
+            $sql = "SELECT p.id, p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.price, o_detail.quantity, s.name shop_name
+                    FROM orders o 
+                    JOIN order_detail o_detail
                     ON o.id = o_detail.order_id
                     JOIN products p ON p.id = o_detail.product_id
+                    JOIN shops s ON s.id = p.shop_id
                     WHERE o.id = ?";
 
             $stmt = $conn->prepare($sql);
@@ -183,22 +186,6 @@ class OrderModel
         return $result;
     }
 
-    public function getByShopIdAndStatus($shopId, $status)
-    {
-        include SRC_DIR . '/config.php';
-
-        $sql = "SELECT *
-                FROM orders o 
-                JOIN order_detail o_detail
-                ON o_detail.order_id = o.id
-                JOIN products p ON o_detail.product_id = p.id
-                WHERE p.shop_id = ? AND o.status = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$shopId, $status]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $results;
-    }
-
     public function getTotalPriceByShopId($shopId)
     {
         include SRC_DIR . '/config.php';
@@ -222,7 +209,7 @@ class OrderModel
         $stmt = $conn->prepare($sql);
         $stmt->execute([$status, $id]);
 
-        return  $stmt->rowCount() === 1;
+        return $stmt->rowCount() === 1;
     }
 
     public function insertToCart($userId, $orders)
@@ -242,7 +229,7 @@ class OrderModel
         return true;
     }
 
-    public function getByShopId($shopId)
+    public function getByShopIdAndStatus($shopId, $status)
     {
         include SRC_DIR . '/config.php';
         $sql = "SELECT o.address ORDER_ADDRESS, o.name ORDER_NAME, o.phone ORDER_PHONE,
@@ -253,11 +240,10 @@ class OrderModel
                 JOIN orders o ON o_detail.order_id = o.id
                 JOIN delivery d ON o.delivery_id = d.id
                 JOIN users u ON o.user_id = u.id
-                WHERE p.shop_id = ? ";
+                WHERE p.shop_id = ? AND o.status = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$shopId]);
+        $stmt->execute([$shopId, $status]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $results;
     }
 }
