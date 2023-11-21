@@ -124,7 +124,7 @@
               </div>
 
               <div class="mt-5 d-flex justify-content-center">
-                <input type="submit" id="add_sp" name="add_sp" value="Thêm sản phẩm" class="form-control text-dark btn" style="max-width: 150px; cursor: pointer; background-color: #f0f3f5;" />
+                <input type="submit" id="add_sp" name="add_sp" value="Lưu" class="form-control text-dark btn" style="max-width: 150px; cursor: pointer; background-color: #f0f3f5;" />
               </div>
             </form>
 
