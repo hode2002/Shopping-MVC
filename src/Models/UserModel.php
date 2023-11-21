@@ -29,6 +29,22 @@ class UserModel
         return $result;
     }
 
+
+    public function getAllByShopId($shopId)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT *
+                FROM users u 
+                JOIN orders o ON u.id = o.user_id
+                JOIN order_detail o_detail ON o_detail.order_id = o.id
+                JOIN products p ON o_detail.product_id = p.id
+                WHERE p.shop_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$shopId]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
     public function create($email, $password)
     {
         include SRC_DIR . '/config.php';

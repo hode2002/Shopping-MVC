@@ -1,4 +1,4 @@
-<?php include_once VIEWS_DIR . "/shop/partials/header/index.php" ?>
+<?php include_once VIEWS_DIR . "/shop/partials/header/index.php"; ?>
 
 <style>
     .card.statistics:hover {
@@ -47,7 +47,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text">
-                                        <span class="count">1234123</span>
+                                        <span class=""><?= htmlspecialchars(format_money($orderTotalPrice)) ?></span>
                                     </div>
                                     <div class="stat-heading">Doanh thu</div>
                                 </div>
@@ -67,7 +67,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text">
-                                        <span class="count">1234123</span>
+                                        <span class=""><?= htmlspecialchars($productCount) ?></span>
                                     </div>
                                     <div class="stat-heading">Sản phẩm</div>
                                 </div>
@@ -87,7 +87,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text">
-                                        <span class="count">1234123</span>
+                                        <span class=""><?= htmlspecialchars($orderDeliveryCount) ?></span>
                                     </div>
                                     <div class="stat-heading">Vận chuyển</div>
                                 </div>
@@ -107,7 +107,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text">
-                                        <span class="count">1234123</span>
+                                        <span class=""><?= htmlspecialchars($userCount) ?></span>
                                     </div>
                                     <div class="stat-heading">Khách hàng</div>
                                 </div>
@@ -129,25 +129,37 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Mã vận chuyển</th>
+                                    <th>STT</th>
+                                    <th>Đơn vị vận chuyển</th>
                                     <th>Tên khách hàng</th>
                                     <th>Mã đơn hàng</th>
                                     <th>Địa chỉ</th>
+                                    <th>Ngày đặt</th>
                                     <th>Trạng thái</th>
                                     <th>Thành tiền</th>
+                                    <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody id="t_body">
-                                <tr>
-                                    <td>124234123</td>
-                                    <td>
-                                        <span class="name">HVD</span>
-                                    </td>
-                                    <td><span>124234123</span></td>
-                                    <td><span>124234123</span></td>
-                                    <td><span>Giao thành công</span></td>
-                                    <td><span class="count">124234123</span></td>
-                                </tr>
+                                <?php foreach ($orders as $index => $order) : ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($index + 1) ?></td>
+                                        <td><?= htmlspecialchars($order['DELIVERY_ID']) ?></td>
+                                        <td>
+                                            <span class="name"><?= htmlspecialchars($order['ORDER_NAME']) ?></span>
+                                        </td>
+                                        <td><span><?= htmlspecialchars($order['ORDER_ID']) ?></span></td>
+                                        <td><span><?= htmlspecialchars($order['ORDER_ADDRESS']) ?></span></td>
+                                        <td><span><?= htmlspecialchars($order['ORDER_DATE']) ?></span></td>
+                                        <td><span><?= htmlspecialchars($order['ORDER_STATUS'] == 0 ? 'Chờ xác nhận' : ($order['ORDER_STATUS'] == 1 ? 'Đang giao' : 'Hủy')) ?></span></td>
+                                        <td><span><?= htmlspecialchars(format_money($order['TOTAL_PRICE'])) ?></span></td>
+                                        <td>
+                                            <a href="#">
+                                                <i class="fa-regular fa-eye font-weight-bold" style="font-size: 24px"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
                             </tbody>
                         </table>
                     </div>

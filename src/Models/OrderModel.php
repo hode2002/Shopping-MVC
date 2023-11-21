@@ -183,6 +183,38 @@ class OrderModel
         return $result;
     }
 
+    public function getByShopIdAndStatus($shopId, $status)
+    {
+        include SRC_DIR . '/config.php';
+
+        $sql = "SELECT *
+                FROM orders o 
+                JOIN order_detail o_detail
+                ON o_detail.order_id = o.id
+                JOIN products p ON o_detail.product_id = p.id
+                WHERE p.shop_id = ? AND o.status = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$shopId, $status]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    public function getTotalPriceByShopId($shopId)
+    {
+        include SRC_DIR . '/config.php';
+
+        $sql = "SELECT SUM(o.total) order_total_price
+                FROM orders o 
+                JOIN order_detail o_detail
+                ON o_detail.order_id = o.id
+                JOIN products p ON o_detail.product_id = p.id
+                WHERE p.shop_id = ? AND o.status = 3";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$shopId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['order_total_price'];
+    }
+
     public function updateStatus($id, $status)
     {
         include SRC_DIR . '/config.php';
@@ -208,5 +240,24 @@ class OrderModel
         }
 
         return true;
+    }
+
+    public function getByShopId($shopId)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT o.address ORDER_ADDRESS, o.name ORDER_NAME, o.phone ORDER_PHONE,
+                d.id DELIVERY_ID, o.id ORDER_ID, o.total TOTAL_PRICE,
+                o.created_at ORDER_DATE, o.status ORDER_STATUS
+                FROM order_detail o_detail 
+                JOIN products p ON o_detail.product_id = p.id
+                JOIN orders o ON o_detail.order_id = o.id
+                JOIN delivery d ON o.delivery_id = d.id
+                JOIN users u ON o.user_id = u.id
+                WHERE p.shop_id = ? ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$shopId]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
     }
 }

@@ -11,6 +11,8 @@ class ShopController
 
             $UserModel = new \App\Models\UserModel();
             $ShopModel = new \App\Models\ShopModel();
+            $OrderModel = new \App\Models\OrderModel();
+            $ProductModel = new \App\Models\ProductModel();
 
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
@@ -25,6 +27,22 @@ class ShopController
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
+
+            $shop = $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            $orderTotalPrice = $OrderModel->getTotalPriceByShopId($shopId);
+
+            $products = $ProductModel->getAllByShopId($shopId);
+            $productCount = count($products);
+
+            $orderDelivery = $OrderModel->getByShopIdAndStatus($shopId, 1);
+            $orderDeliveryCount = count($orderDelivery);
+
+            $shopUsers = $UserModel->getAllByShopId($shopId);
+            $userCount = count($shopUsers);
+
+            $orders = $OrderModel->getByShopId($shopId);
 
             require_once VIEWS_DIR . '/shop/index.php';
         } catch (\PDOException $e) {
