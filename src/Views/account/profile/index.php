@@ -134,6 +134,18 @@
 
 <script>
   $(() => {
+    const swal = (res) => {
+      return Swal.fire({
+        title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
+        text: res["message"],
+        icon: `${res["error"] ? 'error' : 'success'}`,
+        confirmButtonText: 'Ok',
+        customClass: {
+          confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
+        },
+      })
+    }
+
     $('#btn_edit_profile').on('click', function(e) {
       e.preventDefault();
 
@@ -149,16 +161,7 @@
         },
         success: function(res) {
           res = JSON.parse(res);
-
-          Swal.fire({
-            title: `${res["error"] ? 'Lỗi' : 'Thành công'}`,
-            text: res["message"],
-            icon: `${res["error"] ? 'error' : 'success'}`,
-            confirmButtonText: 'Ok',
-            customClass: {
-              confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
-            },
-          })
+          swal(res);
         },
         error: function(error) {
           console.error("Error:", error);
