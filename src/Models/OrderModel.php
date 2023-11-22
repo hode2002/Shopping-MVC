@@ -233,7 +233,7 @@ class OrderModel
         include SRC_DIR . '/config.php';
         $sql = "SELECT  o.address ORDER_ADDRESS, o.name ORDER_NAME, o.phone ORDER_PHONE,
                 o.id ORDER_ID, o.total TOTAL_PRICE, o.created_at ORDER_DATE, o.status ORDER_STATUS,
-                d.id DELIVERY_ID, d.name DELIVERY_NAME
+                o.note ORDER_NOTE, o.delivery_date DELIVERY_DATE, d.id DELIVERY_ID, d.name DELIVERY_NAME
                 FROM order_detail o_detail 
                 JOIN products p ON o_detail.product_id = p.id
                 JOIN orders o ON o_detail.order_id = o.id

@@ -490,6 +490,8 @@ class ShopController
         try {
             require_once SRC_DIR . '/config.php';
             $UserModel = new \App\Models\UserModel();
+            $OrderModel = new \App\Models\OrderModel();
+            $ShopModel = new \App\Models\ShopModel();
 
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
@@ -497,12 +499,18 @@ class ShopController
             $email = htmlspecialchars($_SESSION["email"]);
 
             $user = $UserModel->getByEmail($email);
+            $userId = $user['id'];
 
             if (!(isAdmin() || isShop())) {
                 $title = 'Lỗi';
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
+
+            $shop =  $ShopModel->getByUserId($userId);
+            $shopId = $shop['id'];
+
+            $orders = $OrderModel->getByShopIdAndStatus($shopId, 1);
 
             require_once VIEWS_DIR . '/shop/transport/index.php';
         } catch (\PDOException $e) {

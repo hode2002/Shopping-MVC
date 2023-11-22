@@ -12,31 +12,37 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Mã vẫn chuyển</th>
+                  <th>STT</th>
+                  <th>Đơn vị vận chuyển</th>
                   <th>Mã đơn hàng</th>
                   <th>Tên khách hàng</th>
                   <th>Ngày đặt</th>
-                  <th>Ngày dự kiến </th>
+                  <th>Ngày Giao dự kiến </th>
                   <th>Địa chỉ</th>
-                  <th>Tiến trình</th>
+                  <th>Ghi chú</th>
+                  <th>Trạng thái</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><?= 123 ?></td>
-                  <td><?= 456 ?></td>
-                  <td><?= 'HVD' ?></td>
-                  <td> '18/11/2023' </td>
-                  <td> '21/11/2023' </td>
-                  <td><?= 'CT' ?></td>
-                  <td> Giao thành công </td>
-                  <td>
-                    <a href="/orders/detail" class="mx-2">
-                      <i class="fa-regular fa-eye font-weight-bold" style="font-size: 24px"></i>
-                    </a>
-                  </td>
-                </tr>
+                <?php foreach ($orders as $index => $order) : ?>
+                  <tr>
+                    <td><?= htmlspecialchars($index + 1) ?></td>
+                    <td><?= htmlspecialchars($order['DELIVERY_NAME']) ?> (<?= htmlspecialchars($order['DELIVERY_ID']) ?>)</td>
+                    <td><?= htmlspecialchars($order['ORDER_ID']) ?></td>
+                    <td><?= htmlspecialchars($order['ORDER_NAME']) ?></td>
+                    <td><?= htmlspecialchars($order['ORDER_DATE']) ?></td>
+                    <td><?= htmlspecialchars($order['DELIVERY_DATE']) ?></td>
+                    <td><?= htmlspecialchars($order['ORDER_ADDRESS']) ?></td>
+                    <td><?= htmlspecialchars(empty($order['ORDER_NOTE']) ? "Không" : $order['ORDER_NOTE']) ?></td>
+                    <td>Đang giao</td>
+                    <td>
+                      <a target="_blank" href="/shop/orders/<?= htmlspecialchars($order['ORDER_ID']) ?>" class="mx-2">
+                        <i class="fa-regular fa-eye font-weight-bold" style="font-size: 24px"></i>
+                      </a>
+                    </td>
+                  </tr>
+                <?php endforeach ?>
               </tbody>
             </table>
           </div>

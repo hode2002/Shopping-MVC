@@ -102,7 +102,9 @@
               </p>
             <?php else : ?>
               <select class="select custom-select" style="box-shadow: none; width: auto">
-                <option selected disabled value="">Chờ cập nhật</option>
+                <?php if ((int)htmlspecialchars($order['status']) === 0) : ?>
+                  <option selected disabled value="">Chờ cập nhật</option>
+                <?php endif; ?>
                 <option <?= (int)htmlspecialchars($order['status']) === 1 ? 'selected' : '' ?> value="1">Đang giao</option>
                 <option <?= (int)htmlspecialchars($order['status']) === 2 ? 'selected' : '' ?> value="2">Hủy</option>
               </select>
