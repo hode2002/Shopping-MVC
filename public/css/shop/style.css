@@ -1,24 +1,8 @@
-/* This css file is to over write bootstarp css
---------------------------------------------------------- /
-* Theme Name: Ela Admin Template
-* Theme URI: http://demos.jeweltheme.com/
-* Author: jewel_theme
-* Author URI: http://themeforest.net/user/jewel_theme/portfolio
-* Description:
-* Version: 1.0.0
-* License: GNU General Public License v2 or later
-* License URI: http://www.gnu.org/licenses/gpl-2.0.html
-* Tags: html, themplate, Ela Admin
---------------------------------------------------------- */
-/* 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
-
-Googel Fonts  */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-/* Googel Fonts End  
-
-*/
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+body {
+  font-family: Poppins, sans-serif;
+}
 
 .bg-flat-color-1 {
   background: #00c292;
@@ -430,14 +414,13 @@ Googel Fonts  */
 }
 
 .tdl-holder input[type="checkbox"]:checked+i::after {
-  content    : "\e64c";
-  font-family: 'themify';
-  display    : block;
-  color      : rgba(153, 171, 180, 0.5);
-  left       : 0;
-  position   : absolute;
-  top        : -16px;
-  z-index    : 2;
+  content : "\e64c";
+  display : block;
+  color   : rgba(153, 171, 180, 0.5);
+  left    : 0;
+  position: absolute;
+  top     : -16px;
+  z-index : 2;
 }
 
 .tdl-holder input[type="checkbox"]:checked~span {
@@ -456,15 +439,13 @@ Googel Fonts  */
 }
 
 body {
-  display    : table;
-  font-family: "Open Sans", sans-serif;
-  font-size  : 16px;
-  width      : 100%;
+  display  : table;
+  font-size: 16px;
+  width    : 100%;
 }
 
 p {
   font-size  : 16px;
-  font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 24px;
   color      : #878787;
@@ -800,7 +781,6 @@ aside.left-panel:hover {
   color         : #41434d;
   clear         : both;
   display       : block;
-  font-family   : 'Open Sans';
   font-size     : 14px;
   font-weight   : 700;
   line-height   : 50px;
@@ -966,7 +946,6 @@ aside.left-panel:hover {
   background   : #a9d86e;
   border-radius: 50%;
   color        : #fff;
-  font-family  : 'Open Sans';
   font-size    : 9px;
   font-weight  : 700;
   float        : right;
@@ -1552,7 +1531,6 @@ header .form-inline .search-form.close {
   background   : #d9534f;
   border-radius: 50%;
   color        : #fff;
-  font-family  : 'Open Sans';
   font-size    : 9px;
   font-weight  : 700;
   float        : right;
@@ -1739,7 +1717,6 @@ header .form-inline .search-form.close {
   margin-right: -20px;
   border-top  : 1px solid #ededed;
   background  : #fff;
-  font-family : "Open Sans", sans-serif;
 }
 
 .card.weather-box .nextdays .days {
@@ -1986,15 +1963,11 @@ header .form-inline .search-form.close {
 }
 
 #flotPie1 .legendLabel {
-  color      : #868e96;
-  font-family: 'Open Sans';
-  font-size  : 12px;
+  color    : #868e96;
+  font-size: 12px;
 }
 
 /* Stats Table */
-.table-stats table {
-  font-family: 'Open Sans';
-}
 
 .table-stats table th,
 .table-stats table td {
@@ -2030,10 +2003,9 @@ header .form-inline .search-form.close {
 
 /* Timeline */
 .timeline li {
-  font-family: 'Open Sans';
-  list-style : none;
-  padding    : 5px 0;
-  position   : relative;
+  list-style: none;
+  padding   : 5px 0;
+  position  : relative;
 }
 
 .timeline li i {
@@ -2846,7 +2818,6 @@ footer.site-footer {
 
 footer.site-footer .footer-inner {
   color      : #78909c;
-  font-family: 'Open Sans';
   font-size  : 14px;
   line-height: 1.5;
   padding    : 2.45em 1.125em;
