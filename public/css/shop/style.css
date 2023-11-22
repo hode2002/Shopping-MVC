@@ -1491,7 +1491,7 @@ header .form-inline .search-form.close {
   background        : #fff;
   border            : none;
   left              : inherit !important;
-  right             : 0;
+  right             : 0 !important;
   top               : 54px !important;
   margin            : 0;
   max-width         : 150px;

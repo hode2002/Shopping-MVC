@@ -31,9 +31,13 @@
         text-transform: capitalize;
         vertical-align: middle;
     }
+
+    ::-webkit-scrollbar {
+        height: 10px;
+    }
 </style>
 
-<div class="content" style="min-height: 100vh;">
+<div class="content" style="min-height: 100vh; max-width: 100vw;">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-xl-3 col-lg-6">
@@ -124,44 +128,45 @@
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <strong class="card-title mb-0">Sản phẩm</strong>
                         </div>
-
-                        <div class="table-stats order-table ov-h">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Đơn vị vận chuyển</th>
-                                        <th>Tên khách hàng</th>
-                                        <th>Mã đơn hàng</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Ngày đặt</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thành tiền</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="t_body">
-                                    <?php foreach ($orders as $index => $order) : ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars($index + 1) ?></td>
-                                            <td><?= htmlspecialchars($order['DELIVERY_ID']) ?></td>
-                                            <td>
-                                                <span class="name"><?= htmlspecialchars($order['ORDER_NAME']) ?></span>
-                                            </td>
-                                            <td><span><?= htmlspecialchars($order['ORDER_ID']) ?></span></td>
-                                            <td><span><?= htmlspecialchars($order['ORDER_ADDRESS']) ?></span></td>
-                                            <td><span><?= htmlspecialchars($order['ORDER_DATE']) ?></span></td>
-                                            <td><span><?= htmlspecialchars($order['ORDER_STATUS'] == 0 ? 'Chờ xác nhận' : ($order['ORDER_STATUS'] == 1 ? 'Đang giao' : ($order['ORDER_STATUS'] == 2 ? 'Hủy' : 'Đã nhận hàng'))) ?></span></td>
-                                            <td><span><?= htmlspecialchars(format_money($order['TOTAL_PRICE'])) ?></span></td>
-                                            <td>
-                                                <a target="_blank" href="/shop/orders/<?= htmlspecialchars($order['ORDER_ID']) ?>">
-                                                    <i class="fa-regular fa-eye font-weight-bold" style="font-size: 24px"></i>
-                                                </a>
-                                            </td>
+                        <div style="overflow-x: scroll;">
+                            <div class="table-stats order-table ov-h" style="min-width: 1200px;">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="white-space: nowrap">
+                                            <th>STT</th>
+                                            <th>Đơn vị vận chuyển</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>Mã đơn hàng</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Trạng thái</th>
+                                            <th>Thành tiền</th>
+                                            <th>Thao tác</th>
                                         </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody id="t_body">
+                                        <?php foreach ($orders as $index => $order) : ?>
+                                            <tr style="white-space: nowrap">
+                                                <td><?= htmlspecialchars($index + 1) ?></td>
+                                                <td><?= htmlspecialchars($order['DELIVERY_ID']) ?></td>
+                                                <td>
+                                                    <span class="name"><?= htmlspecialchars($order['ORDER_NAME']) ?></span>
+                                                </td>
+                                                <td><span><?= htmlspecialchars($order['ORDER_ID']) ?></span></td>
+                                                <td><span><?= htmlspecialchars($order['ORDER_ADDRESS']) ?></span></td>
+                                                <td><span><?= htmlspecialchars($order['ORDER_DATE']) ?></span></td>
+                                                <td><span><?= htmlspecialchars($order['ORDER_STATUS'] == 0 ? 'Chờ xác nhận' : ($order['ORDER_STATUS'] == 1 ? 'Đang giao' : ($order['ORDER_STATUS'] == 2 ? 'Hủy' : 'Đã nhận hàng'))) ?></span></td>
+                                                <td><span><?= htmlspecialchars(format_money($order['TOTAL_PRICE'])) ?></span></td>
+                                                <td>
+                                                    <a target="_blank" href="/shop/orders/<?= htmlspecialchars($order['ORDER_ID']) ?>">
+                                                        <i class="fa-regular fa-eye font-weight-bold" style="font-size: 24px"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

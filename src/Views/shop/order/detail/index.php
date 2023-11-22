@@ -10,9 +10,13 @@
     background: #000;
     color: #fff;
   }
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
 </style>
 
-<div class="content" style="min-height: 100vh;">
+<div class="content" style="min-height: 100vh; min-width: 500px; max-width: 100vw;">
   <div class="animated fadeIn">
     <?php if (!empty($orders)) : ?>
       <div class="row">
@@ -25,61 +29,69 @@
             <div class="card-header">
               <strong class="card-title">Chi tiết đơn hàng</strong>
             </div>
-            <div class="table-stats order-table ov-h">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>STT</th>
-                    <th>Hình ảnh</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $totalPrice = 0;
-                  foreach ($orders as $index => $order) : ?>
-                    <?php $totalPrice += ($order['origin_price'] - $order['origin_price'] * $order['sale'] / 100) * $order['quantity'] ?>
-                    <tr class="order" data-order_id="<?= htmlspecialchars($order['order_id']) ?>">
-                      <td>
-                        <span><?= htmlspecialchars($index + 1) ?></span>
-                      </td>
-                      <td>
-                        <div class="round-img">
-                          <a target="_blank" href="/shop/products/edit/<?= htmlspecialchars($order['product_id']) ?>">
-                            <img src="<?= htmlspecialchars($order['thumbnail']) ?>" alt="" />
-                          </a>
-                        </div>
-                      </td>
-                      <td>
-                        <a target="_blank" href="/shop/products/edit/<?= htmlspecialchars($order['product_id']) ?>" class="name"><?= htmlspecialchars($order['name']) ?></a>
-                      </td>
-                      <td><span class="price"><?= htmlspecialchars(format_money($order['origin_price'] - $order['origin_price'] * $order['sale'] / 100)) ?></span></td>
-                      <td class="text-center">
-                        <span><?= htmlspecialchars($order['quantity']) ?></span>
-                      </td>
-                      <td>
-                        <span class="name" style="font-weight: 800;"><?= htmlspecialchars(format_money(($order['origin_price'] - $order['origin_price'] * $order['sale'] / 100) * $order['quantity'])) ?></span>
-                      </td>
+            <div style="overflow-x: scroll;">
+              <div class="table-stats order-table ov-h" style="min-width: 1000px;">
+                <table class="table" style="white-space: nowrap">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Hình ảnh</th>
+                      <th>Tên sản phẩm</th>
+                      <th>Giá</th>
+                      <th>Số lượng</th>
+                      <th>Thành tiền</th>
                     </tr>
-                  <?php endforeach ?>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    <?php $totalPrice = 0;
+                    foreach ($orders as $index => $order) : ?>
+                      <?php $totalPrice += ($order['origin_price'] - $order['origin_price'] * $order['sale'] / 100) * $order['quantity'] ?>
+                      <tr class="order" data-order_id="<?= htmlspecialchars($order['order_id']) ?>">
+                        <td>
+                          <span><?= htmlspecialchars($index + 1) ?></span>
+                        </td>
+                        <td>
+                          <div class="round-img">
+                            <a target="_blank" href="/shop/products/edit/<?= htmlspecialchars($order['product_id']) ?>">
+                              <img src="<?= htmlspecialchars($order['thumbnail']) ?>" alt="" />
+                            </a>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="text-truncate name" style="max-width: 400px; width: 400px;">
+                            <a target="_blank" href="/shop/products/edit/<?= htmlspecialchars($order['product_id']) ?>" href="">
+                              <?= htmlspecialchars($order['name']) ?>
+                            </a>
+                          </div>
+                        </td>
+                        <td><span class="price"><?= htmlspecialchars(format_money($order['origin_price'] - $order['origin_price'] * $order['sale'] / 100)) ?></span></td>
+                        <td class="text-center">
+                          <span><?= htmlspecialchars($order['quantity']) ?></span>
+                        </td>
+                        <td>
+                          <span class="name" style="font-weight: 800;"><?= htmlspecialchars(format_money(($order['origin_price'] - $order['origin_price'] * $order['sale'] / 100) * $order['quantity'])) ?></span>
+                        </td>
+                      </tr>
+                    <?php endforeach ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
           <?php if (!empty($orders)) : ?>
             <div class="d-flex justify-content-end mx-2 bg-white">
               <p class="mb-0 p-3 text-dark mx-5">
-                Đơn vị vận chuyển:
-                <span class="text-capitalize" style="font-weight: 800;">
+                <span style="white-space: nowrap">
+                  Đơn vị vận chuyển:
+                </span>
+                <span class="text-capitalize" style="font-weight: 800; white-space: nowrap">
                   <?= htmlspecialchars($orders[0]['delivery_name']) ?>
                   (<?= htmlspecialchars($orders[0]['delivery_id']) ?>)
                 </span>
               </p>
               <p class="mb-0 p-3 text-dark">
-                Phí vận chuyển:
+                <span style="white-space: nowrap">Phí vận chuyển:</span>
                 <span style="font-weight: 800;">
                   <?= htmlspecialchars(format_money($orders[0]['delivery_amount'])) ?>
                 </span>

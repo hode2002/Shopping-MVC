@@ -10,6 +10,10 @@
   select {
     box-shadow: none !important;
   }
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
 </style>
 
 <div class="content" style="min-height: 100vh;">
@@ -45,7 +49,7 @@
                   <label for="category" class="form-control-label"> Danh mục </label>
                 </div>
                 <div class="col-12 col-md-9">
-                  <select class="form-select form-control" id="category" name="category">
+                  <select class="form-select form-control" style="width: max-content;" id="category" name="category">
                     <option value="" selected>Chọn danh mục</option>
                     <option value="1">Xe máy</option>
                     <option value="2">Ba lô</option>

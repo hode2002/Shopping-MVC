@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="CT467 - Project" />
+    <meta name="description" content="CT271 - Project" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/imgs/favicon/apple-touch-icon.png" />
@@ -170,7 +170,7 @@
     <div id="right-panel" class="right-panel">
         <!-- Header-->
         <header id="header" class="header">
-            <div class="top-left " style="width: 19%;">
+            <div class="top-left ">
                 <div class="navbar-header d-flex justify-content-between" style="width: 100%;">
                     <a class="navbar-brand " href="./" style="display: inline; color: #09c496;    font-weight: bold;">MANAGE</a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
