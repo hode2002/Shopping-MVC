@@ -1,10 +1,10 @@
 <?php include_once VIEWS_DIR . "/shop/partials/header/index.php" ?>
+
 <style>
   .btn-add:hover {
     opacity: 0.8;
   }
 </style>
-
 
 <?php if (empty($products)) : ?>
   <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh">
