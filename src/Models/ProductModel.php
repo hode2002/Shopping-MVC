@@ -6,10 +6,41 @@ use PDO;
 
 class ProductModel
 {
+    public function getByStatus($status)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT p.*, s.name SHOP_NAME, s.id SHOP_ID
+                FROM products p 
+                JOIN shops s 
+                ON s.id = p.shop_id
+                WHERE p.status = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$status]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
     public function getAll()
     {
         include SRC_DIR . '/config.php';
         $sql = "SELECT * FROM products WHERE status = 1 LIMIT 12";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+    public function getAllUnLimit()
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT p.*, s.name SHOP_NAME, s.id SHOP_ID, c.name CATE_NAME
+                FROM products p 
+                JOIN shops s 
+                ON s.id = p.shop_id
+                JOIN categories c 
+                ON p.cate_id = c.id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -143,6 +174,16 @@ class ProductModel
             }
             return true;
         }
+        return false;
+    }
+
+    public function updateStatus($shopId, $productId, $status)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "UPDATE products SET status=? WHERE id=? AND shop_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$status, $productId, $shopId]);
+
         return false;
     }
 

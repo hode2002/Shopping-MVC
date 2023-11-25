@@ -105,6 +105,86 @@ class OrderModel
         return $data;
     }
 
+    public function getAllByAdmin()
+    {
+        include SRC_DIR . '/config.php';
+
+        $sql = "SELECT id, status, total FROM orders ORDER BY id DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($results)) {
+            return [];
+        }
+
+        $data = [];
+
+        foreach ($results as $item) {
+            $sql = "SELECT p.id, p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.price, o_detail.quantity, s.name shop_name
+                    FROM orders o JOIN order_detail o_detail
+                    ON o.id = o_detail.order_id
+                    JOIN products p ON p.id = o_detail.product_id
+                    JOIN shops s ON s.id = p.shop_id
+                    WHERE o.id = ?";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$item['id']]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $arrTmp = [
+                'id' => $item['id'],
+                'status' => $item['status'],
+                'total' => $item['total'],
+                'products' => $result
+            ];
+
+            array_push($data, $arrTmp);
+        }
+
+        return $data;
+    }
+
+    public function getByStatus($status)
+    {
+        include SRC_DIR . '/config.php';
+
+        $sql = "SELECT id, status, total FROM orders WHERE status = ? ORDER BY id DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$status]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($results)) {
+            return [];
+        }
+
+        $data = [];
+
+        foreach ($results as $item) {
+            $sql = "SELECT p.id, p.thumbnail, p.name, p.price origin_price, p.sale, o_detail.price, o_detail.quantity, s.name shop_name
+                    FROM orders o JOIN order_detail o_detail
+                    ON o.id = o_detail.order_id
+                    JOIN products p ON p.id = o_detail.product_id
+                    JOIN shops s ON s.id = p.shop_id
+                    WHERE o.id = ?";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$item['id']]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $arrTmp = [
+                'id' => $item['id'],
+                'status' => $item['status'],
+                'total' => $item['total'],
+                'products' => $result
+            ];
+
+            array_push($data, $arrTmp);
+        }
+
+        return $data;
+    }
+
     public function getOrderByStatus($userId, $status)
     {
         include SRC_DIR . '/config.php';

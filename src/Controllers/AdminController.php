@@ -6,165 +6,195 @@ class AdminController
 {
     public function index()
     {
-        if (!isAdmin()) {
-            $title = 'Lỗi';
-            require_once VIEWS_DIR . '/errors/404.php';
-            exit;
-        };
-        $BookModel = new \App\Models\ProductModel();
-        $books = $BookModel->getAllNoLimit();
-        $title = 'Admin';
-        require_once VIEWS_DIR . '/admin/index.php';
-    }
-
-    public function getAdd()
-    {
-        if (!isAdmin()) {
-            $title = 'Lỗi';
-            require_once VIEWS_DIR . '/errors/404.php';
-            exit;
-        };
-        $title = 'Admin | Thêm';
-        require_once VIEWS_DIR . '/admin/add/index.php';
-    }
-
-    public function postAdd()
-    {
         try {
+            require_once SRC_DIR . '/config.php';
+
+            $UserModel = new \App\Models\UserModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
             if (!isAdmin()) {
                 $title = 'Lỗi';
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
 
-            require_once SRC_DIR . '/config.php';
-            $BookModel = new \App\Models\ProductModel();
+            $title = 'Admin';
 
-            if (!isset($_POST['book'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập thông tin sản phẩm");
-            }
-            $book = json_decode($_POST['book'], true);
+            $ProductModel = new \App\Models\ProductModel();
+            $ContactModel = new \App\Models\ContactModel();
+            $OrderModel = new \App\Models\OrderModel();
+            $ShopModel = new \App\Models\ShopModel();
 
-            if (!isset($book['name'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập tên sản phẩm");
-            }
+            $allUsers = $UserModel->getAllUsers();
+            $countUser = count($allUsers);
 
-            if (!isset($book['price'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập giá bán");
-            }
+            $allOrders = $OrderModel->getAllByAdmin();
+            $countOrder = count($allOrders);
 
-            if (!isset($book['sale'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập giá sale");
-            }
+            $allOrderCancel = $OrderModel->getByStatus(status: 2);
+            $countOrderCancel = count($allOrderCancel);
 
-            if (!isset($book['author'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập tên tác giả");
-            }
+            $allShops = $ShopModel->getByStatus(status: 1);
+            $countShop = count($allShops);
 
-            if (!isset($book['description'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập mô tả sản phẩm");
-            }
+            $allRegisterShop = $ShopModel->getByStatus(status: 0);
 
-            $img = handle_img_upload('img');
-            if (!isset($img)) {
-                JsonResponse(error: 1, message: "Lỗi ảnh bìa");
-            }
-            $book['img'] = $img;
+            $allProducts = $ProductModel->getByStatus(status: 1);
+            $countProduct = count($allProducts);
 
-            $imgs = handle_img_upload('imgs', isMultiple: true);
-            if (!isset($imgs)) {
-                JsonResponse(error: 1, message: "Lỗi ảnh hình ảnh khác");
-            }
-            $book['imgs'] = $imgs;
+            $allPostProducts = $ProductModel->getByStatus(status: 0);
+            $countPostProduct = count($allPostProducts);
 
-            $isSuccess = $BookModel->create($book);
-            if (!isset($isSuccess)) {
-                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
-            }
+            $productsDelivery = $OrderModel->getByStatus(status: 1);
+            $countProductsDelivery = count($productsDelivery);
 
-            JsonResponse(error: 0, message: "Thêm thành công");
+            $allContacts = $ContactModel->getAll();
+            $countContact = count($allContacts);
+
+            require_once VIEWS_DIR . '/admin/index.php';
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getEdit($id)
-    {
-        if (!isAdmin()) {
-            $title = 'Lỗi';
-            require_once VIEWS_DIR . '/errors/404.php';
-            exit;
-        };
-        $BookModel = new \App\Models\ProductModel();
-        $book = $BookModel->getById($id);
-        $title = 'Admin | Chỉnh Sửa';
-        require_once VIEWS_DIR . '/admin/edit/index.php';
-    }
-
-    public function postEdit()
+    public function getUsers()
     {
         try {
+            require_once SRC_DIR . '/config.php';
+
+            $UserModel = new \App\Models\UserModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
             if (!isAdmin()) {
                 $title = 'Lỗi';
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
 
+            $title = 'Admin | Danh sách sản phẩm';
+
+            $allUsers = $UserModel->getAllUsers();
+
+            require_once VIEWS_DIR . '/admin/user/index.php';
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProducts()
+    {
+        try {
             require_once SRC_DIR . '/config.php';
-            $BookModel = new \App\Models\ProductModel();
 
-            if (!isset($_POST['book'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập thông tin sản phẩm");
+            $UserModel = new \App\Models\UserModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
             }
-            $book = json_decode($_POST['book'], true);
+            $email = htmlspecialchars($_SESSION["email"]);
 
-            if (!isset($book['book_id'])) {
+            $user = $UserModel->getByEmail($email);
+
+            if (!isAdmin()) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            $title = 'Admin || Danh sách sản phẩm';
+
+            $ProductModel = new \App\Models\ProductModel();
+
+            $allProducts = $ProductModel->getAllUnLimit();
+
+            require_once VIEWS_DIR . '/admin/product/index.php';
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getShops()
+    {
+        try {
+            require_once SRC_DIR . '/config.php';
+
+            $UserModel = new \App\Models\UserModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
+            if (!isAdmin()) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            $title = 'Admin || Danh sách cửa hàng';
+
+            $ShopModel = new \App\Models\ShopModel();
+
+            $allShops = $ShopModel->getAll();
+
+            require_once VIEWS_DIR . '/admin/shop/index.php';
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function postProductApprove()
+    {
+        try {
+            require_once SRC_DIR . '/config.php';
+
+            $UserModel = new \App\Models\UserModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
+            if (!isAdmin()) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            $ProductModel = new \App\Models\ProductModel();
+
+            if (!isset($_POST['productId'])) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
             }
+            $productId = htmlspecialchars($_POST['productId']);
 
-            if (!isset($book['name'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập tên sản phẩm");
+            if (!isset($_POST['shopId'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
             }
+            $shopId = htmlspecialchars($_POST['shopId']);
 
-            if (!isset($book['price'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập giá bán");
+            if (!isset($_POST['status'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
             }
+            $status = htmlspecialchars($_POST['status']);
 
-            if (!isset($book['sale'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập giá sale");
-            }
-
-            if (!isset($book['author'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập tên tác giả");
-            }
-
-            if (!isset($book['description'])) {
-                JsonResponse(error: 1, message: "Vui lòng nhập mô tả sản phẩm");
-            }
-
-            $oldBook = $BookModel->getById($book['book_id']);
-
-            $img = handle_img_upload('img');
-            if (empty($img)) {
-                $fileName = extractFileNameFromUrl($oldBook['anh_bia']);
-                $book['img'] = $fileName;
-            } else {
-                $book['img'] = $img;
-                $fileName = extractFileNameFromUrl($oldBook['anh_bia']);
-                remove_img_file($fileName);
-            }
-
-            $imgs = handle_img_upload('imgs', isMultiple: true);
-            if (!empty($imgs)) {
-                foreach ($oldBook['imgs'] as $item) {
-                    $fileName = extractFileNameFromUrl($item['hinh_anh']);
-                    remove_img_file($fileName);
-                }
-                $BookModel->deleteBookImgs($book['book_id']);
-                $book['imgs'] = $imgs;
-            }
-
-            $isSuccess = $BookModel->update($book);
+            $isSuccess = $ProductModel->updateStatus($shopId, $productId, $status);
             if (!isset($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
             }
@@ -175,85 +205,46 @@ class AdminController
         }
     }
 
-    public function postDelete($id)
+    public function postShopApprove()
     {
-        $BookModel = new \App\Models\ProductModel();
+        try {
+            require_once SRC_DIR . '/config.php';
 
-        $oldBook = $BookModel->getById($id);
-        if (empty($oldBook)) {
-            JsonResponse(error: 1, message: "Sản phẩm không tồn tại hoặc đã bị xóa");
+            $UserModel = new \App\Models\UserModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
+            if (!isAdmin()) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            $ShopModel = new \App\Models\ShopModel();
+
+            if (!isset($_POST['shopId'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+            $shopId = htmlspecialchars($_POST['shopId']);
+
+            if (!isset($_POST['status'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+            $status = htmlspecialchars($_POST['status']);
+
+            $isSuccess = $ShopModel->updateStatus($shopId, $status);
+            if (!isset($isSuccess)) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+
+            JsonResponse(error: 0, message: "Đã duyệt");
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
         }
-
-        foreach ($oldBook['imgs'] as $item) {
-            $fileName = extractFileNameFromUrl($item['hinh_anh']);
-            remove_img_file($fileName);
-        }
-
-        $isSuccess = $BookModel->delete($id);
-
-        $fileName = extractFileNameFromUrl($oldBook['anh_bia']);
-        if ($isSuccess && empty($fileName)) {
-            JsonResponse(error: 1, message: "Xóa sản phẩm thành công");
-        }
-        remove_img_file($fileName);
-
-        if (!$isSuccess) {
-            JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau.");
-        }
-
-        JsonResponse(error: 0, message: "Xóa sản phẩm thành công");
-    }
-
-    public function getOrder()
-    {
-        if (!isAdmin()) {
-            $title = 'Lỗi';
-            require_once VIEWS_DIR . '/errors/404.php';
-            exit;
-        };
-        $CheckoutModel = new \App\Models\CheckoutModel();
-
-        $orders = $CheckoutModel->getOrdersInfo();
-        $title = 'Admin';
-        require_once VIEWS_DIR . '/admin/order/index.php';
-    }
-
-    public function getOrderDetail($orderId)
-    {
-        if (!isAdmin()) {
-            $title = 'Lỗi';
-            require_once VIEWS_DIR . '/errors/404.php';
-            exit;
-        };
-        $CheckoutModel = new \App\Models\CheckoutModel();
-
-        $results = $CheckoutModel->getOrderDetail($orderId);
-        $title = 'Admin | Chi Tiết Đơn Hàng';
-        require_once VIEWS_DIR . '/admin/order/detail/index.php';
-    }
-
-
-    public function postOrderUpdate()
-    {
-        if (!isset($_POST['id']) || !isset($_POST['status'])) {
-            JsonResponse(error: 1, message: "Thiếu thông tin");
-        }
-        $id = htmlspecialchars($_POST['id']);
-        $status = htmlspecialchars($_POST['status']);
-
-        $CheckoutModel = new \App\Models\CheckoutModel();
-
-        $order = $CheckoutModel->getById($id);
-        if (empty($order)) {
-            JsonResponse(error: 1, message: "Đơn hàng không tồn tại, Vui lòng kiểm tra lại");
-        }
-
-        $isSuccess = $CheckoutModel->updateStatus($id, $status);
-
-        if (!$isSuccess) {
-            JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau.");
-        }
-
-        JsonResponse(error: 0, message: "Cập nhật thành công");
     }
 }

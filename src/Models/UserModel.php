@@ -6,6 +6,17 @@ use PDO;
 
 class UserModel
 {
+    public function getAllUsers()
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT * FROM users WHERE role_code <> 'R3'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
     public function getByEmail($email)
     {
         include SRC_DIR . '/config.php';

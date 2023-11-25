@@ -67,15 +67,13 @@ class ShopController
 
             $isExistStore = $ShopModel->getByUserId($userId);
             if (!empty($isExistStore)) {
-                JsonResponse(error: 1, message: "Bạn đã mở shop rồi!");
+                JsonResponse(error: 1, message: "Bạn đã đăng ký mở cửa hàng. Vui lòng chờ admin xét duyệt");
             }
 
             $ShopModel->openStore($userId);
             $UserModel->updateRole($userId, roleCode: "R2");
 
-            $_SESSION['role'] = 'R2';
-
-            JsonResponse(error: 0, message: "Đăng ký mở shop thành công!");
+            JsonResponse(error: 0, message: "Đăng ký thành công. Vui lòng chờ admin xét duyệt");
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

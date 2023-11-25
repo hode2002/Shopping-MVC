@@ -25,4 +25,15 @@ class ContactModel
 
         return $result;
     }
+
+    public function getAll()
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT * FROM contacts";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
 }
