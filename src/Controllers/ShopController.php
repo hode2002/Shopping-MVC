@@ -124,14 +124,13 @@ class ShopController
                 redirect('/login');
             }
             $email = htmlspecialchars($_SESSION["email"]);
+            $user = $UserModel->getByEmail($email);
 
             if (!(isAdmin() || isShop())) {
                 $title = 'Lỗi';
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             };
-
-            $user = $UserModel->getByEmail($email);
 
             require_once VIEWS_DIR . '/shop/product/add/index.php';
         } catch (\PDOException $e) {
