@@ -202,7 +202,7 @@
                                 <ul id="dropdown-menu" class="dropdown-menu text-white">
                                     <li><a class="dropdown-item" href="/profile">Tài khoản</a></li>
                                     <li><a class="dropdown-item" href="/purchase">Đơn mua</a></li>
-                                    <?= (isset($_SESSION['role']) && ((int) $_SESSION['role'] === 'R3'))
+                                    <?= (isset($_SESSION['role']) && ($_SESSION['role'] == 'R3'))
                                         ? '<li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>'
                                         : '';
                                     ?>
