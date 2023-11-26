@@ -22,35 +22,24 @@
 
 <main class="bg-light py-5">
     <div class="container bg-white">
-        <section class="">
+        <section class="product" data-product_id="<?= htmlspecialchars($product['id']) ?>">
             <div class="row pt-2">
-                <div class="col-lg-6">
-                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" data-bs-interval="2000">
-                                <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="d-block w-100" alt="...">
-                            </div>
-                            <?php foreach ($product['imgs'] as $item) : ?>
-                                <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="<?= htmlspecialchars($item['image_url']) ?>" class="d-block w-100" alt="...">
-                                </div>
-                            <?php endforeach ?>
-                        </div>
-                        <button class="slick-prev slick-arrows pull-left fa fa-angle-left" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon text-dark" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="slick-next slick-arrows pull-right fa fa-angle-right" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                <div class="col-md-6 py-5">
+                    <div class="d-flex justify-content-center">
+                        <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="main-img img d-block w-75" alt="...">
+                    </div>
+                    <div class="d-flex image-slider overflow-hidden mt-2">
+                        <?php foreach ($product['imgs'] as $item) : ?>
+                            <img src="<?= htmlspecialchars($item['image_url']) ?>" class="sub-img d-block" width="106" height="106" alt="...">
+                        <?php endforeach ?>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 p-5">
                     <div class="ps-lg-3">
-                        <h4 class="title text-dark">
+                        <h4 class="title text-dark name">
                             <?= htmlspecialchars($product['name']) ?>
                         </h4>
+
                         <div class="d-flex flex-row my-3">
                             <div class="text-warning mb-1 me-2">
                                 <i class="fa fa-star"></i>
@@ -67,15 +56,16 @@
                                 100K Đã Bán</span>
                         </div>
 
-                        <div class="mb-3">
-                            <span class="h2"><?= htmlspecialchars(format_money($product['price'])) ?></span>
+                        <div class="mb-3 d-flex gap-4">
+                            <span class="h2 text-black-50 unit-price text-decoration-line-through"><?= htmlspecialchars(format_money($product['price'])) ?></span>
+                            <span class="h2 price"><?= htmlspecialchars(format_money($product['price'] - $product['price'] * $product['sale'] / 100)) ?></span>
                         </div>
 
                         <p class="text-truncate">
                             <?= htmlspecialchars($product['description']) ?>
                         </p>
 
-                        <div class=" row">
+                        <div class="row">
                             <dt class="col-3">Danh mục: </dt>
                             <dd class="col-9"><?= htmlspecialchars($product['cate_name']) ?></dd>
 
@@ -95,12 +85,16 @@
                                 <p><strong>Số lượng: </strong></p>
                             </div>
                             <div class="col-md-8 col-7">
-                                <input type="number" step="1" min="1" max="100" value="1" name="quantity" class="quantity-field border rounded  text-center w-25">
+                                <input type="number" step="1" min="1" max="100" value="1" name="quantity" class="quantity quantity-field border rounded text-center w-25">
                             </div>
                         </div>
-                        <div class="my-2 d-block">
-                            <button href="#" class="button text-white rounded text-decoration-none border-0" style=" padding: 15px 65px; background-color: #D10024;">Mua Ngay</button>
-                            <button href="#" class="button text-white rounded text-decoration-none border-0" style=" padding: 15px 32px; background-color: #D10024;">
+
+                        <div class="my-2 d-flex justify-content-around bottom-0">
+                            <button href="#" class="add-to-cart buy-now button text-white rounded text-decoration-none border-0" style="min-width: 200px; padding: 10px 65px; background-color: #D10024;">
+                                <span hidden class="no-alert"></span>
+                                Mua Ngay
+                            </button>
+                            <button href="#" class="add-to-cart button text-white rounded text-decoration-none border-0" style="min-width: 200px; padding: 10px 32px; background-color: #D10024;">
                                 &nbsp;&nbsp;<i class="fa-solid fa-cart-plus fa-lg text-decoration-none"></i>&nbsp;&nbsp;</button>
                         </div>
 
@@ -130,6 +124,7 @@
                                 <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3" role="tab" aria-controls="ex1-pills-3" aria-selected="false">Chính sách đổi trả</a>
                             </li>
                         </ul>
+
                         <div class="tab-content" id="ex1-content">
                             <!-- Đánh Giá  -->
                             <div class="tab-pane fade mb-2 show active" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
@@ -318,7 +313,7 @@
                                     <div class="row p-3">
                                         <?php foreach ($recommend as $product) : ?>
 
-                                            <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 py-2">
+                                            <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 pb-5 pt-2">
                                                 <div class="card" style="width: 11rem">
                                                     <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="card-img-top p-2" alt="product" />
                                                     <div class="card-body p-2">
@@ -346,6 +341,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 </main>
 
@@ -353,6 +350,33 @@
 
 <script>
     $(() => {
+        const convertPriceToNumber = (price) => {
+            const result = price.replace(/\D/g, '');
+            return Number(result);
+        }
+
+        $('img.sub-img').each(function() {
+            $(this).on('click', function() {
+                const img = $(this).prop("src");
+                $('.main-img').prop("src", img);
+            })
+        })
+
+        $('.buy-now').on('click', function() {
+            const product = $(this).closest('.product');
+            const productId = product[0]?.dataset.product_id;
+            const quantity = product.find('input.quantity').val() || 1;
+
+            const item = {
+                id: productId,
+                name: $.trim(product.find('.name').text()),
+                img: product.find('.main-img').prop('src'),
+                quantity,
+                price: convertPriceToNumber(product.find('.unit-price').text()),
+            }
+            window.localStorage.setItem('checkout_products', JSON.stringify([item]))
+        })
+
         const postAjax = (url, data = [], isDelete = false, comment = {}) => {
             $.ajax({
                 url,

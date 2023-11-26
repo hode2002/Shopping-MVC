@@ -220,12 +220,13 @@
         $('.add-to-cart').each(function() {
             $(this).on('click', function() {
                 const product = $(this).closest('.product');
-                const productId = product[0].dataset.product_id;
+                const productId = product[0]?.dataset.product_id;
+                const quantity = product.find('input.quantity').val() || 1;
 
                 const formData = new FormData();
 
                 formData.append('productId', productId);
-                formData.append('quantity', 1);
+                formData.append('quantity', quantity);
 
                 fetch('/cart', {
                         method: 'POST',
@@ -254,7 +255,7 @@
                             const itemId = $(this).prop('href').split('/')[4];
 
                             if (itemId === productId) {
-                                $(this).find('.quantity').html(Number($(this).find('.quantity').text()) + 1);
+                                $(this).find('.quantity').html(Number($(this).find('.quantity').text()) + Number(quantity));
                                 isExist = true;
                             }
                         })
@@ -277,7 +278,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>                       
+                            </a>
                         `;
 
                         if (!isExist) {

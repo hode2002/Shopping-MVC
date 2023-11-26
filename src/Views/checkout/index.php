@@ -56,9 +56,9 @@
                                 <p>Nhận hàng vào <span class="estimate-date fw-semibold">...</span> </p>
                             </div>
 
-                            <div class="d-flex align-items-center p-2 rounded" style="border: 1px solid #15161d">
-                                <input type="radio" id="payment-cod" />
-                                <span><label for="payment-cod">Thanh toán khi nhận hàng</label></span>
+                            <div class="d-flex align-items-center p-2 rounded" style="border: 1px solid #ccc">
+                                <input type="radio" id="payment-cod" checked />
+                                <span><label for="payment-cod" class="ms-2">Thanh toán khi nhận hàng</label></span>
                             </div>
                         </div>
                     </div>

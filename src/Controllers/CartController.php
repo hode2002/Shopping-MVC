@@ -9,6 +9,8 @@ class CartController
         try {
             $UserModel = new \App\Models\UserModel();
             $CartModel = new \App\Models\CartModel();
+            $ProductModel = new \App\Models\ProductModel();
+
             $title = 'Giỏ Hàng';
 
             if (!isset($_SESSION['email'])) {
@@ -18,6 +20,8 @@ class CartController
             $email = $_SESSION['email'];
             $user = $UserModel->getByEmail($email);
             $userId = $user['id'];
+
+            $recommends = $ProductModel->getRandom();
 
             $cartList = $CartModel->getList($userId);
             if (empty($cartList)) {
