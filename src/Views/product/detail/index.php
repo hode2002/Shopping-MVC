@@ -71,11 +71,11 @@
                             <span class="h2"><?= htmlspecialchars(format_money($product['price'])) ?></span>
                         </div>
 
-                        <p>
+                        <p class="text-truncate">
                             <?= htmlspecialchars($product['description']) ?>
                         </p>
 
-                        <div class="row">
+                        <div class=" row">
                             <dt class="col-3">Danh mục: </dt>
                             <dd class="col-9"><?= htmlspecialchars($product['cate_name']) ?></dd>
 
@@ -118,7 +118,10 @@
 
                         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                             <li class="nav-item d-flex" role="presentation">
-                                <a class="nav-link d-flex align-items-center justify-content-center w-100 active bg" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Mô tả sản phâm</a>
+                                <a class="nav-link d-flex align-items-center justify-content-center w-100 active bg" id="ex1-tab-4" data-mdb-toggle="pill" href="#ex1-pills-4" role="tab" aria-controls="ex1-pills-4" aria-selected="true">Đánh giá</a>
+                            </li>
+                            <li class="nav-item d-flex" role="presentation">
+                                <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="false">Mô tả sản phâm</a>
                             </li>
                             <li class="nav-item d-flex" role="presentation">
                                 <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2" role="tab" aria-controls="ex1-pills-2" aria-selected="false">Thông tin vận chuyển</a>
@@ -126,13 +129,59 @@
                             <li class="nav-item d-flex" role="presentation">
                                 <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3" role="tab" aria-controls="ex1-pills-3" aria-selected="false">Chính sách đổi trả</a>
                             </li>
-                            <li class="nav-item d-flex" role="presentation">
-                                <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-4" data-mdb-toggle="pill" href="#ex1-pills-4" role="tab" aria-controls="ex1-pills-4" aria-selected="false">Đánh giá</a>
-                            </li>
                         </ul>
-
                         <div class="tab-content" id="ex1-content">
-                            <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                            <!-- Đánh Giá  -->
+                            <div class="tab-pane fade mb-2 show active" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+
+                                <div class="container my-3 pt-3 bg-white">
+                                    <h4>Đánh Giá</h4>
+                                    <!-- Tỉ lệ  -->
+
+                                    <?php if (isset($_SESSION['email'])) : ?>
+                                        <div class="py-5 input-group mb-3 post-comment z-1" data-user_id="<?= htmlspecialchars($user['id']) ?>" data-product_id="<?= htmlspecialchars($product['id']) ?>">
+                                            <input type="text" class="px-3 py-2 form-control content" placeholder="Bình luận gì đó..." style="box-shadow: none">
+                                            <button class="btn btn-outline-danger btn-comment-create" type="button">Đăng</button>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="row pt-4 border comment-list">
+                                        <?php foreach ($comments as $comment) : ?>
+                                            <div class="p-5 mb-2 comment" data-product_id="<?= htmlspecialchars($product['id']) ?>" data-comment_id="<?= htmlspecialchars($comment['id']) ?>">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex">
+                                                        <img src="<?= htmlspecialchars($comment['avatar']) ?>" height="50" width="50" class="rounded-circle">
+                                                        <div class="ms-3 comment-left">
+                                                            <h6 class="text-primary"><?= htmlspecialchars($comment['name'] ?? $comment['email']) ?></h6>
+                                                            <p class="comment-text"><?= htmlspecialchars($comment['content']) ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <?php if (isset($_SESSION['email']) && htmlspecialchars($comment['email']) === $_SESSION['email']) : ?>
+                                                        <div class="d-flex gap-2 comment-right">
+                                                            <p class="mb-0 btn-comment-edit text-decoration-none me-2 text-danger" style="cursor: pointer;">Chỉnh sửa</p>
+                                                            <p class="mb-0 btn-comment-post-update text-decoration-none me-2 text-danger d-none" style="cursor: pointer;">Lưu</p>
+                                                            <p class="mb-0 btn-comment-delete text-decoration-none mb-0 text-danger" style="cursor: pointer;">Xóa</p>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row gap-3 align-items-center">
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <span class="text-muted fw-normal">
+                                                            <?= htmlspecialchars($comment['updated_at']) ?>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        <?php endforeach ?>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Mô tả sản phẩm -->
+                            <div class="tab-pane fade" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                                 <p>
                                     <?= htmlspecialchars($product['description']) ?>
                                 </p>
@@ -259,175 +308,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-
-                            <!-- Đánh Giá  -->
-                            <div class="tab-pane fade mb-2" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-
-                                <div class="container my-3 pt-3 bg-white">
-                                    <h4>Đánh giá sản phẩm</h4>
-                                    <!-- Tỉ lệ  -->
-                                    <div class="row pt-4">
-                                        <div class="col-md-6 ">
-                                            <div>
-                                                <span style="font-size: 60px;">4.5/</span><span style="font-size: 30px;">5
-                                                    &nbsp;</span>
-
-                                                <span class="text-warning">
-                                                    <i class="fa-solid fa-star fa-lg"></i>
-                                                    <i class="fa-solid fa-star fa-lg"></i>
-                                                    <i class="fa-solid fa-star fa-lg"></i>
-                                                    <i class="fa-solid fa-star fa-lg"></i>
-                                                    <i class="fa-solid fa-star fa-lg"></i></span>
-                                            </div>
-                                            <i>
-                                                Đây là thông tin người mua đánh giá shop bán sản phẩm này có đúng mô
-                                                tả không.
-                                            </i>
-                                        </div>
-
-
-                                        <div class="col-md-6 ">
-                                            <div class="row">
-                                                <div class="col-md-4 col-5 my-2 pt-1">
-                                                    <!-- 5 -->
-                                                    <div class="text-warning pt-1">
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                    </div>
-                                                    <!-- 4 -->
-                                                    <div class="text-warning pt-1">
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    </div>
-                                                    <!-- 3 -->
-                                                    <div class="text-warning pt-1">
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    </div>
-                                                    <!-- 2 -->
-                                                    <div class="text-warning pt-1">
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    </div>
-                                                    <!-- 1 -->
-                                                    <div class="text-warning pt-1">
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-7 my-2 pt-1">
-                                                    <div class="pt-1">
-                                                        <div class="progress my-1">
-                                                            <div class="progress-bar " style="width: 35%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pt-1">
-                                                        <div class="progress my-1">
-                                                            <div class="progress-bar " style="width: 35%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pt-1">
-                                                        <div class="progress my-1">
-                                                            <div class="progress-bar " style="width: 35%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pt-1">
-                                                        <div class="progress my-1">
-                                                            <div class="progress-bar " style="width: 35%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pt-1">
-                                                        <div class="progress my-1">
-                                                            <div class="progress-bar " style="width: 35%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Cm1 -->
-
-                                        <div class="p-5 mb-2">
-                                            <div class="d-flex flex-row">
-                                                <img src="/imgs/products/BongDa.png" height="50" width="50" class="rounded-circle">
-                                                <div class="ms-2">
-                                                    <h6 class="mb-1 text-primary">Luong Hai Dang</h6>
-                                                    <i class="text-warning fa fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <p class="comment-text my-3">Sản phẩm như l</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex flex-row gap-3 align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa-solid fa-thumbs-up"></i>
-                                                        <span class="ms-1 fs-10">Like</span>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="d-flex flex-row">
-                                                    <span class="text-muted fw-normal fs-10">29-10-2023
-                                                        PM</span>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="d-flex flex-row">
-                                                <img src="/imgs/products/BongDa.png" height="50" width="50" class="rounded-circle">
-                                                <div class="ms-2">
-                                                    <h6 class="mb-1 text-primary">Luong Hai Dang</h6>
-                                                    <i class="text-warning fa fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <i class="text-warning fa-regular fa-star fa-sm"></i>
-                                                    <p class="comment-text my-3">Sản phẩm như l</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex flex-row gap-3 align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fa-solid fa-thumbs-up"></i>
-                                                        <span class="ms-1 fs-10">Like</span>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="d-flex flex-row">
-                                                    <span class="text-muted fw-normal fs-10">29-10-2023
-                                                        PM</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- Pills content -->
                         </div>
                     </div>
                     <div class="col-lg-12 pt-3">
@@ -470,5 +350,74 @@
 </main>
 
 <script src="https://mdbootstrap.com/api/snippets/static/download/MDB5-Free_6.4.2/js/mdb.min.js"></script>
+
+<script>
+    $(() => {
+        const postAjax = (url, data = [], isDelete = false, comment = {}) => {
+            $.ajax({
+                url,
+                type: 'POST',
+                data,
+                success: function(res) {
+                    if (isDelete) {
+                        comment.remove();
+                        return;
+                    }
+
+                    window.location.reload();
+                },
+            })
+        }
+
+        $('.btn-comment-create').on('click', function() {
+            const comment = $(this).closest('.post-comment');
+            const productId = comment[0].dataset.product_id;
+            const content = comment.find('.content').val();
+
+            const data = {
+                productId,
+                content
+            }
+
+            postAjax('/products/comment', data);
+        })
+
+        $('.btn-comment-delete').on('click', function() {
+            const comment = $(this).closest('.comment');
+            const commentId = comment[0].dataset.comment_id;
+            const productId = comment[0].dataset.product_id;
+
+            const data = {
+                productId,
+                commentId
+            }
+
+            postAjax('/products/comment/delete', data, true, comment);
+        })
+
+        $('.btn-comment-edit').on('click', function() {
+            const comment = $(this).closest('.comment');
+            const commentId = comment[0].dataset.comment_id;
+            const productId = comment[0].dataset.product_id;
+            const content = comment.find('p.comment-text').text();
+
+            const input = `<input class="form-control comment-text" value="${content}" style="box-shadow: none;" />`;
+            comment.find('.comment-left').append(input);
+            comment.find('p.comment-text').remove();
+            $(this).addClass('d-none');
+            comment.find('.btn-comment-post-update').removeClass('d-none');
+
+            $('.btn-comment-post-update').on('click', function() {
+                const data = {
+                    commentId,
+                    productId,
+                    content: comment.find('input.comment-text').val(),
+                }
+
+                postAjax('/products/comment/update', data, false, comment);
+            })
+        })
+    })
+</script>
 
 <?php include_once VIEWS_DIR . "/partials/footer/index.php" ?>
