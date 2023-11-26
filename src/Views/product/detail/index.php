@@ -141,7 +141,7 @@
                                     <?php if (isset($_SESSION['email'])) : ?>
                                         <div class="py-5 input-group mb-3 post-comment z-1" data-user_id="<?= htmlspecialchars($user['id']) ?>" data-product_id="<?= htmlspecialchars($product['id']) ?>">
                                             <input type="text" class="px-3 py-2 form-control content" placeholder="Bình luận gì đó..." style="box-shadow: none">
-                                            <button class="btn btn-outline-danger btn-comment-create" type="button">Đăng</button>
+                                            <button class="button btn-outline-danger btn-comment-create rounded-end-2 text-white border-0" type="button" style="min-width: 120px; background-color: #D10024;">Đăng</button>
                                         </div>
                                     <?php endif; ?>
 
