@@ -242,7 +242,7 @@ class AdminController
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
             }
 
-            JsonResponse(error: 0, message: "Đã duyệt");
+            JsonResponse(error: 0, message: "Thành công");
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }

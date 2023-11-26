@@ -120,13 +120,13 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li class="<?= count(explode('/', $_SERVER['REQUEST_URI'])) === 2 ? 'active' : '' ?>">
                         <a href="/shop"><i class="menu-icon fa fa-laptop"></i>Dashboard
                         </a>
                     </li>
                     <li class="menu-title">Chức năng</li>
                     <!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown <?= str_contains($_SERVER['REQUEST_URI'], 'products') ? 'active' : '' ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa-brands fa-product-hunt"></i>Sản phẩm</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -138,7 +138,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown <?= str_contains($_SERVER['REQUEST_URI'], 'orders') ? 'active' : '' ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa fa-table"></i>Đơn hàng</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -147,7 +147,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown <?= str_contains($_SERVER['REQUEST_URI'], 'transports') ? 'active' : '' ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa-solid fa-truck"></i>
                             Vận chuyển

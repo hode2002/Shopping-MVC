@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-12 col-md-9">
                   <select class="form-select form-control" style="width: max-content;" id="category" name="category">
-                    <option value="" selected>Chọn danh mục</option>
+                    <option value="" disabled selected>Chọn danh mục</option>
                     <option value="1">Xe máy</option>
                     <option value="2">Ba lô</option>
                     <option value="3">Thể thao</option>

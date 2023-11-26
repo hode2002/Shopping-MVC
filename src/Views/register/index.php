@@ -27,16 +27,16 @@
             <form id="register_form" method="post" action="/register" class="mt-5">
               <div class="mb-3">
                 <label class="form-label ms-3" for="email">Email: </label>
-                <input value="admin@gmail.com" type="email" autocomplete="off" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fs-7 p-3" id="email" name="email" placeholder="Nhập vào email" />
+                <input type="email" autocomplete="off" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fs-7 p-3" id="email" name="email" placeholder="Nhập vào email" />
               </div>
               <div class="mb-3">
                 <label class="form-label ms-3">Mật khẩu</label>
-                <input value="11111" type="password" id="password" placeholder="Nhập vào mật khẩu" name="password" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fs-7 p-3" />
+                <input type="password" id="password" placeholder="Nhập vào mật khẩu" name="password" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fs-7 p-3" />
               </div>
               <div class="mb-3">
                 <label for="confirm_password" class="form-label ms-3">Nhập lại mật khẩu:
                 </label>
-                <input value="11111" type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fs-7 p-3" />
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fs-7 p-3" />
               </div>
               <div class="col text-center">
                 <button type="submit" class="btn-register btn btn-outline-dark btn-lg rounded-pill mt-4 w-100 bg-white">

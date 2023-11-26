@@ -67,10 +67,10 @@
 
                         <div class="tbl-product-width">
                             <div class="d-flex align-items-center">
-                                <img src=" <?= htmlspecialchars($item['thumbnail']) ?>" alt="" style="width: 80px; height: 80px;">
-                                <p class="text-truncate mx-4 mb-0 product-name">
+                                <a href="/product/<?= htmlspecialchars($item['product_id']) ?>"><img src=" <?= htmlspecialchars($item['thumbnail']) ?>" alt="" style="width: 80px; height: 80px;"></a>
+                                <a href="/product/<?= htmlspecialchars($item['product_id']) ?>" class="text-truncate text-decoration-none text-dark mx-4 mb-0 product-name">
                                     <?= htmlspecialchars($item['name']) ?>
-                                </p>
+                                </a>
                             </div>
                         </div>
 

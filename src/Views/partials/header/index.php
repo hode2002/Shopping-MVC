@@ -59,7 +59,7 @@
                 url: '/history-search',
                 type: 'GET',
                 success: function(res) {
-                    data = JSON.parse(res);
+                    data = res ? JSON.parse(res) : [];
                     let html = '';
                     data.forEach((item) => {
                         html += `
@@ -116,10 +116,6 @@
                             customClass: {
                                 confirmButton: `${res["error"] ? 'bg-danger' : 'bg-success'}`,
                             },
-                        }).then(() => {
-                            if (!res['error']) {
-                                window.location.href = '/shop';
-                            }
                         })
                     },
                 })
@@ -185,7 +181,7 @@
                                     </li>';
                             } else {
                                 echo '<li class="me-3 fw-semibold" style="font-size: 14px">
-                                        <a href="/shop" class="text-decoration-none text-white">
+                                        <a href="/shop" target="_blank" class="text-decoration-none text-white">
                                            Quản lí cửa hàng
                                         </a>
                                     </li>';
@@ -203,9 +199,10 @@
                                     <li><a class="dropdown-item" href="/profile">Tài khoản</a></li>
                                     <li><a class="dropdown-item" href="/purchase">Đơn mua</a></li>
                                     <?= (isset($_SESSION['role']) && ($_SESSION['role'] == 'R3'))
-                                        ? '<li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>'
+                                        ? '<li><a class="dropdown-item" href="/admin" target="_blank">Trang quản trị</a></li>'
                                         : '';
                                     ?>
+
                                     <form id="logout_form" action="/logout" method="post" class="d-flex flex-column">
                                         <button class="dropdown-item" type="submit">
                                             <i class="fas fa-sign-in-alt"></i>

@@ -26,13 +26,13 @@
             <form id="login_form" action="/login" method="post" class="mt-5">
               <div class="mb-4">
                 <label for="email" class="form-label ms-4 w-100 fw-semibold">Email:</label>
-                <input value="admin@gmail.com" type="email" name="email" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="Nhập vào Email" />
+                <input type="email" name="email" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="Nhập vào Email" />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label ms-4 w-100 fw-semibold">
                   Mật khẩu:
                 </label>
-                <input value="11111" type="password" name="password" placeholder="Nhập vào mật khẩu" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" />
+                <input type="password" name="password" placeholder="Nhập vào mật khẩu" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" />
               </div>
 
               <div class="text-end fw-bold">

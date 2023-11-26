@@ -7,9 +7,13 @@
     }
 </style>
 
-<main>
+<main style="
+        background-image: url('/imgs/logos/bg_register_page.avif');
+        background-size: contain;
+        background-position: center;
+      ">
     <div class="container">
-        <div class="row vh-100 w-100 align-self-center">
+        <div class="row vh-100 w-100 align-self-center justify-content-end">
             <div class="col-12 col-lg-6 col-xl-6 px-5">
                 <div class="row vh-100">
                     <div class="col align-self-center p-5 w-100 text-white rounded-3" style="background-color: rgb(30, 31, 41)">
@@ -21,7 +25,7 @@
                         <form id="forget_pass_form" action="/forget-pass" method="post" class="mt-5">
                             <div class="mb-4">
                                 <label for="email" class="form-label ms-4 w-100 fw-semibold">Email:</label>
-                                <input value="admin@gmail.com" type="email" name="email" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="Nhập vào Email" />
+                                <input type="email" name="email" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="Nhập vào Email" />
                             </div>
 
                             <div class="col text-center">
