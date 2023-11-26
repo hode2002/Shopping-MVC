@@ -216,10 +216,10 @@ class ProductModel
         $sql = "SELECT p.*, c.name cate_name 
                 from products p JOIN categories c ON p.cate_id = c.id
                 WHERE c.name LIKE ? OR p.name LIKE ? OR p.description LIKE ?";
-        $ketqua = $conn->prepare($sql);
-        $ketqua->execute(['%' . $keyword . '%', '%' . $keyword . '%', '%' . $keyword . '%']);
-        $ketqua = $ketqua->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['%' . $keyword . '%', '%' . $keyword . '%', '%' . $keyword . '%']);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $ketqua;
+        return $results;
     }
 }

@@ -22,7 +22,6 @@ class ProfileController
     public function postEditProfile()
     {
         $UserModel = new \App\Models\UserModel();
-        // $profile = json_decode($_POST['profile'], true);
 
         $id = isset($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
         if (empty($id)) {
