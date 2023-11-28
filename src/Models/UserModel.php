@@ -87,12 +87,12 @@ class UserModel
         return $stmt->rowCount() === 1;
     }
 
-    public function updateRole($userId, $roleCode)
+    public function updateRole($email, $roleCode)
     {
         include SRC_DIR . '/config.php';
-        $sql = "UPDATE users SET role_code = ? WHERE id = ?";
+        $sql = "UPDATE users SET role_code = ? WHERE email = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$roleCode, $userId]);
+        $stmt->execute([$roleCode, $email]);
         return $stmt->rowCount() === 1;
     }
 

@@ -70,8 +70,7 @@ class ShopController
                 JsonResponse(error: 1, message: "Bạn đã đăng ký mở cửa hàng. Vui lòng chờ admin xét duyệt");
             }
 
-            $ShopModel->openStore($userId);
-            $UserModel->updateRole($userId, roleCode: "R2");
+            $ShopModel->openShop($userId, $email);
 
             JsonResponse(error: 0, message: "Đăng ký thành công. Vui lòng chờ admin xét duyệt");
         } catch (\PDOException $e) {

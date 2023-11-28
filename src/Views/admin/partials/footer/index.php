@@ -28,6 +28,7 @@
         $('.btn-shop-approve').on('click', function() {
             const shop = $(this).closest('.shop')
             const status = shop[0].dataset.shop_status;
+            const email = shop.find('.shop-email').text();
 
             Swal.fire({
                 title: 'Xét duyệt mở cửa hàng',
@@ -46,7 +47,8 @@
 
                 const data = {
                     shopId,
-                    status: 1
+                    email,
+                    status: 1,
                 }
 
                 if (result.isConfirmed) {

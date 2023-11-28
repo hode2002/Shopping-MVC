@@ -40,7 +40,7 @@
                                                 <h6><?= htmlspecialchars($shop['U_NAME'] ?? 'Chưa cập nhật') ?></h6>
                                             </td>
                                             <td class="align-middle">
-                                                <h6><?= htmlspecialchars($shop['email']) ?></h6>
+                                                <h6 class="shop-email"><?= htmlspecialchars($shop['email']) ?></h6>
                                             </td>
                                             <td class="align-middle">
                                                 <h6><?= htmlspecialchars($shop['created_at']) ?></h6>

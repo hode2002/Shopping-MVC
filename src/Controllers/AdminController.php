@@ -242,6 +242,17 @@ class AdminController
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
             }
 
+            if (!isset($_POST['email'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+            $shopEmail = htmlspecialchars($_POST['email']);
+
+            $isSuccess = $UserModel->updateRole($shopEmail, roleCode: "R2");
+            if (!isset($isSuccess)) {
+                $isSuccess = $ShopModel->updateStatus($shopId, 0);
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+
             JsonResponse(error: 0, message: "Thành công");
         } catch (\PDOException $e) {
             echo $e->getMessage();

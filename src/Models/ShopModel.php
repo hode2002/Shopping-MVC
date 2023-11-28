@@ -6,12 +6,13 @@ use PDO;
 
 class ShopModel
 {
-    function openStore($userId)
+    function openShop($userId, $email)
     {
         include SRC_DIR . '/config.php';
-        $sql = "INSERT INTO shops (user_id) VALUES (?)";
+        $shopName = explode('@', $email)[0];
+        $sql = "INSERT INTO shops (user_id, name, phone) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$userId]);
+        $stmt->execute([$userId, $shopName]);
         return $stmt->rowCount() === 1;
     }
 

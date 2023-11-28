@@ -134,7 +134,7 @@
                                             <td class="align-middle"><?= htmlspecialchars($index + 1) ?></td>
                                             <td> <img src="<?= htmlspecialchars($shop['logo']) ?>" alt="shop logo" class="img-radius wid-40 align-top m-r-15"></td>
                                             <td class="align-middle">
-                                                <h6><?= htmlspecialchars($shop['email']) ?></h6>
+                                                <h6 class="shop-email"><?= htmlspecialchars($shop['email']) ?></h6>
                                             </td>
                                             <td class="align-middle">
                                                 <h6><?= htmlspecialchars($shop['name']) ?></h6>
