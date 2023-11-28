@@ -113,6 +113,15 @@
               </div>
 
               <div class="row form-group">
+                <div class="col col-md-3 align-self-center">
+                  <label for="quantity" class="form-control-label"> Số lượng kho </label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" autocomplete="off" id="quantity" value="<?= htmlspecialchars($product['quantity']) ?>" name="quantity" placeholder="Số lượng" class="form-control" />
+                </div>
+              </div>
+
+              <div class="row form-group">
                 <div class="col col-md-3">
                   <label for="description" class="form-control-label"> Mô tả </label>
                 </div>
@@ -226,6 +235,7 @@
         "category": Number($('#category').find(':selected').val()),
         "price": Number($('#price').val()),
         "sale": Number($('#sale').val()),
+        "quantity": Number($('#quantity').val()),
         "description": $('#description').val()
       };
       formData.append("product", JSON.stringify(product));
@@ -280,6 +290,10 @@
           required: true,
           number: true
         },
+        quantity: {
+          required: true,
+          number: true
+        },
         description: {
           required: true,
         },
@@ -296,6 +310,10 @@
         },
         sale: {
           required: 'Nhập sale',
+          number: 'Vui lòng nhập số'
+        },
+        quantity: {
+          required: 'Nhập số lượng kho',
           number: 'Vui lòng nhập số'
         },
         img: 'Chọn hình ảnh',

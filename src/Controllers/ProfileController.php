@@ -193,12 +193,12 @@ class ProfileController
 
             $status = htmlspecialchars($_POST['status']);
             if ((int)$status === 4) {
-                $orders = $OrderModel->getAllOrder($userId);
+                $orders = $OrderModel->getAllByUserId($userId);
                 echo json_encode($orders);
                 exit;
             }
 
-            $orders = $OrderModel->getOrderByStatus($userId, $status);
+            $orders = $OrderModel->getByUserIdAndStatus($userId, $status);
             echo json_encode($orders);
         } catch (\PDOException $e) {
             echo $e->getMessage();

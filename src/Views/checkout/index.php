@@ -93,11 +93,7 @@
 
             const checkout_products = JSON.parse(window.localStorage.getItem('checkout_products'));
 
-            formData.append('checkout_products', JSON.stringify(checkout_products.map((item) => ({
-                id: item.id,
-                quantity: item.quantity,
-                price: item.price,
-            }))));
+            formData.append("checkout_products", JSON.stringify(checkout_products));
 
             formData.append("userInfo", JSON.stringify(userInfo));
 
@@ -165,7 +161,8 @@
             return;
         }
 
-        const checkout_products = JSON.parse(window.localStorage.getItem('checkout_products'));
+        let checkout_products = JSON.parse(window.localStorage.getItem('checkout_products'));
+        checkout_products = checkout_products.flatMap(item => [...item])
 
         $('#show-order').html('<div class="overflow-y-scroll"><div id="order-list" style="max-height: 380px;"></div></div>');
 

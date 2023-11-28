@@ -34,6 +34,7 @@
                       <th>Giá</th>
                       <th>Sale</th>
                       <th>Thành tiền</th>
+                      <th>Số lượng</th>
                       <th>Trạng thái</th>
                       <th>Thao tác</th>
                     </tr>
@@ -57,6 +58,7 @@
                         <td><span class="price"><?= htmlspecialchars(format_money($product['price'])) ?></span></td>
                         <td><span><?= htmlspecialchars($product['sale']) ?></span>%</td>
                         <td><span><?= htmlspecialchars(format_money((int)$product['price'] - (int)$product['price'] * (int)$product['sale'] / 100)) ?></span></td>
+                        <td><span class="quantity"><?= htmlspecialchars($product['quantity']) ?></span></td>
                         <td><span><?= htmlspecialchars($product['status'] == 0 ?  'Chờ kiểm duyệt' : ($product['status'] == 1 ? 'Đã duyệt' : 'Vi phạm')) ?></span></td>
                         <td>
                           <div class="d-flex justify-content-end">

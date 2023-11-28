@@ -60,7 +60,7 @@
             </div>
             <div class="cart-list" style="padding: 0; min-width: 1000px;">
                 <?php foreach ($cartList as $item) : ?>
-                    <div class="product cart-item p-2 d-flex align-items-center mt-3 bg-white shadow-sm" data-product_id="<?= htmlspecialchars($item['product_id']) ?>">
+                    <div class="product cart-item p-2 d-flex align-items-center mt-3 bg-white shadow-sm" data-product_id="<?= htmlspecialchars($item['product_id']) ?>" data-shop_id="<?= htmlspecialchars($item['shop_id']) ?>">
                         <div class="px-3">
                             <input class="select" type="checkbox" style="width: 20px; height: 20px;">
                         </div>
@@ -87,7 +87,7 @@
                                         <span class="fa fa-minus"></span>
                                     </button>
                                 </span>
-                                <input type="number" value="<?= htmlspecialchars($item['quantity']) ?>" min="0" max="100" name="quantity" class="quantity fw-bold form-control input-number text-center col rounded-0 border-end-0 border-start-0" style="box-shadow: none; border-color: #17252a;">
+                                <input type="number" value="<?= htmlspecialchars($item['quantity']) ?>" min="0" max="<?= htmlspecialchars($item['product_quantity']) ?>" name="quantity" class="quantity fw-bold form-control input-number text-center col rounded-0 border-end-0 border-start-0" style="box-shadow: none; border-color: #17252a;">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn-plus btn btn-dark btn-number rounded-start-0" style="border: 1px solid #17252a;" data-type="plus" data-field="quantity">
                                         <span class="fa fa-plus"></span>
@@ -372,22 +372,43 @@
         })
 
         $('.buy').on('click', function() {
-            const productsChecked = [];
+            const tmp = [];
 
             $('.cart-item').each(function() {
                 if ($(this).find('input.select').is(':checked')) {
                     const product = {
                         id: $(this)[0].dataset.product_id,
                         name: $.trim($(this).find('.product-name').text()),
+                        shopId: Number($(this).closest('.product')[0].dataset.shop_id),
                         img: $(this).find('img').prop('src'),
                         quantity: Number($(this).find('.quantity').val()),
                         price: convertPriceToNumber($(this).find('.unit-price').text()),
                     }
-                    productsChecked.push(product)
+
+                    tmp.push(product)
                 }
             })
 
-            window.localStorage.setItem('checkout_products', JSON.stringify(productsChecked))
+            const data = [];
+            const obj = {};
+
+            tmp.forEach(item => {
+                const {
+                    shopId
+                } = item;
+
+                if (!obj[shopId]) {
+                    obj[shopId] = [];
+                }
+
+                obj[shopId].push(item);
+            });
+
+            for (const key in obj) {
+                data.push(obj[key]);
+            }
+
+            window.localStorage.setItem('checkout_products', JSON.stringify(data))
 
             window.location.href = '/checkout';
         })

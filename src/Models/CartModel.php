@@ -9,7 +9,7 @@ class CartModel
     public function getList($userId)
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT name, thumbnail, price, sale, c.product_id AS product_id, quantity 
+        $sql = "SELECT name, thumbnail, price, sale, c.product_id AS product_id, c.quantity, p.quantity AS product_quantity, p.shop_id shop_id
                 FROM carts c 
                 JOIN products p ON p.id = c.product_id 
                 WHERE user_id=?";

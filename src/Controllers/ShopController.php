@@ -181,6 +181,10 @@ class ShopController
                 JsonResponse(error: 1, message: "Vui lòng nhập sale");
             }
 
+            if (!isset($product['quantity'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập số lượng kho");
+            }
+
             if (!isset($product['category'])) {
                 JsonResponse(error: 1, message: "Vui lòng chọn danh mục sản phẩm");
             }
@@ -288,6 +292,10 @@ class ShopController
 
             if (!isset($product['category'])) {
                 JsonResponse(error: 1, message: "Vui lòng chọn danh mục sản phẩm");
+            }
+
+            if (!isset($product['quantity'])) {
+                JsonResponse(error: 1, message: "Vui lòng nhập số lượng kho");
             }
 
             if (!isset($product['description'])) {

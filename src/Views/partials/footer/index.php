@@ -221,7 +221,7 @@
             $(this).on('click', function() {
                 const product = $(this).closest('.product');
                 const productId = product[0]?.dataset.product_id;
-                const quantity = product.find('input.quantity').val() || 1;
+                const quantity = product.find('#quantity').val() || 1;
 
                 const formData = new FormData();
 
@@ -273,7 +273,7 @@
                                                 ${product.find('.origin-price').text()}
                                             </p>
                                             <p class="mb-0 fs-5 fw-bold" style="color: rgb(209, 0, 36)">
-                                                 ${product.find('.price').text()} x<span class="quantity ms-1 fw-bold">1</span>
+                                                 ${product.find('.price').text()} x<span class="quantity ms-1 fw-bold">${quantity}</span>
                                             </p>
                                         </div>
                                     </div>

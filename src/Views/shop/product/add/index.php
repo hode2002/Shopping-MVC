@@ -28,7 +28,7 @@
             <form id="add_product_form" action="shop/products" method="post" enctype="multipart/form-data" class="form-horizontal">
               <div class="row form-group">
                 <div class="col col-md-3 align-self-center align-self-center">
-                  <label for="id" class="form-control-label">Mã sản phẩm</label>
+                  <label for="id" class="form-control-label">Mã sản phẩm *</label>
                 </div>
                 <div class="col-12 col-md-9">
                   <input required type="text" autocomplete="off" id="id" name="id" placeholder="Mã sản phẩm" class="form-control" />
@@ -37,7 +37,7 @@
 
               <div class="row form-group">
                 <div class="col col-md-3 align-self-center align-self-center">
-                  <label for="name" class="form-control-label">Tên sản phẩm</label>
+                  <label for="name" class="form-control-label">Tên sản phẩm *</label>
                 </div>
                 <div class="col-12 col-md-9">
                   <input required type="text" autocomplete="off" id="name" name="name" placeholder="Tên" class="form-control" />
@@ -46,7 +46,7 @@
 
               <div class="row form-group">
                 <div class="col col-md-3 align-self-center">
-                  <label for="category" class="form-control-label"> Danh mục </label>
+                  <label for="category" class="form-control-label"> Danh mục *</label>
                 </div>
                 <div class="col-12 col-md-9">
                   <select class="form-select form-control" style="width: max-content;" id="category" name="category">
@@ -69,7 +69,7 @@
 
               <div class="row form-group">
                 <div class="col col-md-3 align-self-center">
-                  <label for="price" class="form-control-label"> Giá </label>
+                  <label for="price" class="form-control-label"> Giá *</label>
                 </div>
                 <div class="col-12 col-md-9">
                   <input type="text" autocomplete="off" id="price" name="price" placeholder="Giá" class="form-control" />
@@ -87,7 +87,7 @@
 
               <div class="row form-group">
                 <div class="col col-md-3 align-self-center">
-                  <label for="thumbnail" class="form-control-label"> Ảnh </label>
+                  <label for="thumbnail" class="form-control-label"> Ảnh *</label>
                 </div>
 
                 <div class="col-12 col-md-9">
@@ -114,8 +114,17 @@
               </div>
 
               <div class="row form-group">
+                <div class="col col-md-3 align-self-center">
+                  <label for="quantity" class="form-control-label"> Số lượng kho </label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" autocomplete="off" id="quantity" name="quantity" placeholder="Số lượng" class="form-control" />
+                </div>
+              </div>
+
+              <div class="row form-group">
                 <div class="col col-md-3">
-                  <label for="description" class="form-control-label"> Mô tả </label>
+                  <label for="description" class="form-control-label"> Mô tả *</label>
                 </div>
                 <div class="col-12 col-md-9">
                   <textarea name="description" id="description" rows="6" placeholder="Nội dung..." class="form-control"></textarea>
@@ -225,6 +234,7 @@
         "category": Number($('#category').find(':selected').val()),
         "price": Number($('#price').val()),
         "sale": Number($('#sale').val()),
+        "quantity": Number($('#quantity').val()),
         "description": $('#description').val()
       };
       formData.append("product", JSON.stringify(product));
@@ -282,6 +292,10 @@
         img: {
           required: true,
         },
+        quantity: {
+          required: true,
+          number: true
+        },
         description: {
           required: true,
         },
@@ -298,6 +312,10 @@
         },
         sale: {
           required: 'Nhập sale',
+          number: 'Vui lòng nhập số'
+        },
+        quantity: {
+          required: 'Nhập số lượng kho',
           number: 'Vui lòng nhập số'
         },
         img: 'Chọn hình ảnh',

@@ -93,7 +93,7 @@ class CartController
 
                 JsonResponse(error: 0, message: "Cập nhật số lượng thành công thành công");
             }
-            $isSuccess = $CartModel->create($userId, $productId);
+            $isSuccess = $CartModel->create($userId, $productId, $quantity);
             if (empty($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
             }

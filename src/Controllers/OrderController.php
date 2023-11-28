@@ -66,14 +66,11 @@ class OrderController
 
             $note = htmlspecialchars($userCheckoutInfo['note']) ?? "";
 
-            $isSuccess = $OrderModel->createOrder($userId, $name, $address, $phone, $note, $checkout_products, $delivery);
-
-            if (empty($isSuccess)) {
-                JsonResponse(error: 1, message: "Có lỗi xảy ra! Vui lòng thử lại sau");
+            foreach ($checkout_products as $item) {
+                $OrderModel->createOrder($userId, $name, $address, $phone, $note, $item, $delivery);
             }
-            JsonResponse(error: 0, message: "Đặt hàng thành công");
 
-            require_once VIEWS_DIR . '/checkout/index.php';
+            JsonResponse(error: 0, message: "Đặt hàng thành công");
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
@@ -82,25 +79,31 @@ class OrderController
     public function postOrderCancel()
     {
         try {
-            if (!isset($_POST['id']) || !isset($_POST['status'])) {
+            if (!isset($_POST['id']) || !isset($_POST['status']) || !isset($_POST['shopId'])) {
                 JsonResponse(error: 1, message: "Thiếu thông tin");
             }
             $id = htmlspecialchars($_POST['id']);
             $status = htmlspecialchars($_POST['status']);
+            $shopId = htmlspecialchars($_POST['shopId']);
 
             if ((int)$status !== 2) {
                 JsonResponse(error: 1, message: "Không thể thực hiện");
             }
 
             $OrderModel = new \App\Models\OrderModel();
+            $ProductModel = new \App\Models\ProductModel();
 
             $order = $OrderModel->getOrderDetail($id);
             if (empty($order)) {
                 JsonResponse(error: 1, message: "Đơn hàng không tồn tại, Vui lòng kiểm tra lại");
             }
+            $productsOrder = $OrderModel->getProductsOrder($id);
+
+            foreach ($productsOrder as $product) {
+                $ProductModel->updateQuantity($shopId, $product['id'], $product['quantity']);
+            }
 
             $isSuccess = $OrderModel->updateStatus($id, $status);
-
             if (!$isSuccess) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau.");
             }

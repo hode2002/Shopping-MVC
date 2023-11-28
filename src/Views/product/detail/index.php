@@ -80,13 +80,16 @@
                         </div>
 
                         <hr />
-                        <div class="row">
-                            <div class="col-md-4 col-5">
-                                <p><strong>Số lượng: </strong></p>
+                        <div class="d-flex align-items-center my-4 gap-3">
+                            <p class="mb-0"><strong>Số lượng: </strong></p>
+
+                            <input type="number" step="1" min="1" max="<?= htmlspecialchars($product['quantity']) ?>" value="1" id="quantity" name="quantity" class="form-control quantity quantity-field border rounded text-center w-25" style="box-shadow: none;">
+
+                            <div>
+                                <span class="fw-bold"><?= htmlspecialchars($product['quantity']) ?></span>
+                                <span>sản phẩm có sẵn</span>
                             </div>
-                            <div class="col-md-8 col-7">
-                                <input type="number" step="1" min="1" max="100" value="1" name="quantity" class="quantity quantity-field border rounded text-center w-25">
-                            </div>
+
                         </div>
 
                         <div class="my-2 d-flex justify-content-around bottom-0">
@@ -365,7 +368,7 @@
         $('.buy-now').on('click', function() {
             const product = $(this).closest('.product');
             const productId = product[0]?.dataset.product_id;
-            const quantity = product.find('input.quantity').val() || 1;
+            const quantity = product.find('#quantity').val() || 1;
 
             const item = {
                 id: productId,
@@ -374,7 +377,9 @@
                 quantity,
                 price: convertPriceToNumber(product.find('.unit-price').text()),
             }
-            window.localStorage.setItem('checkout_products', JSON.stringify([item]))
+            window.localStorage.setItem('checkout_products', JSON.stringify([
+                [item]
+            ]))
         })
 
         const postAjax = (url, data = [], isDelete = false, comment = {}) => {
