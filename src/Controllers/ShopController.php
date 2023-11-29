@@ -458,9 +458,6 @@ class ShopController
             if (!isset($_SESSION['email'])) {
                 redirect('/login');
             }
-            $email = htmlspecialchars($_SESSION["email"]);
-
-            $user = $UserModel->getByEmail($email);
 
             if (!(isAdmin() || isShop())) {
                 $title = 'Lỗi';
@@ -478,9 +475,34 @@ class ShopController
             }
             $status = htmlspecialchars($_POST['status']);
 
+
             $isSuccess = $OrderModel->updateStatus($id, $status);
             if (empty($isSuccess)) {
                 JsonResponse(error: 1, message: "Có lỗi xảy ra, Vui lòng thử lại sau");
+            }
+
+            if ((int)$status === 2) {
+                $ProductModel = new \App\Models\ProductModel();
+                $ShopModel = new \App\Models\ShopModel();
+
+                $email = htmlspecialchars($_SESSION["email"]);
+
+                $user = $UserModel->getByEmail($email);
+                $userId = $user['id'];
+
+                $shop =  $ShopModel->getByUserId($userId);
+                $shopId = $shop['id'];
+
+                $productsOrder = $OrderModel->getProductsOrder($id);
+
+                foreach ($productsOrder as $product) {
+                    $isSuccess = $ProductModel->updateQuantity($shopId, $product['id'], (int)$product['quantity']);
+                    if (empty($isSuccess)) {
+                        JsonResponse(error: 1, message: "Có lỗi xảy ra, Vui lòng thử lại sau");
+                    }
+                }
+
+                JsonResponse(error: 0, message: "Cập nhật thành công");
             }
 
             JsonResponse(error: 0, message: "Cập nhật thành công");

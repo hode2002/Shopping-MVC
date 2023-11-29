@@ -207,7 +207,7 @@ class ProductModel
         $stmt = $conn->prepare($sql);
         $stmt->execute([$quantity, $productId, $shopId]);
 
-        return false;
+        return $stmt->rowCount() === 1;
     }
 
     public function delete($id, $shopId)
