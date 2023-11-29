@@ -146,7 +146,7 @@ class ProductModel
         include SRC_DIR . '/config.php';
         $sql = "SELECT p.*, c.name cate_name 
                 from products p JOIN categories c ON p.cate_id = c.id
-                WHERE c.name LIKE ? OR p.name LIKE ? OR p.description LIKE ?";
+                WHERE c.name LIKE ? OR p.name LIKE ? OR p.description LIKE ? AND p.quantity <> 0";
         $stmt = $conn->prepare($sql);
         $stmt->execute(['%' . $keyword . '%', '%' . $keyword . '%', '%' . $keyword . '%']);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
