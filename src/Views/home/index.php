@@ -67,7 +67,7 @@
     <div class="image-slider d-flex overflow-hidden">
       <?php foreach ($categories as $cate) : ?>
         <div class="image-item py-3 col-sm-4 col-md-2">
-          <a href="/danh-muc/<?= htmlspecialchars($cate['slug']) ?>" class="text-decoration-none">
+          <a href="/category?id-cate=<?= htmlspecialchars($cate['id']) ?>" class="text-decoration-none">
             <div class="justify-content-center text-center">
               <img src="<?= htmlspecialchars($cate['img']) ?>" alt="" style="object-fit: cover" width="100%" />
             </div>

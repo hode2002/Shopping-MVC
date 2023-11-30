@@ -25,7 +25,23 @@ class ProductController
         $title = $products[0]['name'];
         require_once VIEWS_DIR . '/product/search/index.php';
     }
-
+    public function category()
+    {
+        $ProductModel = new \App\Models\ProductModel();
+        $UserModel = new \App\Models\UserModel();
+        if (isset($_SESSION['email'])) {
+            $user = $UserModel->getByEmail($_SESSION['email']);
+        }
+        $title = 'Tìm kiếm danh mục';
+        $id_cate = htmlspecialchars($_GET['id-cate']);
+        $products = $ProductModel->getAllProductCategory($id_cate);
+        if (empty($products)) {
+            require_once VIEWS_DIR . '/category/empty.php';
+            exit;
+        }
+        // $title = $products[0]['name'];
+        require_once VIEWS_DIR . '/category/index.php';
+    }
     public function getDetail($id)
     {
         try {

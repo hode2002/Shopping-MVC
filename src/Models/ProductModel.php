@@ -232,4 +232,13 @@ class ProductModel
         $stmt->execute([$id]);
         return $stmt->rowCount() >= 0;
     }
+    public function getAllProductCategory($id_cate)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT p.* FROM products p JOIN categories c ON p.cate_id = c.id WHERE c.id=?  AND p.quantity <> 0";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id_cate]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
 }

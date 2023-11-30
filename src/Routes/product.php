@@ -1,5 +1,6 @@
 <?php
 $router->get('/search', 'App\Controllers\ProductController@index');
+$router->get('/category', 'App\Controllers\ProductController@category');
 
 $router->get('/product/(.*)', 'App\Controllers\ProductController@getDetail');
 
