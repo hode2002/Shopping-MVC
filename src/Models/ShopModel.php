@@ -10,7 +10,7 @@ class ShopModel
     {
         include SRC_DIR . '/config.php';
         $shopName = explode('@', $email)[0];
-        $sql = "INSERT INTO shops (user_id, name, phone) VALUES (?, ?)";
+        $sql = "INSERT INTO shops (user_id, name) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$userId, $shopName]);
         return $stmt->rowCount() === 1;
