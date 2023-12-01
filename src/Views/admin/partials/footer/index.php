@@ -92,6 +92,33 @@
                 }
             })
         })
+
+        $('.btn-delete-user').on('click', function() {
+            Swal.fire({
+                title: 'Xóa người dùng?',
+                icon: 'warning',
+                showConfirmButton: true,
+                showCancelButton: true,
+                // showDenyButton: true,
+                confirmButtonText: "Đồng ý",
+                denyButtonText: 'Hủy',
+                cancelButtonText: 'Quay lại',
+                confirmButtonColor: '#3085d6',
+                denyButtonColor: '#d33',
+
+            }).then((result) => {
+                const userId = $(this)[0].dataset.user_id
+
+                const data = {
+                    userId,
+                }
+
+                if (result.isConfirmed) {
+                    postAjax('/admin/users', data);
+                }
+            })
+        })
+        
     })
 </script>
 

@@ -93,6 +93,56 @@ class AdminController
         }
     }
 
+    public function postDeleteUser()
+    {
+        try {
+            require_once SRC_DIR . '/config.php';
+
+            $UserModel = new \App\Models\UserModel();
+            $ShopModel = new \App\Models\ShopModel();
+            $CartModel = new \App\Models\CartModel();
+
+            if (!isset($_SESSION['email'])) {
+                redirect('/login');
+            }
+            $email = htmlspecialchars($_SESSION["email"]);
+
+            $user = $UserModel->getByEmail($email);
+
+            if (!isAdmin()) {
+                $title = 'Lỗi';
+                require_once VIEWS_DIR . '/errors/404.php';
+                exit;
+            };
+
+            if (!isset($_POST['userId'])) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+            $userId = htmlspecialchars($_POST['userId']);
+
+            $isExist = $UserModel->getByUserId($userId);
+            if (empty($isExist)) {
+                JsonResponse(error: 1, message: "Khách hàng không tồn tại");
+            }
+
+            $isShop = $ShopModel->getByUserId($userId);
+            if(!empty($isShop)) {
+                $shopId = $isShop['id'];
+                $ShopModel->deleteByUserId($userId, $shopId);
+            }
+            
+            $CartModel->deleteByUserId($userId);
+            $isSuccess = $UserModel->delete($userId);
+            if (empty($isSuccess)) {
+                JsonResponse(error: 1, message: "Có lỗi xảy ra! vui lòng thử lại sau");
+            }
+
+            JsonResponse(error: 0, message: "Thành công");
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function getProducts()
     {
         try {

@@ -61,4 +61,24 @@ class ShopModel
         $stmt->execute([$status, $shopId]);
         return $stmt->rowCount() === 1;
     }
+
+    
+    function deleteByUserId($userId, $shopId)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "DELETE FROM shops WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$userId]);
+        if($stmt->rowCount() === 1) {
+            $sql = "DELETE FROM products WHERE shop_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$shopId]);
+            if($stmt->rowCount() === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    
 }

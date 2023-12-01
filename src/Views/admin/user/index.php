@@ -44,15 +44,15 @@
                                                 <h6><?= htmlspecialchars($user['dob'] ?? 'Chưa cập nhật') ?></h6>
                                             </td>
                                             <td class="align-middle">
-                                                <h6><?= htmlspecialchars($user['gender'] ?? 'Chưa cập nhật') ?></h6>
+                                                <h6><?= htmlspecialchars(isset($user['gender']) ? ($user['gender'] == 1 ? 'Nam' : 'Nữ') : 'Chưa cập nhật') ?></h6>
                                             </td>
                                             <td class="align-middle">
                                                 <h6><?= htmlspecialchars($user['address'] ?? 'Chưa cập nhật') ?></h6>
                                             </td>
-                                            <td><?= htmlspecialchars($user['phone'] ?? 'Chưa cập nhật') ?></td>
+                                            <td class="align-middle"><?= htmlspecialchars($user['phone'] ?? 'Chưa cập nhật') ?></td>
                                             <td class="align-middle">
                                                 <div class="d-flex justify-content-end">
-                                                    <i class="btn-product-approve fa-solid fa-trash font-weight-bold  p-2" style="cursor: pointer; font-size: 24px"></i>
+                                                    <i data-user_id="<?= htmlspecialchars($user['id'])?>" class="btn-delete-user fa-solid fa-trash font-weight-bold  p-2" style="cursor: pointer; font-size: 24px"></i>
                                                 </div>
                                             </td>
                                         </tr>

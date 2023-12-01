@@ -28,6 +28,16 @@ class UserModel
         return $user;
     }
 
+    public function getByUserId($id)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "SELECT * FROM users WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $user;
+    }
+
     public function getInfo($email, $password)
     {
         include SRC_DIR . '/config.php';
@@ -111,6 +121,15 @@ class UserModel
         $sql = "UPDATE users SET name=?, phone=?, gender=?, dob=? WHERE id=?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$name, $phone, $gender, $dob, $id]);
+        return $stmt->rowCount() === 1;
+    }
+
+    public function delete($userId)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "DELETE FROM users WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$userId]);
         return $stmt->rowCount() === 1;
     }
 }
