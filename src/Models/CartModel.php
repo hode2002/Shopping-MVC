@@ -56,4 +56,13 @@ class CartModel
         $stmt->execute([$userId, $productId]);
         return $stmt->rowCount() === 1;
     }
+
+    public function deleteByUserId($userId)
+    {
+        include SRC_DIR . '/config.php';
+        $sql = "DELETE FROM carts WHERE user_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$userId]);
+        return $stmt->rowCount() === 1;
+    }
 }

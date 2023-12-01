@@ -109,6 +109,41 @@
         .nav-link:hover {
             background-color: #eee !important;
         }
+
+        /* li.active {
+            background-color: rgb(209, 0, 36) !important;
+        } */
+
+        /* li.active i
+        a {
+            color: rgb(209, 0, 36) !important;
+        } */
+        .navbar .navbar-nav>.active>a,
+        .navbar .navbar-nav>.active>a:focus,
+        .navbar .navbar-nav>.active>a:hover {
+            color: rgb(209, 0, 36);
+        }
+
+        .navbar .navbar-nav li>a:hover,
+        .navbar .navbar-nav li>a:hover .menu-icon {
+            color: rgb(209, 0, 36) !important;
+        }
+
+        .navbar .navbar-nav li.active .menu-icon,
+        .navbar .navbar-nav li:hover .toggle_nav_button:before,
+        .navbar .navbar-nav li .toggle_nav_button.nav-open:before {
+            color: rgb(209, 0, 36);
+        }
+
+        .navbar .navbar-nav li.menu-item-has-children.show .sub-menu {
+            background-color: rgb(30, 31, 41) !important;
+        }
+
+        .navbar .navbar-nav li.menu-item-has-children {
+            background-color: rgb(30, 31, 41) !important;
+
+        }
+       
     </style>
 
     <title>Kênh Người Bán</title>
@@ -116,15 +151,15 @@
 
 <body>
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel" style="background-color: rgb(30, 31, 41);">
         <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="<?= count(explode('/', $_SERVER['REQUEST_URI'])) === 2 ? 'active' : '' ?>">
+            <div id="main-menu" class="main-menu collapse navbar-collapse" style="background-color: rgb(30, 31, 41);">
+                <ul class="nav navbar-nav" >
+                    <li class="<?= count(explode('/', $_SERVER['REQUEST_URI'])) === 2 ? 'active' : '' ?>" style="background-color: rgb(30, 31, 41);">
                         <a href="/shop"><i class="menu-icon fa fa-laptop"></i>Dashboard
                         </a>
                     </li>
-                    <li class="menu-title">Chức năng</li>
+                    <li class="menu-title" >Chức năng</li>
                     <!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown <?= str_contains($_SERVER['REQUEST_URI'], 'products') ? 'active' : '' ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -169,10 +204,10 @@
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="background-color: rgb(21, 22, 29); border-bottom:0">
             <div class="top-left ">
-                <div class="navbar-header d-flex justify-content-between" style="width: 100%;">
-                    <a class="navbar-brand " href="./" style="display: inline; color: #09c496;    font-weight: bold;">MANAGE</a>
+                <div class="navbar-header d-flex justify-content-between" style="width: 100%; background-color: rgb(21, 22, 29);">
+                    <a class="navbar-brand " href="./" style="display: inline; color: rgb(209, 0, 36) !important;    font-weight: bold;">MANAGE</a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
