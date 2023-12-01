@@ -127,6 +127,10 @@
     })
 
     $(() => {
+        $(window).bind('beforeunload', () => {
+            window.localStorage.removeItem('checkout_products');
+        })
+
         if (!window.localStorage.getItem('delivery')) {
             fetch('/delivery', {
                     method: 'GET',
