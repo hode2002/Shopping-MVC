@@ -73,8 +73,11 @@ class ProductModel
     public function getById($id)
     {
         include SRC_DIR . '/config.php';
-
-        $sql = "SELECT p.*, c.name AS cate_name, c.slug AS cate_slug FROM products p JOIN categories c ON p.cate_id = c.id WHERE p.id=? AND status = 1 AND p.quantity <> 0";
+        $sql = "SELECT p.*, c.name AS cate_name, s.name shop_name, s.logo shop_logo, s.created_at shop_date
+                FROM products p 
+                JOIN categories c ON p.cate_id = c.id 
+                JOIN shops s ON s.id = p.shop_id 
+                WHERE p.id=? AND p.status = 1 AND p.quantity <> 0";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -107,7 +110,7 @@ class ProductModel
     public function getAllByShopId($shopId)
     {
         include SRC_DIR . '/config.php';
-        $sql = "SELECT * FROM products WHERE shop_id = ? LIMIT 12";
+        $sql = "SELECT * FROM products WHERE shop_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$shopId]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

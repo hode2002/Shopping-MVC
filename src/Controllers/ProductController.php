@@ -48,6 +48,7 @@ class ProductController
             $ProductModel = new \App\Models\ProductModel();
             $UserModel = new \App\Models\UserModel();
             $CommentModel = new \App\Models\CommentModel();
+            $ShopModel = new \App\Models\ShopModel();
 
             if (isset($_SESSION['email'])) {
                 $user = $UserModel->getByEmail($_SESSION['email']);
@@ -58,6 +59,9 @@ class ProductController
                 require_once VIEWS_DIR . '/errors/404.php';
                 exit;
             }
+
+            $shopId = $product['shop_id'];
+            $shopProducts = $ProductModel->getAllByShopId($shopId);
 
             $comments = $CommentModel->getByProductId($id);
 

@@ -40,25 +40,14 @@
                             <?= htmlspecialchars($product['name']) ?>
                         </h4>
 
-                        <div class="d-flex flex-row my-3">
-                            <div class="text-warning mb-1 me-2">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ms-1">
-                                    5.0
-                                </span>
-                            </div>
-                            <span class="text-muted">
-                                <i class="fas fa-shopping-basket fa-sm mx-1"></i>
-                                100K Đã Bán</span>
+                        <div class="row my-3">
+                            <dt class="col-3" style="white-space: nowrap;">Tên cửa hàng: </dt>
+                            <dd class="col-8 text-danger fw-bold text-capitalize"><?= htmlspecialchars($product['shop_name']) ?></dd>
                         </div>
 
                         <div class="mb-3 d-flex gap-4">
                             <span class="h2 text-black-50 unit-price text-decoration-line-through"><?= htmlspecialchars(format_money($product['price'])) ?></span>
-                            <span class="h2 price"><?= htmlspecialchars(format_money($product['price'] - $product['price'] * $product['sale'] / 100)) ?></span>
+                            <span class="h2 price fw-bold"><?= htmlspecialchars(format_money($product['price'] - $product['price'] * $product['sale'] / 100)) ?></span>
                         </div>
 
                         <p class="text-truncate">
@@ -67,29 +56,20 @@
 
                         <div class="row">
                             <dt class="col-3">Danh mục: </dt>
-                            <dd class="col-9"><?= htmlspecialchars($product['cate_name']) ?></dd>
-
-                            <dt class="col-3">Màu sắc: </dt>
-                            <dd class="col-9">Tím mộng mơ</dd>
-
-                            <dt class="col-3">Chất liệu: </dt>
-                            <dd class="col-9">Inox không gỉ</dd>
-
-                            <dt class="col-3">Thương hiệu: </dt>
-                            <dd class="col-9">Logitech</dd>
+                            <dd class="col-8"><?= htmlspecialchars($product['cate_name']) ?></dd>
                         </div>
 
                         <hr />
-                        <div class="d-flex align-items-center my-4 gap-3">
-                            <p class="mb-0"><strong>Số lượng: </strong></p>
 
-                            <input type="number" step="1" min="1" max="<?= htmlspecialchars($product['quantity']) ?>" value="1" id="quantity" name="quantity" class="form-control quantity quantity-field border rounded text-center w-25" style="box-shadow: none;">
-
-                            <div>
-                                <span class="fw-bold"><?= htmlspecialchars($product['quantity']) ?></span>
-                                <span>sản phẩm có sẵn</span>
-                            </div>
-
+                        <div class="row align-items-center mb-5">
+                            <dt class="col-3 ">Số lượng: </dt>
+                            <dd class="col-8 d-flex gap-2 align-items-center mb-0">
+                                <input type="number" step="1" min="1" max="<?= htmlspecialchars($product['quantity']) ?>" value="1" id="quantity" name="quantity" class="form-control quantity quantity-field border rounded text-center w-25" style="box-shadow: none;">
+                                <div>
+                                    <span class="fw-bold"><?= htmlspecialchars($product['quantity']) ?></span>
+                                    <span>sản phẩm có sẵn</span>
+                                </div>
+                            </dd>
                         </div>
 
                         <div class="my-2 d-flex justify-content-around bottom-0">
@@ -105,6 +85,43 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <div class="container bg-white mt-3">
+        <div class="row p-5 mb-2 justify-content-between align-items-center">
+            <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <div class="d-flex align-items-center">
+                    <img src="<?= htmlspecialchars($product['shop_logo']) ?>" height="45" width="45" class="rounded-circle" style="object-fit: cover;">
+                    <div class="ms-3 comment-left ">
+                        <p class="mb-0 text-dark fw-bold text-primary"><?= htmlspecialchars($product['shop_name']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="d-flex flex-column">
+                    <p class="mb-0 text-muted fw-normal my-1">
+                        Tỉ Lệ Phản Hồi:
+                        <span class="text-end fw-bold text-danger">100%</span>
+                    </p>
+                    <p class=" mb-0 text-muted fw-normal my-1">
+                        Thời Gian Phản Hồi:
+                        <span class="fw-bold text-danger"> trong vài phút</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="d-flex flex-column">
+                    <p class=" mb-0 text-muted fw-normal my-1">
+                        Sản Phẩm
+                        <span class="fw-bold text-danger"><?= htmlspecialchars(count($shopProducts)) ?></span>
+                    </p>
+                    <p class="mb-0 text-muted fw-normal my-1">
+                        Thời gian tham gia:
+                        <span class="fw-bold text-danger"><?= htmlspecialchars($product['shop_date']) ?></span>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <section class="bg-light py-4 mt-5">
@@ -180,53 +197,9 @@
                             </div>
                             <!-- Mô tả sản phẩm -->
                             <div class="tab-pane fade" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                                <p>
+                                <p style="line-height: 40px;">
                                     <?= htmlspecialchars($product['description']) ?>
                                 </p>
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li><i class="fas fa-check text-success me-2"></i>Bàn phím gaming có dây
-                                                SIDOTECH giả cơ nhưng mang
-                                                đến trải nghiệm về chất lượng không kém gì bàn phím
-                                                ơ chuyên nghiệp</li>
-
-                                        </ul>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-0">
-                                        <ul class="list-unstyled">
-                                            <li><i class="fas fa-check text-success me-2"></i>Bàn phím gaming
-                                                SIDOTECH hướng đến
-                                                những game thủ chuyên nghiệp
-                                                hoặc những bạn cần sự 1
-                                                chiếc bàn phím có tốc độ phản hồi cao để có thể làm việc
-                                                sử lý nhanh nhất</li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <table class="table border mt-3 mb-2">
-                                    <tr>
-                                        <th class="py-2">Thông số:</th>
-                                        <td class="py-2">123123</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="py-2">Processor capacity:</th>
-                                        <td class="py-2">2.3GHz dual-core Intel Core i5</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="py-2">Camera quality:</th>
-                                        <td class="py-2">720p FaceTime HD camera</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="py-2">Memory</th>
-                                        <td class="py-2">8 GB RAM or 16 GB RAM</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="py-2">Graphics</th>
-                                        <td class="py-2">Intel Iris Plus Graphics 640</td>
-                                    </tr>
-                                </table>
                             </div>
                             <!-- Van Chuyen -->
                             <div class="tab-pane fade mb-2" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
@@ -308,41 +281,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 pt-3">
-                        <div class="px-0 border rounded-2 shadow-0">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Sản phẩm tương tự</h5>
-                                    <div class="row p-3">
-                                        <?php foreach ($recommend as $product) : ?>
-
-                                            <div class="product d-flex justify-content-center col-6 col-md-4 col-lg-2 pb-5 pt-2">
-                                                <div class="card" style="width: 11rem">
-                                                    <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="card-img-top p-2" alt="product" />
-                                                    <div class="card-body p-2">
-                                                        <h5 class="card-title text-truncate" style="font-size: 11px">
-                                                            <?= htmlspecialchars($product['name']) ?>
-                                                        </h5>
-                                                        <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
-                                                            <?= htmlspecialchars(format_money($product['price'])) ?>
-                                                        </p>
-                                                        <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1" style="
+                    <?php if (isset($recommend)) : ?>
+                        <div class="col-lg-12 pt-3">
+                            <div class="px-0 border rounded-2 shadow-0">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Sản phẩm tương tự</h5>
+                                        <div class="row p-3">
+                                            <?php foreach ($recommend as $product) : ?>
+                                                <a href="/product/<?= htmlspecialchars($product['id']) ?>" class="product text-decoration-none d-flex justify-content-center col-6 col-md-4 col-lg-2 pb-5 pt-2">
+                                                    <div class="card" style="width: 11rem">
+                                                        <img src="<?= htmlspecialchars($product['thumbnail']) ?>" class="card-img-top p-2" alt="product" />
+                                                        <div class="card-body p-2">
+                                                            <h5 class="card-title text-truncate" style="font-size: 11px">
+                                                                <?= htmlspecialchars($product['name']) ?>
+                                                            </h5>
+                                                            <p class="price card-text text-start m-0" style="color: rgb(209, 0, 36)">
+                                                                <?= htmlspecialchars(format_money($product['price'])) ?>
+                                                            </p>
+                                                            <div class="add_to_cart text-center top-100 start-0 end-0 position-absolute d-none w-100 rounded-bottom-1" style="
                                                           background-color: rgb(209, 0, 36);
                                                           border: 1px solid rgb(209, 0, 36);
                                                         ">
-                                                            <div class="btn text-white border-0">Thêm vào giỏ</div>
+                                                                <div class="btn text-white border-0">Thêm vào giỏ</div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-
-                                        <?php endforeach ?>
-
+                                                </a>
+                                            <?php endforeach ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
