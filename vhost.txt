@@ -1,8 +1,8 @@
 <VirtualHost *:80>	
-    DocumentRoot "C:\Users\54dhv\Desktop\CT271-Project\public"
-    ServerName ct271-project.localhost
+    DocumentRoot "path\to\project\public"
+    ServerName shopping-mvc.localhost
     # Set access permission 
-    <Directory "C:\Users\54dhv\Desktop\CT271-Project\public"> 
+    <Directory "path\to\project\public"> 
 	Options Indexes FollowSymLinks Includes ExecCGI
 	AllowOverride All
 	Require all granted
